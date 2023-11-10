@@ -1,24 +1,27 @@
 #include <SFML/Graphics.hpp>
+#include "Button.h"
+
+using namespace sf;
+using namespace std;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
+	Button B("Content/Image/test0.png", 50, 50);
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+	while (window.isOpen())
+	{
+		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
+		Event e;
+		while (window.pollEvent(e)) {
+			if (e.type == Event::Closed) {
+				window.close();
+			}
+		}
 
-    return 0;
+		window.clear();
+		B.draw(window, mouse);
+		window.display();
+	}
 }
