@@ -1,15 +1,5 @@
 #include "Button.h"
 
-Button::Button()
-{
-
-}
-
-Button::~Button()
-{
-
-}
-
 Button::Button(string fileName, float x, float y)
 {
 	state = 0;
@@ -17,6 +7,11 @@ Button::Button(string fileName, float x, float y)
 	sprite.setTexture(texture);
 	sprite.setPosition(x, y);
 	this->fileName = fileName;
+}
+
+Button::~Button()
+{
+
 }
 
 bool Button::isMoved(Vector2f& mouse)

@@ -20,9 +20,8 @@ private:
     float speed;
 
 public:
-    Button();
-    ~Button();
     Button(string fileName, float x, float y);
+    ~Button();
 
     bool isMoved(Vector2f& mouse);
     bool isClicked(Vector2f& mouse);

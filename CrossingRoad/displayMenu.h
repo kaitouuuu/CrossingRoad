@@ -5,6 +5,7 @@
 #include "TextBox.h"
 #include "Button.h"
 #include "MainMenu.h"
+#include "character.h"
 
 using namespace sf;
 using namespace std;
