@@ -148,7 +148,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Road.cpp" />
     <ClCompile Include="TextBox.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.hpp" />
@@ -159,7 +161,9 @@
     <ClInclude Include="Frontend.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Road.h" />
     <ClInclude Include="TextBox.h" />
+    <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
