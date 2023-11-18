@@ -1,38 +1,47 @@
 #pragma once
 #include <vector>
-class Object {
+#include "character.h"
+class Stableobject {
 private:
 	float x;
 	float y;
-
-
-};
-
-class Car : public Object {
-private:
-	float speed;
+	float width;
+	float height;
+	Texture texture;
+	Sprite sprite;
 public:
-	void display();
+	Stableobject(const float& x, const float& y, string filename, const float& width, const float& height);
+	void draw(RenderWindow& window);
 };
-
-class Obstacle : public Object {
-
-public:
-	void display();
-};
-
 class Superlane {
 private:
 	float y;
 	float x;
-public:
+	float width;
+	float height;
 
+public:
+	Superlane(const float& x, const float& y, const float& width, const float& height) : x(x), y(y),width(width),height(height){}
+	virtual void draw(RenderWindow& window)=0;
 };
-class lane: public Superlane  {
+class Lawn: public Superlane  {
 private:
-	std::vector<Obstacle*> smallobstacle;
+	std::vector<Stableobject*> smallobstacle;
+	Texture texture;
+	Sprite sprite;
+public:
+	Lawn(const float& x, const float& y, const float& width, const float& height,string filename) : Superlane(x, y, width, height){
+		if (!texture.loadFromFile(filename)) {
+			cout << "Failed to load grass spritesheet!" << endl;
+			exit(0);
+		}
+		IntRect rectangle(x, y, width, height);
+		sprite.setTexture(texture);
+		sprite.setTextureRect(rectangle);
+	}
+	void draw(RenderWindow& window) override;
 };
-class road: public Superlane {
+class Road: public Superlane {
 private:
-	std::vector<Car*> vehicle;
+	// vehicle class 
 };
