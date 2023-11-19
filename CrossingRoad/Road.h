@@ -9,25 +9,25 @@
 
 class Road {
 private:
-    float yPos;
-    bool hasTrafficLight;
-    sf::Color trafficLightColor;
-    float speed;
-    std::deque<Vehicle> cars;
+	float yPos;
+	bool hasTrafficLight;
+	sf::Color trafficLightColor;
+	float speed;
+	std::deque<Vehicle> cars;
 
 public:
-    Road(float yPos, bool hasTrafficLight, sf::Color trafficLightColor, float speed);
+	Road(float yPos, bool hasTrafficLight, sf::Color trafficLightColor, float speed);
 
-    float getYPosition() const;
-    bool getHasTrafficLight() const;
-    sf::Color getTrafficLightColor() const;
-    float getSpeed() const;
+	float getYPosition() const;
+	bool getHasTrafficLight() const;
+	sf::Color getTrafficLightColor() const;
+	float getSpeed() const;
 
-    void addCar(const Vehicle& car);
-    void updateCars();
+	void addCar(const Vehicle& car);
+	void updateCars();
 
-    // For debug
-    void printCar();
+	// For debug
+	void printCar();
 };
 
 #endif // ROAD_H

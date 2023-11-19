@@ -5,20 +5,20 @@
 
 class Vehicle {
 private:
-    float xPos;
-    float yPos;
-    std::string type;
+	float xPos;
+	float yPos;
+	std::string type;
 
 public:
-    Vehicle();
-    Vehicle(float xPos, float yPos, std::string type);
+	Vehicle();
+	Vehicle(float xPos, float yPos, std::string type);
 
-    float getXPosition() const;
-    float getYPosition() const;
-    std::string getType() const;
+	float getXPosition() const;
+	float getYPosition() const;
+	std::string getType() const;
 
-    void updatePosition(float speed);
-    void rotatePosition(bool gotoBack);
+	void updatePosition(float speed);
+	void rotatePosition(bool gotoBack);
 };
 
 #endif // VEHICLE_H
