@@ -11,6 +11,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Base.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vehicle.h">
@@ -20,6 +21,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Base.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

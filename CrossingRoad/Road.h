@@ -4,6 +4,8 @@
 #include <iostream>
 #include <deque>
 #include <algorithm>
+#include <string>
+#include <vector>
 
 #include "Vehicle.h"
 #include "Object.h"
