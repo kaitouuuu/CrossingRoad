@@ -3,7 +3,10 @@
 Road::Road()
 	: type(""), yPos(0), hasTrafficLight(false), trafficLightColor(0), speed(0) {}
 
-std::string Road::getTypeRoad() const
+Road::Road(std::string type, float yPos)
+	: type(type), yPos(yPos), hasTrafficLight(false), trafficLightColor(0), speed(0) {}
+
+std::string Road::getType() const
 {
 	return type;
 }
@@ -28,54 +31,60 @@ float Road::getSpeed() const
 	return speed;
 }
 
+void Road::setSpeed(const float s) {
+	speed = s;
+}
+
+void Road::setTrafficLight(const int color) {
+	hasTrafficLight = true;
+	trafficLightColor = color;
+}
+
 void Road::addCar(const Vehicle& addedCar)
 {
-	cars.push_back(addedCar);
+	for (Vehicle& car : cars) {
+		float carX = car.getX();
+		float carX2 = carX + car.getWidth();
+		float addedCarX = addedCar.getX();
+		float addedCarX2 = addedCarX + addedCar.getWidth();
 
-	for (int i = 0; i < cars.size(); ++i)
-	{
-		if (cars[i].getX() > addedCar.getX())
-		{
-			std::swap(cars[i], cars.back());
-			break;
+		if (carX <= addedCarX && addedCarX <= carX2 || addedCarX <= carX && carX <= addedCarX2) {
+			return;
 		}
 	}
+
+	cars.push_back(addedCar);
 }
 
 void Road::updateCars()
 {
-	bool deleteCarFront = false;
-	bool deleteCarBack = false;
-	Vehicle rotateCar;
-
 	for (Vehicle& car : cars)
 	{
 		car.updatePosition(speed);
-		if (car.getX() >= 1920)
-		{
-			rotateCar = car;
-			deleteCarBack = true;
-		}
-		if (car.getX() < 0)
-		{
-			rotateCar = car;
-			deleteCarFront = true;
+	}
+}
+
+void Road::addObject(const Object& addedObject) {
+	for (Object& object : objects) {
+		float objX = object.getX();
+		float objX2 = objX + object.getWidth();
+		float addedObjX = addedObject.getX();
+		float addedObjX2 = addedObjX + addedObject.getWidth();
+
+		if (objX <= addedObjX && addedObjX <= objX2 || addedObjX <= objX && objX <= addedObjX2) {
+			return;
 		}
 	}
 
-	if (deleteCarBack == true)
-	{
-		cars.pop_back();
-		rotateCar.rotatePosition(false);
-		cars.push_front(rotateCar);
-	}
+	objects.push_back(addedObject);
+}
 
-	if (deleteCarFront == true)
-	{
-		cars.pop_front();
-		rotateCar.rotatePosition(true);
-		cars.push_back(rotateCar);
-	}
+void Road::setY(const float y) {
+	yPos = y;
+}
+
+void Road::setType(const std::string t) {
+	type = t;
 }
 
 void Road::printCar() {

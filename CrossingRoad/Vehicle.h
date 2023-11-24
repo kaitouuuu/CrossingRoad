@@ -22,7 +22,6 @@ public:
 	std::string getType() const;
 
 	void updatePosition(float speed);
-	void rotatePosition(bool gotoBack);
 };
 
 #endif // VEHICLE_H

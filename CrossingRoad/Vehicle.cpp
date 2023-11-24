@@ -34,15 +34,11 @@ std::string Vehicle::getType() const
 void Vehicle::updatePosition(float speed)
 {
 	xPos += speed;
-}
 
-void Vehicle::rotatePosition(bool gotoBack)
-{
-	if (gotoBack == true) {
-		xPos += 1920;
-	}
-	else
-	{
+	if (xPos >= 1920) {
 		xPos -= 1920;
+	}
+	else if (xPos < 0) {
+		xPos += 1920;
 	}
 }
