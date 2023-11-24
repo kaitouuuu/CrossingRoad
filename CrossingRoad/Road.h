@@ -4,23 +4,29 @@
 #include <iostream>
 #include <deque>
 #include <algorithm>
+
 #include <SFML/Graphics.hpp>
+
 #include "Vehicle.h"
+#include "Object.h"
 
 class Road {
 private:
+	bool type; // True: Road, False: Field
 	float yPos;
 	bool hasTrafficLight;
-	sf::Color trafficLightColor;
+	int trafficLightColor; // 0: Green, 1: Yellow, 2: Red
 	float speed;
 	std::deque<Vehicle> cars;
+	std::vector<Object> objects;
 
 public:
-	Road(float yPos, bool hasTrafficLight, sf::Color trafficLightColor, float speed);
+	Road();
 
-	float getYPosition() const;
+	bool getTypeRoad() const;
+	float getY() const;
 	bool getHasTrafficLight() const;
-	sf::Color getTrafficLightColor() const;
+	int getTrafficLightColor() const;
 	float getSpeed() const;
 
 	void addCar(const Vehicle& car);

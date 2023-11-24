@@ -1,10 +1,9 @@
 #include <SFML/Graphics.hpp>
-#include "Frontend.h"
+#include "Road.h"
 
 using namespace sf;
 using namespace std;
 
-int main()
-{
-    Frontend();
+int main() {
+	return 0;
 }

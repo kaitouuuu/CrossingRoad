@@ -1,19 +1,27 @@
 #include "Vehicle.h"
 
-Vehicle::Vehicle(float xPos, float yPos, std::string type)
-	: xPos(xPos), yPos(yPos), type(type) {}
-
 Vehicle::Vehicle()
-	: xPos(0), yPos(0), type("") {}
+	: xPos(0), yPos(0), width(0), height(0), type("") {}
 
-float Vehicle::getXPosition() const
+Vehicle::Vehicle(float xPos, float yPos, int width, int height, std::string type)
+	: xPos(xPos), yPos(yPos), width(width), height(height), type(type) {}
+
+float Vehicle::getX() const
 {
 	return xPos;
 }
 
-float Vehicle::getYPosition() const
+float Vehicle::getY() const
 {
 	return yPos;
+}
+
+int Vehicle::getWidth() const {
+	return width;
+}
+
+int Vehicle::getHeight() const {
+	return height;
 }
 
 std::string Vehicle::getType() const

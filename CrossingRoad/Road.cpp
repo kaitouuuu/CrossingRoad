@@ -1,9 +1,13 @@
 #include "Road.h"
 
-Road::Road(float yPos, bool hasTrafficLight, sf::Color trafficLightColor, float speed)
-	: yPos(yPos), hasTrafficLight(hasTrafficLight), trafficLightColor(trafficLightColor), speed(speed) {}
+Road::Road()
+	: type(false), yPos(0), hasTrafficLight(false), trafficLightColor(0), speed(0) {}
 
-float Road::getYPosition() const
+bool Road::getTypeRoad() const {
+	return type;
+}
+
+float Road::getY() const
 {
 	return yPos;
 }
@@ -13,7 +17,7 @@ bool Road::getHasTrafficLight() const
 	return hasTrafficLight;
 }
 
-sf::Color Road::getTrafficLightColor() const
+int Road::getTrafficLightColor() const
 {
 	return trafficLightColor;
 }
@@ -29,7 +33,7 @@ void Road::addCar(const Vehicle& addedCar)
 
 	for (int i = 0; i < cars.size(); ++i)
 	{
-		if (cars[i].getXPosition() > addedCar.getXPosition())
+		if (cars[i].getX() > addedCar.getX())
 		{
 			std::swap(cars[i], cars.back());
 			break;
@@ -46,12 +50,12 @@ void Road::updateCars()
 	for (Vehicle& car : cars)
 	{
 		car.updatePosition(speed);
-		if (car.getXPosition() >= 1920)
+		if (car.getX() >= 1920)
 		{
 			rotateCar = car;
 			deleteCarBack = true;
 		}
-		if (car.getXPosition() < 0)
+		if (car.getX() < 0)
 		{
 			rotateCar = car;
 			deleteCarFront = true;
@@ -76,7 +80,7 @@ void Road::updateCars()
 void Road::printCar() {
 	for (Vehicle& car : cars)
 	{
-		std::cout << car.getXPosition() << " " << car.getYPosition() << " ";
+		std::cout << car.getX() << " " << car.getY() << " ";
 	}
 	std::cout << std::endl;
 }

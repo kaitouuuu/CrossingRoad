@@ -1,38 +1,25 @@
-#pragma once
-#include <vector>
+#ifndef OBJECT_H
+#define OBJECT_H
+
+#include <string>
+
 class Object {
 private:
-	float x;
-	float y;
-
-
-};
-
-class Car : public Object {
-private:
-	float speed;
-public:
-	void display();
-};
-
-class Obstacle : public Object {
+	float xPos;
+	float yPos;
+	int width;
+	int height;
+	std::string type;
 
 public:
-	void display();
+	Object();
+	Object(float xPos, float yPos, int width, int height, std::string type);
+
+	float getX() const;
+	float getY() const;
+	int getWidth() const;
+	int getHeight() const;
+	std::string getType() const;
 };
 
-class Superlane {
-private:
-	float y;
-	float x;
-public:
-
-};
-class lane: public Superlane  {
-private:
-	std::vector<Obstacle*> smallobstacle;
-};
-class road: public Superlane {
-private:
-	std::vector<Car*> vehicle;
-};
+#endif // OBJECT_H
