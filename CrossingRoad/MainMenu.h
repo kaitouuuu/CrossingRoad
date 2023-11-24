@@ -11,10 +11,14 @@ using namespace std;
 class MainMenu
 {
 private:
-    vector<TextBox> mainMenuText;
+    
     vector<Button> mainMenuButton;
-
+    string type;
 public:
     MainMenu( vector<Button> mainMenuButton);
     void draw(RenderWindow& window, Vector2f& mouse);
+    void updateState(string type);
+    void loadgame();
+    void savegame();
+    void quit();
 };

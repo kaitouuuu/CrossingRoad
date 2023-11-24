@@ -53,6 +53,19 @@ void displayMenu(RenderWindow& window)
 			// Set the scale of the background sprite
 			background.setScale(scaleX, scaleY);
 		}
+		if (e.type == sf::Event::MouseButtonPressed) {
+			if (e.mouseButton.button == sf::Mouse::Left) {
+				// Get the mouse position
+				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+				for (auto& button : b) {
+					// Check if the mouse is over the button
+					if (button.getglobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+						std::cout << "Button clicked!" << std::endl;
+						break;
+					}
+				}
+			}
+		}
 
 		character.update(frameClock);
 
