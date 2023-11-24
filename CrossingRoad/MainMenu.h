@@ -15,6 +15,6 @@ private:
     vector<Button> mainMenuButton;
 
 public:
-    MainMenu(vector<TextBox> mainMenuText, vector<Button> mainMenuButton);
+    MainMenu( vector<Button> mainMenuButton);
     void draw(RenderWindow& window, Vector2f& mouse);
 };
