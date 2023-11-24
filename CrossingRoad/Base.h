@@ -22,6 +22,7 @@ public:
 
 	// For debug
 	Base(std::mt19937_64 seed);
+	void printAll();
 };
 
 #endif // BASE_H

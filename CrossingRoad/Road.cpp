@@ -1,10 +1,18 @@
 #include "Road.h"
 
 Road::Road()
-	: type(""), yPos(0), hasTrafficLight(false), trafficLightColor(0), speed(0) {}
+	: type(""), yPos(0), hasTrafficLight(false), trafficLightColor(0), speed(0)
+{
+	cars.clear();
+	objects.clear();
+}
 
 Road::Road(std::string type, float yPos)
-	: type(type), yPos(yPos), hasTrafficLight(false), trafficLightColor(0), speed(0) {}
+	: type(type), yPos(yPos), hasTrafficLight(false), trafficLightColor(0), speed(0)
+{
+	cars.clear();
+	objects.clear();
+}
 
 std::string Road::getType() const
 {
@@ -87,10 +95,20 @@ void Road::setType(const std::string t) {
 	type = t;
 }
 
-void Road::printCar() {
+void Road::printAll() {
+	std::cout << type << std::endl;
+	std::cout << "Car: ";
+
 	for (Vehicle& car : cars)
 	{
-		std::cout << car.getX() << " " << car.getY() << " ";
+		std::cout << car.getX() << ":" << car.getY() << " ";
 	}
+
+	std::cout << std::endl << "Object: ";
+
+	for (Object& object : objects) {
+		std::cout << object.getX() << ":" << object.getY() << " ";
+	}
+
 	std::cout << std::endl;
 }

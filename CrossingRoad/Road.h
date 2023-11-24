@@ -37,7 +37,7 @@ public:
 	// For debug
 	void setY(const float y);
 	void setType(const std::string t);
-	void printCar();
+	void printAll();
 };
 
 #endif // ROAD_H
