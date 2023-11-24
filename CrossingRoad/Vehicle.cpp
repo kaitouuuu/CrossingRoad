@@ -16,11 +16,13 @@ float Vehicle::getY() const
 	return yPos;
 }
 
-int Vehicle::getWidth() const {
+int Vehicle::getWidth() const
+{
 	return width;
 }
 
-int Vehicle::getHeight() const {
+int Vehicle::getHeight() const
+{
 	return height;
 }
 

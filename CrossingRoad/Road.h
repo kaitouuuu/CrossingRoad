@@ -5,8 +5,6 @@
 #include <deque>
 #include <algorithm>
 
-#include <SFML/Graphics.hpp>
-
 #include "Vehicle.h"
 #include "Object.h"
 
