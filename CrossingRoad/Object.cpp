@@ -16,11 +16,13 @@ float Object::getY() const
 	return yPos;
 }
 
-int Object::getWidth() const {
+int Object::getWidth() const
+{
 	return width;
 }
 
-int Object::getHeight() const {
+int Object::getHeight() const
+{
 	return height;
 }
 

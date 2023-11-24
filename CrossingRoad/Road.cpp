@@ -1,9 +1,10 @@
 #include "Road.h"
 
 Road::Road()
-	: type(false), yPos(0), hasTrafficLight(false), trafficLightColor(0), speed(0) {}
+	: type(""), yPos(0), hasTrafficLight(false), trafficLightColor(0), speed(0) {}
 
-bool Road::getTypeRoad() const {
+std::string Road::getTypeRoad() const
+{
 	return type;
 }
 

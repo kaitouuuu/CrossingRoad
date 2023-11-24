@@ -12,7 +12,7 @@
 
 class Road {
 private:
-	bool type; // True: Road, False: Field
+	std::string type;
 	float yPos;
 	bool hasTrafficLight;
 	int trafficLightColor; // 0: Green, 1: Yellow, 2: Red
@@ -23,7 +23,7 @@ private:
 public:
 	Road();
 
-	bool getTypeRoad() const;
+	std::string getTypeRoad() const;
 	float getY() const;
 	bool getHasTrafficLight() const;
 	int getTrafficLightColor() const;
