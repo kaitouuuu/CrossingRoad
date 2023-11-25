@@ -2,7 +2,10 @@
 #define VEHICLE_H
 
 #include <string>
-
+#include <iostream>
+#include <SFML/Graphics.hpp>
+using namespace sf;
+using namespace std;
 class Vehicle {
 private:
 	float xPos;
@@ -10,6 +13,8 @@ private:
 	int width;
 	int height;
 	std::string type;
+	Texture texture;
+	Sprite sprite;
 
 public:
 	Vehicle();
@@ -20,7 +25,6 @@ public:
 	int getWidth() const;
 	int getHeight() const;
 	std::string getType() const;
-
 	void updatePosition(float speed);
 };
 

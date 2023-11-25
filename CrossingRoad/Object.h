@@ -2,7 +2,10 @@
 #define OBJECT_H
 
 #include <string>
-
+#include <iostream>
+#include <SFML/Graphics.hpp>
+using namespace sf;
+using namespace std;
 class Object {
 private:
 	float xPos;
@@ -10,6 +13,8 @@ private:
 	int width;
 	int height;
 	std::string type;
+	Texture texture;
+	Sprite sprite;
 
 public:
 	Object();
@@ -20,6 +25,10 @@ public:
 	int getWidth() const;
 	int getHeight() const;
 	std::string getType() const;
+	FloatRect getglobalBounds();
+	bool doesIntersect(Object* other);
+	void draw(RenderWindow& window);
 };
+
 
 #endif // OBJECT_H

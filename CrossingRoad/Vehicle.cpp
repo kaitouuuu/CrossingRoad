@@ -43,4 +43,5 @@ void Vehicle::updatePosition(float speed)
 	{
 		xPos += 1920;
 	}
+
 }
