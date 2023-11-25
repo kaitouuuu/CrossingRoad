@@ -35,10 +35,12 @@ void Vehicle::updatePosition(float speed)
 {
 	xPos += speed;
 
-	if (xPos >= 1920) {
+	if (xPos >= 1920)
+	{
 		xPos -= 1920;
 	}
-	else if (xPos < 0) {
+	else if (xPos < 0)
+	{
 		xPos += 1920;
 	}
 }

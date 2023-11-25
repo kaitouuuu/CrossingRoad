@@ -4,9 +4,10 @@
 using namespace sf;
 using namespace std;
 
-int main() {
+int main()
+{
 	Base test = Base();
-	test.randomGame(2);
+	test.randomGame(10000);
 	test.printAll();
 
 	return 0;

@@ -39,24 +39,28 @@ float Road::getSpeed() const
 	return speed;
 }
 
-void Road::setSpeed(const float s) {
+void Road::setSpeed(const float s)
+{
 	speed = s;
 }
 
-void Road::setTrafficLight(const int color) {
+void Road::setTrafficLight(const int color)
+{
 	hasTrafficLight = true;
 	trafficLightColor = color;
 }
 
 void Road::addCar(const Vehicle& addedCar)
 {
-	for (Vehicle& car : cars) {
+	for (Vehicle& car : cars)
+	{
 		float carX = car.getX();
 		float carX2 = carX + car.getWidth();
 		float addedCarX = addedCar.getX();
 		float addedCarX2 = addedCarX + addedCar.getWidth();
 
-		if (carX <= addedCarX && addedCarX <= carX2 || addedCarX <= carX && carX <= addedCarX2) {
+		if (carX <= addedCarX && addedCarX <= carX2 || addedCarX <= carX && carX <= addedCarX2)
+		{
 			return;
 		}
 	}
@@ -72,14 +76,17 @@ void Road::updateCars()
 	}
 }
 
-void Road::addObject(const Object& addedObject) {
-	for (Object& object : objects) {
+void Road::addObject(const Object& addedObject)
+{
+	for (Object& object : objects)
+	{
 		float objX = object.getX();
 		float objX2 = objX + object.getWidth();
 		float addedObjX = addedObject.getX();
 		float addedObjX2 = addedObjX + addedObject.getWidth();
 
-		if (objX <= addedObjX && addedObjX <= objX2 || addedObjX <= objX && objX <= addedObjX2) {
+		if (objX <= addedObjX && addedObjX <= objX2 || addedObjX <= objX && objX <= addedObjX2)
+		{
 			return;
 		}
 	}
@@ -87,16 +94,19 @@ void Road::addObject(const Object& addedObject) {
 	objects.push_back(addedObject);
 }
 
-void Road::setY(const float y) {
+void Road::setY(const float y)
+{
 	yPos = y;
 }
 
-void Road::setType(const std::string t) {
+void Road::setType(const std::string t)
+{
 	type = t;
 }
 
-void Road::printAll() {
-	std::cout << type << std::endl;
+void Road::printAll()
+{
+	std::cout << type << " " << speed << std::endl;
 	std::cout << "Car: ";
 
 	for (Vehicle& car : cars)
@@ -106,7 +116,8 @@ void Road::printAll() {
 
 	std::cout << std::endl << "Object: ";
 
-	for (Object& object : objects) {
+	for (Object& object : objects)
+	{
 		std::cout << object.getX() << ":" << object.getY() << " ";
 	}
 
