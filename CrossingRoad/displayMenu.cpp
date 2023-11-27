@@ -2,6 +2,7 @@
 
 void displayMenu(RenderWindow& window)
 {
+	//Test
 	window.setFramerateLimit(60);
 
 	Texture Image;
