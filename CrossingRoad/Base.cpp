@@ -19,10 +19,10 @@ void Base::randomGame(int difficulty)
 
 	// Initial road
 	lanes.clear();
-	Road newRoad = Road("Road", widthLane);
+	Road newRoad = Road("Field", widthLane);
 	lanes.push_back(newRoad);
 
-	int numLane = std::min(25 + difficulty * 4, 100);
+	int numLane = std::min(25 + difficulty * 3, 100);
 
 	for (int i = 2; i <= numLane; ++i)
 	{
