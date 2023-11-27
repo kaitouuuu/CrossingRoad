@@ -44,4 +44,5 @@ void Vehicle::updatePosition(float speed)
 	{
 		xPos += screenLimit;
 	}
+
 }
