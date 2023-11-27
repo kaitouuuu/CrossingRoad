@@ -33,14 +33,15 @@ std::string Vehicle::getType() const
 
 void Vehicle::updatePosition(float speed)
 {
+	const float screenLimit = 1920 + 48;
 	xPos += speed;
 
-	if (xPos >= 1920)
+	if (xPos >= screenLimit)
 	{
-		xPos -= 1920;
+		xPos -= screenLimit;
 	}
-	else if (xPos < 0)
+	else if (xPos < 0 - 48)
 	{
-		xPos += 1920;
+		xPos += screenLimit;
 	}
 }

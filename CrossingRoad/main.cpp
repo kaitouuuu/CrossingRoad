@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
 	Base test = Base();
-	test.randomGame(10000);
+	test.randomGame(5);
 	test.printAll();
 
 	return 0;

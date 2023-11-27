@@ -77,6 +77,12 @@ void Base::randomGame(int difficulty)
 	}
 }
 
+void Base::playGame()
+{
+	// TODO: character movement, collison and update screen
+	// merge code from others
+}
+
 Base::Base(std::mt19937_64 seed)
 	: rng(seed) {}
 
