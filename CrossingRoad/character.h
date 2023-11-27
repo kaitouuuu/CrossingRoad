@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "AnimatedSprite.hpp"
+#include "Object.h"
 #include <iostream>
 
 using namespace sf;
@@ -15,7 +16,7 @@ enum Direction {
 	front, left, right
 };
 
-class Character 
+class Character
 {
 private:
 	Texture texture;
@@ -29,24 +30,30 @@ private:
 
 	float speed;
 	float x, y;
-	
+
+	bool isCleared;
 	bool noKeyWasPressed;
 	bool isLose;
+
+	int type;
 
 	Skin skin;
 
 public:
-	bool collision_car();
-	bool collision_obj();
+	bool checkCollision(vector<Object> o);
 	void changeskin();
 
 	Character(string fileName, float x, float y, bool paused, bool looped);
 
+	void setMoveUp();
+	void setMoveDown();
+	void setMoveLeft();
+	void setMoveRight();
 	void setUp();
 	void setDown();
 	void setLeft();
 	void setRight();
-	void update(Clock& frameClock);
+	void update(Clock& frameClock, vector<Object> o);
 	void draw(RenderWindow& window);
 
 	bool getIsLose() { return isLose; }

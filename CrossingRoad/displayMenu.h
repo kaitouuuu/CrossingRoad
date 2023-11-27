@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "MainMenu.h"
 #include "character.h"
+#include "Object.h"
 
 using namespace sf;
 using namespace std;

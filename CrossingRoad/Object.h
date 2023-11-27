@@ -4,8 +4,15 @@ class Object {
 private:
 	float x;
 	float y;
+	float width;
+	float height;
 
-
+public:
+	Object(float x, float y, float width, float height);
+	float getX();
+	float getY();
+	float getWidth();
+	float getHeight();
 };
 
 class Car : public Object {
@@ -28,11 +35,11 @@ private:
 public:
 
 };
-class lane: public Superlane  {
+class lane : public Superlane {
 private:
 	std::vector<Obstacle*> smallobstacle;
 };
-class road: public Superlane {
+class road : public Superlane {
 private:
 	std::vector<Car*> vehicle;
 };
