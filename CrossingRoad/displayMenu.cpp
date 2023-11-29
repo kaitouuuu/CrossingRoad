@@ -49,6 +49,7 @@ void displayMenu(RenderWindow& window)
 			if (e.type == Event::Closed) {
 				window.close();
 			}
+			character.changeSkin();
 		}
 
 		character.update(frameClock, o);

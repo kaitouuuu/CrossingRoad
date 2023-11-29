@@ -72,6 +72,14 @@ void Character::setRight()
 	walkingAnimationRight.addFrame(sf::IntRect(1 * w, 3 * w, 1 * w, 1 * w));
 }
 
+void Character::clearFrame()
+{
+	walkingAnimationUp.clearFrame();
+	walkingAnimationDown.clearFrame();
+	walkingAnimationLeft.clearFrame();
+	walkingAnimationRight.clearFrame();
+}
+
 Character::Character(string fileName, float x, float y, bool paused, bool looped)
 {
 	if (!texture.loadFromFile(fileName))
@@ -111,10 +119,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 	{
 		if (checkCollision(o)) {
 			if (!isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = true;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -122,10 +127,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 		}
 		else {
 			if (isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = false;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -140,10 +142,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 	{
 		if (checkCollision(o)) {
 			if (!isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = true;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -151,10 +150,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 		}
 		else {
 			if (isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = false;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -169,10 +165,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 	{
 		if (checkCollision(o)) {
 			if (!isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = true;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -180,10 +173,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 		}
 		else {
 			if (isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = false;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -198,10 +188,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 	{
 		if (checkCollision(o)) {
 			if (!isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = true;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -209,10 +196,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 		}
 		else {
 			if (isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = false;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -228,10 +212,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 	{
 		if (type == 0) {
 			if (!isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = true;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -241,10 +222,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 
 		if (type == 1) {
 			if (!isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = true;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -254,10 +232,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 
 		if (type == 2) {
 			if (!isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = true;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -267,10 +242,7 @@ void Character::update(Clock& frameClock, vector<Object> o)
 
 		if (type == 3) {
 			if (!isCleared) {
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
+				clearFrame();
 				isCleared = true;
 			}
 			for (int i = 0; i < 100; ++i)
@@ -288,6 +260,34 @@ void Character::update(Clock& frameClock, vector<Object> o)
 
 	x = animatedSprite.getPosition().x;
 	y = animatedSprite.getPosition().y;
+}
+
+void Character::changeSkin()
+{
+	if (Keyboard::isKeyPressed(Keyboard::Tab)) {
+		if (skin < 4) {
+			++skin;
+		}
+		else {
+			skin = 0;
+		}
+
+		if (skin == 0) {
+			animatedSprite.setColor(Color::White);
+		}
+		else if (skin == 1) {
+			animatedSprite.setColor(Color(255, 165, 79));
+		}
+		else if (skin == 2) {
+			animatedSprite.setColor(Color(139, 69, 19));
+		}
+		else if (skin == 3) {
+			animatedSprite.setColor(Color(82, 84, 41));
+		}
+		else if (skin == 4) {
+			animatedSprite.setColor(Color(176, 250, 255));
+		}
+	}
 }
 
 void Character::draw(RenderWindow& window)
@@ -334,5 +334,3 @@ bool Character::checkCollision(vector<Object> o)
 	}
 	return false;
 }
-
-void Character::changeskin() {}

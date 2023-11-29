@@ -8,14 +8,6 @@
 using namespace sf;
 using namespace std;
 
-enum Skin {
-	red, blue, green
-};
-
-enum Direction {
-	front, left, right
-};
-
 class Character
 {
 private:
@@ -28,6 +20,8 @@ private:
 	Animation walkingAnimationRight;
 	Animation* currentAnimation;
 
+	int skin = 0;
+
 	float speed;
 	float x, y;
 
@@ -37,11 +31,8 @@ private:
 
 	int type;
 
-	Skin skin;
-
 public:
 	bool checkCollision(vector<Object> o);
-	void changeskin();
 
 	Character(string fileName, float x, float y, bool paused, bool looped);
 
@@ -53,7 +44,9 @@ public:
 	void setDown();
 	void setLeft();
 	void setRight();
+	void clearFrame();
 	void update(Clock& frameClock, vector<Object> o);
+	void changeSkin();
 	void draw(RenderWindow& window);
 
 	bool getIsLose() { return isLose; }
