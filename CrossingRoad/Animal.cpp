@@ -1,37 +1,37 @@
-#include "Vehicle.h"
+#include "Animal.h"
 
-Vehicle::Vehicle()
+Animal::Animal()
 	: xPos(0), yPos(0), width(0), height(0), type("") {}
 
-Vehicle::Vehicle(float xPos, float yPos, float width, float height, std::string type)
+Animal::Animal(float xPos, float yPos, float width, float height, std::string type)
 	: xPos(xPos), yPos(yPos), width(width), height(height), type(type) {}
 
-float Vehicle::getX() const
+float Animal::getX() const
 {
 	return xPos;
 }
 
-float Vehicle::getY() const
+float Animal::getY() const
 {
 	return yPos;
 }
 
-float Vehicle::getWidth() const
+float Animal::getWidth() const
 {
 	return width;
 }
 
-float Vehicle::getHeight() const
+float Animal::getHeight() const
 {
 	return height;
 }
 
-std::string Vehicle::getType() const
+std::string Animal::getType() const
 {
 	return type;
 }
 
-void Vehicle::updatePosition(float speed)
+void Animal::updatePosition(float speed)
 {
 	xPos += speed;
 

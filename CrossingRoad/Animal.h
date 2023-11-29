@@ -1,5 +1,5 @@
-#ifndef VEHICLE_H
-#define VEHICLE_H
+#ifndef ANIMAL_H
+#define ANIMAL_H
 
 #include <string>
 #include <iostream>
@@ -7,7 +7,7 @@
 
 using namespace sf;
 
-class Vehicle {
+class Animal {
 private:
 	float xPos;
 	float yPos;
@@ -18,8 +18,8 @@ private:
 	Sprite sprite;
 
 public:
-	Vehicle();
-	Vehicle(float xPos, float yPos, float width, float height, std::string type);
+	Animal();
+	Animal(float xPos, float yPos, float width, float height, std::string type);
 
 	float getX() const;
 	float getY() const;
@@ -29,4 +29,4 @@ public:
 	void updatePosition(float speed);
 };
 
-#endif // VEHICLE_H
+#endif // ANIMAL_H

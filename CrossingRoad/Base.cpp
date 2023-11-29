@@ -13,18 +13,17 @@ int Base::randomNumber(int l, int r)
 void Base::randomGame(int difficulty)
 {
 	const float widthLane = 48.0;
-	std::string allRoadType[] = { "Road", "Field" };
+	const int numLane = 20;
+	std::string allRoadType[] = { "Road", "Field", "Land"};
 	std::string allObjectType[] = { "tree", "TREE" };
 	float allObjectSize[] = { 36.0, 48.0 };
 
 	// Initial road
 	lanes.clear();
-	Road newRoad = Road("Road", widthLane);
+	Road newRoad = Road("Field", widthLane);
 	lanes.push_back(newRoad);
 
-	int numLane = std::min(25 + difficulty * 4, 100);
-
-	for (int i = 2; i <= numLane; ++i)
+	for (int i = 2; i < numLane; ++i)
 	{
 		std::string type = allRoadType[randomNumber(0, 1)];
 		newRoad = Road(type, widthLane * i);
@@ -75,6 +74,14 @@ void Base::randomGame(int difficulty)
 
 		lanes.push_back(newRoad);
 	}
+
+	newRoad = Road("Field", widthLane);
+}
+
+void Base::playGame()
+{
+	// TODO: character movement, collison and update screen
+	// merge code from others
 }
 
 Base::Base(std::mt19937_64 seed)

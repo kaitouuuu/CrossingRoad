@@ -77,7 +77,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>G:\year1\Semester 2\Cs162\Group project\CrossingRoad\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\Assignment\Programming Systems\Group\CrossingRoad\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -94,7 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\Assignment\Programming Systems\Group\CrossingRoad\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\Assignment\Programming Systems\Group\CrossingRoad\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,7 +112,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\Assignment\Programming Systems\Group\CrossingRoad\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\Assignment\Programming Systems\Group\CrossingRoad\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,7 +129,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\Assignment\Programming Systems\Group\CrossingRoad\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\Assignment\Programming Systems\Group\CrossingRoad\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animal.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animal.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Road.h" />
