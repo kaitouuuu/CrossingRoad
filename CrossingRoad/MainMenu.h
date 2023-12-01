@@ -18,7 +18,7 @@ private:
     vector<Button> menu;
     vector<TextBox> text;
 public:
-    Menu(vector<Button>& menu);
+    Menu(const vector<Button>& menu,const vector<TextBox> & text);
     void draw(RenderWindow& window, Vector2f& mouse) ;
 };
 

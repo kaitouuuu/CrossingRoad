@@ -15,17 +15,27 @@ void displayMenu(RenderWindow& window)
 
 	GameState currentState = GameState::mainmenu;
 
-	Button A("Content/Image/Game.png", 1437, 458,"Game");
-	Button B("Content/Image/Rule.png", 1447, 584, "Rule");
-	Button C("Content/Image/Setting.png", 1395, 679,"Setting");
-	Button D("Content/Image/High score.png", 1388, 794, "High score");
-	Button E("Content/Image/Exit.png", 1452, 915, "Exit");
+	Button A("Content/Image/Game.png", 1452, 353,"Game");
+	Button B("Content/Image/Rule.png", 1462, 466, "Rule");
+	Button C("Content/Image/Setting.png", 1410, 579,"Setting");
+	Button D("Content/Image/High score.png", 1403, 692, "High score");
+	Button E("Content/Image/Exit.png", 1465, 811, "Exit");
+	Button F("Content/Image/New Game.png", 1415, 410, "New game");
+	Button G("Content/Image/Load game.png", 1406, 522, "Load game");
+	Button H("Content/Image/Back.png", 1483, 634, "Back");
 	vector<Button> b;
 	b.push_back(A);
 	b.push_back(B);
 	b.push_back(C);
 	b.push_back(D);
 	b.push_back(E);
+
+
+	vector<Button> c;
+	c.push_back(F);
+	c.push_back(G);
+	c.push_back(H);
+
 	TextBox At("Content/Font/SuperMario256.ttf", Color::White, "CROSSY ROAD", 100, 401, 157);
 	//TextBox Bt("Content/Font/SuperMario256.ttf", Color::Black, "Hello", 25, 500, 650);
 	//TextBox Ct("Content/Font/SuperMario256.ttf", Color::Black, "Bye", 25, 500, 800);
@@ -34,10 +44,13 @@ void displayMenu(RenderWindow& window)
 	t.push_back(At);
 	//t.push_back(Bt);
 	//t.push_back(Ct);
-
-	MainMenu m(b);
+	Menu n(b, t);
+	Menu q(c, t);
+	//MainMenu m(b);
 
 	//Character character("Content/Image/Character1.png", 500, 500, true, false);
+
+
 
 	Clock frameClock;
 
@@ -63,19 +76,34 @@ void displayMenu(RenderWindow& window)
 					// Get the mouse position
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-					for (auto& button : b) {
-						if (button.isClicked(mousePosF) ){
-							if (button.type() == "Game") {
-								currentState = GameState::game;
-							}
-							else if (button.type() == "Setting") {
-								currentState = GameState::setting;
-							}
-							else if (button.type() == "Exit") {
-								exit(0);
+					if(currentState==GameState::mainmenu)
+						for (auto& button : b) {
+							if (button.isClicked(mousePosF) ){
+								if (button.type() == "Game") {
+									currentState = GameState::game;
+								}
+								else if (button.type() == "Setting") {
+									currentState = GameState::setting;
+								}
+								else if (button.type() == "Exit") {
+									exit(0);
+								}
 							}
 						}
-					}
+					else 
+						for (auto& button : c) {
+							if (button.isClicked(mousePosF)) {
+								if (button.type() == "New game") {
+									currentState = GameState::newgame;
+								}
+								else if (button.type() == "Load game") {
+									currentState = GameState::loadgame;
+								}
+								else if (button.type() == "Back") {
+									currentState = GameState::mainmenu;
+								}
+							}
+						}
 				}
 			}
 		}
@@ -88,12 +116,12 @@ void displayMenu(RenderWindow& window)
 		case GameState::mainmenu:
 			window.draw(background);
 			
-			m.draw(window, mouse);
+			n.draw(window, mouse);
 			break;
 		case GameState::game:
 			window.draw(background);
 			
-			m.draw(window, mouse);
+			q.draw(window, mouse);
 			
 			break;
 		case GameState::highscore:
@@ -101,6 +129,7 @@ void displayMenu(RenderWindow& window)
 			window.close();
 			break;
 		}
+	
 		window.display();
 	}
 }
