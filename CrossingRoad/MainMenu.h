@@ -7,20 +7,37 @@
 using namespace sf;
 using namespace std;
 
-class MainMenu
-{
-private:
+enum class GameState {
+    mainmenu,game,setting,highscore, loadgame, newgame
+};
 
-    vector<Button> mainMenuButton;
-    string type;
+
+
+class Menu {
+private:
+    vector<Button> menu;
+    vector<TextBox> text;
 public:
-    MainMenu(vector<Button> mainMenuButton);
-    void draw(RenderWindow& window, Vector2f& mouse);
-    void updateState(string type);
+    Menu(vector<Button>& menu);
+    void draw(RenderWindow& window, Vector2f& mouse) ;
+};
+
+class MainMenu: public Menu
+{
+
+    
+public:
+    MainMenu(vector<Button>& mainMenuButton);
     void game();
     void highscore();
     void exit();
     void rule();
     void setting();
 
+};
+
+class Game:public Menu {
+public:
+    void newgame();
+    void loadgame();
 };

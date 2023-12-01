@@ -9,24 +9,29 @@ void displayMenu(RenderWindow& window)
 		// Handle error if the image fails to load
 		return;
 	}
-
+	
 	Sprite background(backgroundTexture);
+	
 
-	Button A("Content/Image/Game.png", 50, 50);
-	Button B("Content/Image/Exit.png", 50, 200);
-	Button C("Content/Image/Setting.png", 50, 350);
+	GameState currentState = GameState::mainmenu;
 
+	Button A("Content/Image/Game.png", 1437, 458,"Game");
+	Button B("Content/Image/Rule.png", 1447, 584, "Rule");
+	Button C("Content/Image/Setting.png", 1395, 679,"Setting");
+	Button D("Content/Image/High score.png", 1388, 794, "High score");
+	Button E("Content/Image/Exit.png", 1452, 915, "Exit");
 	vector<Button> b;
 	b.push_back(A);
 	b.push_back(B);
 	b.push_back(C);
-
-	//TextBox At("Content/Font/SuperMario256.ttf", Color::Black, "Hi", 25, 500, 500);
+	b.push_back(D);
+	b.push_back(E);
+	TextBox At("Content/Font/SuperMario256.ttf", Color::White, "CROSSY ROAD", 100, 401, 157);
 	//TextBox Bt("Content/Font/SuperMario256.ttf", Color::Black, "Hello", 25, 500, 650);
 	//TextBox Ct("Content/Font/SuperMario256.ttf", Color::Black, "Bye", 25, 500, 800);
 
-	//vector<TextBox> t;
-	//t.push_back(At);
+	vector<TextBox> t;
+	t.push_back(At);
 	//t.push_back(Bt);
 	//t.push_back(Ct);
 
@@ -59,13 +64,16 @@ void displayMenu(RenderWindow& window)
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 					for (auto& button : b) {
-						// Check if the mouse is over the button
-						/*if (button.getGlobalBound().contains(static_cast<sf::Vector2f>(mousePos))) {
-							std::cout << "Button clicked!" << std::endl;
-							break;
-						}*/
 						if (button.isClicked(mousePosF) ){
-							cout << "Cliked!";
+							if (button.type() == "Game") {
+								currentState = GameState::game;
+							}
+							else if (button.type() == "Setting") {
+								currentState = GameState::setting;
+							}
+							else if (button.type() == "Exit") {
+								exit(0);
+							}
 						}
 					}
 				}
@@ -74,9 +82,25 @@ void displayMenu(RenderWindow& window)
 		//character.update(frameClock);
 
 		window.clear(Color::White);
-		window.draw(background);
 		//character.draw(window);
-		m.draw(window, mouse);
+
+		switch (currentState) {
+		case GameState::mainmenu:
+			window.draw(background);
+			
+			m.draw(window, mouse);
+			break;
+		case GameState::game:
+			window.draw(background);
+			
+			m.draw(window, mouse);
+			
+			break;
+		case GameState::highscore:
+			// Optionally handle cleanup and exit the loop
+			window.close();
+			break;
+		}
 		window.display();
 	}
 }

@@ -1,14 +1,17 @@
 #include "Button.h"
 
-Button::Button(string fileName, float x, float y)
+Button::Button(string fileName, float x, float y,string type="default")
 {
     state = 0;
     texture.loadFromFile(fileName);
     sprite.setTexture(texture);
     sprite.setPosition(x, y);
     this->fileName = fileName;
+    Stype = type;
 }
-
+const string Button::type() {
+    return Stype;
+}
 Button::~Button()
 {
 
