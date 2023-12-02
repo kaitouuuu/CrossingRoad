@@ -28,19 +28,20 @@ void Base::randomGame(int difficulty)
 		std::string type = allRoadType[randomNumber(0, 2)];
 
 		// The harder the game the fewer Field type roads appear
-		if (difficulty > 3 && type == "Field") {
+		if (difficulty > 3 && type == "Field")
+		{
 			std::string type = allRoadType[randomNumber(0, 2)];
 		}
-
-		if (difficulty > 10 && type == "Field") {
+		if (difficulty > 10 && type == "Field")
+		{
 			std::string type = allRoadType[randomNumber(0, 2)];
 		}
-
-		if (difficulty > 28 && type == "Field") {
+		if (difficulty > 28 && type == "Field")
+		{
 			std::string type = allRoadType[randomNumber(0, 2)];
 		}
-
-		if (difficulty > 67 && type == "Field") {
+		if (difficulty > 67 && type == "Field")
+		{
 			std::string type = allRoadType[randomNumber(0, 2)];
 		}
 
@@ -91,11 +92,13 @@ void Base::randomGame(int difficulty)
 			}
 		}
 
-		if (type == "Land") {
+		if (type == "Land")
+		{
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
 
 			// Random vehicle direction
-			if (randomNumber(0, 1)) {
+			if (randomNumber(0, 1))
+			{
 				speed = -speed;
 			}
 
@@ -103,7 +106,8 @@ void Base::randomGame(int difficulty)
 
 			int numAnimal = difficulty + std::max(0, randomNumber(0, difficulty) - 1) - 1;
 
-			for (int j = 1; j <= numAnimal; ++j) {
+			for (int j = 1; j <= numAnimal; ++j)
+			{
 				Animal newAnimal = Animal(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "Dog");
 				newRoad.addAnimal(newAnimal);
 			}
@@ -120,16 +124,20 @@ void Base::randomGame(int difficulty)
 // TODO: Testing with Character
 void Base::playGame(int difficulty)
 {
-	int numStage = std::min(std::min(difficulty, 6) + difficulty / 12, 24);
+	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
 
-	for (int i = 1; i <= numStage; ++i) {
-		if (i < numStage / 4) {
+	for (int i = 1; i <= numStage; ++i)
+	{
+		if (i < numStage / 4)
+		{
 			randomGame(std::max(difficulty - 1, 1));
 		}
-		else if (i == numStage) {
+		else if (i == numStage)
+		{
 			randomGame(difficulty + 1);
 		}
-		else {
+		else
+		{
 			randomGame(difficulty);
 		}
 

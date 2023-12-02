@@ -95,13 +95,15 @@ void Road::addObject(const Object& addedObject)
 }
 
 void Road::addAnimal(const Animal& addedAnimal) {
-	for (Animal& animal : animals) {
+	for (Animal& animal : animals)
+	{
 		float aniX = animal.getX();
 		float aniX2 = aniX + animal.getWidth();
 		float addedAniX = addedAnimal.getX();
 		float addedAniX2 = addedAniX + addedAnimal.getWidth();
 
-		if (aniX <= addedAniX && addedAniX <= aniX2 || addedAniX <= aniX && aniX <= addedAniX2) {
+		if (aniX <= addedAniX && addedAniX <= aniX2 || addedAniX <= aniX && aniX <= addedAniX2)
+		{
 			return;
 		}
 	}
@@ -110,7 +112,8 @@ void Road::addAnimal(const Animal& addedAnimal) {
 }
 
 void Road::updateAnimals() {
-	for (Animal& animal : animals) {
+	for (Animal& animal : animals)
+	{
 		animal.updatePosition(speed);
 	}
 }

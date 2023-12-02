@@ -16,9 +16,9 @@ private:
 	bool hasTrafficLight;
 	int trafficLightColor; // 0: Green, 1: Yellow, 2: Red
 	float speed;
-	std::vector<Vehicle> cars;
-	std::vector<Object> objects;
-	std::vector<Animal> animals;
+	std::vector<Vehicle> cars; // Road
+	std::vector<Object> objects; // Field
+	std::vector<Animal> animals; // Land
 
 public:
 	Road();
