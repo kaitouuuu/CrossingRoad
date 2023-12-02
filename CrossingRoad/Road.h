@@ -7,6 +7,7 @@
 
 #include "Vehicle.h"
 #include "Object.h"
+#include "Animal.h"
 
 class Road {
 private:
@@ -17,6 +18,7 @@ private:
 	float speed;
 	std::vector<Vehicle> cars;
 	std::vector<Object> objects;
+	std::vector<Animal> animals;
 
 public:
 	Road();
@@ -30,9 +32,11 @@ public:
 	void setSpeed(const float s);
 	void setTrafficLight(const int color);
 
-	void addCar(const Vehicle& car);
+	void addCar(const Vehicle& addedCar);
 	void updateCars();
-	void addObject(const Object& object);
+	void addObject(const Object& addedObject);
+	void addAnimal(const Animal& addedAnimal);
+	void updateAnimals();
 
 	// For debug
 	void setY(const float y);
