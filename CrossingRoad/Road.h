@@ -5,9 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "Vehicle.h"
 #include "Object.h"
-#include "Animal.h"
 
 class Road {
 private:
@@ -16,9 +14,7 @@ private:
 	bool hasTrafficLight;
 	int trafficLightColor; // 0: Green, 1: Yellow, 2: Red
 	float speed;
-	std::vector<Vehicle> cars; // Road
-	std::vector<Object> objects; // Field
-	std::vector<Animal> animals; // Land
+	std::vector<Object> objects;
 
 public:
 	Road();
@@ -32,11 +28,8 @@ public:
 	void setSpeed(const float s);
 	void setTrafficLight(const int color);
 
-	void addCar(const Vehicle& addedCar);
-	void updateCars();
-	void addObject(const Object& addedObject);
-	void addAnimal(const Animal& addedAnimal);
-	void updateAnimals();
+	void addObject(const Object& added);
+	void updateObjects();
 
 	// For debug
 	void setY(const float y);

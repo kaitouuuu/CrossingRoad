@@ -15,7 +15,7 @@ void Base::randomGame(int difficulty)
 	const float widthLane = 54.0;
 	const int numLane = 20;
 	std::string allRoadType[] = { "Road", "Field", "Land"};
-	std::string allObjectType[] = { "tree", "TREE" };
+	std::string allObjectType[] = { "thin_tree", "big_tree" };
 	float allObjectSize[] = { 36.0, 48.0 };
 
 	// Initial road
@@ -74,8 +74,8 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numCar; ++j)
 			{
-				Vehicle newCar = Vehicle(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "Blue");
-				newRoad.addCar(newCar);
+				Object newCar = Object(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "blue_car");
+				newRoad.addObject(newCar);
 			}
 		}
 
@@ -108,8 +108,8 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numAnimal; ++j)
 			{
-				Animal newAnimal = Animal(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "Dog");
-				newRoad.addAnimal(newAnimal);
+				Object newAnimal = Object(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "brown_dog");
+				newRoad.addObject(newAnimal);
 			}
 		}
 

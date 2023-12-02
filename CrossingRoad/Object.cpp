@@ -8,10 +8,12 @@ Object::Object(float xPos, float yPos, float width, float height, std::string ty
 
 	std::string filename;
 
-	if (type == "thintree") {
+	if (type == "thin_tree")
+	{
 		 filename = "Content/Image/thintree.png";
 	}
-	else if (type == "bigtree") {
+	else if (type == "big_tree")
+	{
 		filename = "Content/Image/bigtree.png";
 	}
 
@@ -54,6 +56,19 @@ float Object::getHeight() const
 std::string Object::getType() const
 {
 	return type;
+}
+
+void Object::updatePosition(float speed)
+{
+	xPos += speed;
+	if (xPos >= 1920)
+	{
+		xPos -= 1920;
+	}
+	else if (xPos < 0)
+	{
+		xPos += 1920;
+	}
 }
 
 FloatRect Object::getglobalBounds()

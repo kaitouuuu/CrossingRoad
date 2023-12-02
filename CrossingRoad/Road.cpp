@@ -3,14 +3,12 @@
 Road::Road()
 	: type(""), yPos(0), hasTrafficLight(false), trafficLightColor(0), speed(0)
 {
-	cars.clear();
 	objects.clear();
 }
 
 Road::Road(std::string type, float yPos)
 	: type(type), yPos(yPos), hasTrafficLight(false), trafficLightColor(0), speed(0)
 {
-	cars.clear();
 	objects.clear();
 }
 
@@ -50,40 +48,14 @@ void Road::setTrafficLight(const int color)
 	trafficLightColor = color;
 }
 
-void Road::addCar(const Vehicle& addedCar)
-{
-	for (Vehicle& car : cars)
-	{
-		float carX = car.getX();
-		float carX2 = carX + car.getWidth();
-		float addedCarX = addedCar.getX();
-		float addedCarX2 = addedCarX + addedCar.getWidth();
-
-		if (carX <= addedCarX && addedCarX <= carX2 || addedCarX <= carX && carX <= addedCarX2)
-		{
-			return;
-		}
-	}
-
-	cars.push_back(addedCar);
-}
-
-void Road::updateCars()
-{
-	for (Vehicle& car : cars)
-	{
-		car.updatePosition(speed);
-	}
-}
-
-void Road::addObject(const Object& addedObject)
+void Road::addObject(const Object& added)
 {
 	for (Object& object : objects)
 	{
 		float objX = object.getX();
 		float objX2 = objX + object.getWidth();
-		float addedObjX = addedObject.getX();
-		float addedObjX2 = addedObjX + addedObject.getWidth();
+		float addedObjX = added.getX();
+		float addedObjX2 = addedObjX + added.getWidth();
 
 		if (objX <= addedObjX && addedObjX <= objX2 || addedObjX <= objX && objX <= addedObjX2)
 		{
@@ -91,30 +63,16 @@ void Road::addObject(const Object& addedObject)
 		}
 	}
 
-	objects.push_back(addedObject);
+	objects.push_back(added);
 }
 
-void Road::addAnimal(const Animal& addedAnimal) {
-	for (Animal& animal : animals)
-	{
-		float aniX = animal.getX();
-		float aniX2 = aniX + animal.getWidth();
-		float addedAniX = addedAnimal.getX();
-		float addedAniX2 = addedAniX + addedAnimal.getWidth();
-
-		if (aniX <= addedAniX && addedAniX <= aniX2 || addedAniX <= aniX && aniX <= addedAniX2)
+void Road::updateObjects()
+{
+	if (type != "Field") {
+		for (Object& object : objects)
 		{
-			return;
+			object.updatePosition(speed);
 		}
-	}
-
-	animals.push_back(addedAnimal);
-}
-
-void Road::updateAnimals() {
-	for (Animal& animal : animals)
-	{
-		animal.updatePosition(speed);
 	}
 }
 
@@ -130,24 +88,11 @@ void Road::setType(const std::string t)
 
 void Road::printAll()
 {
-	std::cout << type << " " << speed << std::endl << "Car: ";
-
-	for (Vehicle& car : cars)
-	{
-		std::cout << car.getX() << ":" << car.getY() << " ";
-	}
-
-	std::cout << std::endl << "Object: ";
+	std::cout << type << " " << speed << std::endl << "Object: ";
 
 	for (Object& object : objects)
 	{
 		std::cout << object.getX() << ":" << object.getY() << " ";
-	}
-
-	std::cout << std::endl << "Animal: ";
-
-	for (Animal& animal : animals) {
-		std::cout << animal.getX() << ":" << animal.getY() << " ";
 	}
 
 	std::cout << std::endl;
