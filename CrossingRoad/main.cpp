@@ -5,8 +5,7 @@ using namespace sf;
 int main()
 {
 	Base test = Base();
-	test.randomGame(2);
-	test.printAll();
+	test.playGame(2);
 
 	return 0;
 }

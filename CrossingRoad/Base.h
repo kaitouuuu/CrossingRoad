@@ -18,7 +18,7 @@ public:
 	int randomNumber(int l, int r);
 
 	void randomGame(int difficulty);
-	void playGame();
+	void playGame(int difficulty);
 
 	// For debug
 	Base(std::mt19937_64 seed);

@@ -144,8 +144,6 @@
     <ClCompile Include="Animal.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="displayMenu.cpp" />
-    <ClCompile Include="Frontend.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -157,8 +155,6 @@
     <ClInclude Include="Animal.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="displayMenu.h" />
-    <ClInclude Include="Frontend.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Road.h" />

@@ -12,7 +12,7 @@ int Base::randomNumber(int l, int r)
 // TODO: Random traffic light
 void Base::randomGame(int difficulty)
 {
-	const float widthLane = 48.0;
+	const float widthLane = 54.0;
 	const int numLane = 20;
 	std::string allRoadType[] = { "Road", "Field", "Land"};
 	std::string allObjectType[] = { "tree", "TREE" };
@@ -26,6 +26,24 @@ void Base::randomGame(int difficulty)
 	for (int i = 2; i < numLane; ++i)
 	{
 		std::string type = allRoadType[randomNumber(0, 2)];
+
+		// The harder the game the fewer Field type roads appear
+		if (difficulty > 3 && type == "Field") {
+			std::string type = allRoadType[randomNumber(0, 2)];
+		}
+
+		if (difficulty > 10 && type == "Field") {
+			std::string type = allRoadType[randomNumber(0, 2)];
+		}
+
+		if (difficulty > 28 && type == "Field") {
+			std::string type = allRoadType[randomNumber(0, 2)];
+		}
+
+		if (difficulty > 67 && type == "Field") {
+			std::string type = allRoadType[randomNumber(0, 2)];
+		}
+
 		newRoad = Road(type, widthLane * i);
 
 		if (type == "Road")
@@ -62,7 +80,7 @@ void Base::randomGame(int difficulty)
 
 		if (type == "Field")
 		{
-			int numObj = randomNumber(0, difficulty - 1);
+			int numObj = randomNumber(0, std::max(0, difficulty - 1));
 
 			for (int j = 1; j <= numObj; ++j)
 			{
@@ -94,13 +112,32 @@ void Base::randomGame(int difficulty)
 		lanes.push_back(newRoad);
 	}
 
+	// Last road
 	newRoad = Road("Field", widthLane);
+	lanes.push_back(newRoad);
 }
 
-void Base::playGame()
+// TODO: Testing with Character
+void Base::playGame(int difficulty)
 {
-	// TODO: character movement, collison and update screen
-	// merge code from others
+	int numStage = std::min(std::min(difficulty, 6) + difficulty / 12, 24);
+
+	for (int i = 1; i <= numStage; ++i) {
+		if (i < numStage / 4) {
+			randomGame(std::max(difficulty - 1, 1));
+		}
+		else if (i == numStage) {
+			randomGame(difficulty + 1);
+		}
+		else {
+			randomGame(difficulty);
+		}
+
+		// For debug
+		printAll();
+		int temp;
+		std::cin >> temp;
+	}
 }
 
 Base::Base(std::mt19937_64 seed)
