@@ -115,6 +115,7 @@ void Base::randomGame(int difficulty)
 
 		lanes.push_back(newRoad);
 	}
+	if (type == "Ro")
 
 	// Last road
 	newRoad = Road("Field", widthLane);
@@ -125,7 +126,8 @@ void Base::randomGame(int difficulty)
 void Base::playGame(int difficulty)
 {
 	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-
+    Character champ("Character1.png",960.f,1070.f,true,false);
+	sf::Clock clock;
 	for (int i = 1; i <= numStage; ++i)
 	{
 		if (i < numStage / 4)
@@ -140,12 +142,12 @@ void Base::playGame(int difficulty)
 		{
 			randomGame(difficulty);
 		}
-
 		// For debug
 		printAll();
 		int temp;
 		std::cin >> temp;
 	}
+	champ.update(clock, lanes[champ.getY()/54]);
 }
 
 Base::Base(std::mt19937_64 seed)

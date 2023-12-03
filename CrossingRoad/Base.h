@@ -4,7 +4,7 @@
 #include <vector>
 #include <random>
 #include <chrono>
-
+#include "character.h"
 #include "Road.h"
 
 class Base {
