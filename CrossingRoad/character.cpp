@@ -101,7 +101,7 @@ Character::Character(string fileName, float x, float y, bool paused, bool looped
 	isLose = false;
 }
 
-void Character::update(Clock& frameClock, vector<Object> o)
+void Character::update(Clock &frameClock, Road &aRoad)
 {
 	Time frameTime = frameClock.restart();
 
@@ -109,8 +109,11 @@ void Character::update(Clock& frameClock, vector<Object> o)
 
 	if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W))
 	{
-		if (checkCollision(o)) {
-			if (!isCleared) {
+		if (checkCollision(aRoad))
+		{
+
+			if (!isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -120,8 +123,10 @@ void Character::update(Clock& frameClock, vector<Object> o)
 			for (int i = 0; i < 100; ++i)
 				setUp();
 		}
-		else {
-			if (isCleared) {
+		else
+		{
+			if (isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -132,14 +137,18 @@ void Character::update(Clock& frameClock, vector<Object> o)
 				setMoveUp();
 			movement.y = -speed;
 		}
+		if (aRoad.getType() != "Field")
+			isLose = true;
 		type = 0;
 		noKeyWasPressed = false;
 		currentAnimation = &walkingAnimationUp;
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S))
 	{
-		if (checkCollision(o)) {
-			if (!isCleared) {
+		if (checkCollision(aRoad))
+		{
+			if (!isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -149,8 +158,10 @@ void Character::update(Clock& frameClock, vector<Object> o)
 			for (int i = 0; i < 100; ++i)
 				setDown();
 		}
-		else {
-			if (isCleared) {
+		else
+		{
+			if (isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -161,14 +172,18 @@ void Character::update(Clock& frameClock, vector<Object> o)
 				setMoveDown();
 			movement.y = speed;
 		}
+		if (aRoad.getType() != "Field")
+			isLose = true;
 		type = 1;
 		noKeyWasPressed = false;
 		currentAnimation = &walkingAnimationDown;
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
 	{
-		if (checkCollision(o)) {
-			if (!isCleared) {
+		if (checkCollision(aRoad))
+		{
+			if (!isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -178,8 +193,10 @@ void Character::update(Clock& frameClock, vector<Object> o)
 			for (int i = 0; i < 100; ++i)
 				setLeft();
 		}
-		else {
-			if (isCleared) {
+		else
+		{
+			if (isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -190,14 +207,18 @@ void Character::update(Clock& frameClock, vector<Object> o)
 				setMoveLeft();
 			movement.x = -speed;
 		}
+		if (aRoad.getType() != "Field")
+			isLose = true;
 		type = 2;
 		noKeyWasPressed = false;
 		currentAnimation = &walkingAnimationLeft;
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
 	{
-		if (checkCollision(o)) {
-			if (!isCleared) {
+		if (checkCollision(aRoad))
+		{
+			if (!isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -207,8 +228,10 @@ void Character::update(Clock& frameClock, vector<Object> o)
 			for (int i = 0; i < 100; ++i)
 				setRight();
 		}
-		else {
-			if (isCleared) {
+		else
+		{
+			if (isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -219,6 +242,8 @@ void Character::update(Clock& frameClock, vector<Object> o)
 				setMoveRight();
 			movement.x = speed;
 		}
+		if (aRoad.getType() != "Field")
+			isLose = true;
 		type = 3;
 		noKeyWasPressed = false;
 		currentAnimation = &walkingAnimationRight;
@@ -226,8 +251,10 @@ void Character::update(Clock& frameClock, vector<Object> o)
 
 	if (noKeyWasPressed)
 	{
-		if (type == 0) {
-			if (!isCleared) {
+		if (type == 0)
+		{
+			if (!isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -239,8 +266,10 @@ void Character::update(Clock& frameClock, vector<Object> o)
 			currentAnimation = &walkingAnimationUp;
 		}
 
-		if (type == 1) {
-			if (!isCleared) {
+		if (type == 1)
+		{
+			if (!isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -252,8 +281,10 @@ void Character::update(Clock& frameClock, vector<Object> o)
 			currentAnimation = &walkingAnimationDown;
 		}
 
-		if (type == 2) {
-			if (!isCleared) {
+		if (type == 2)
+		{
+			if (!isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -265,8 +296,10 @@ void Character::update(Clock& frameClock, vector<Object> o)
 			currentAnimation = &walkingAnimationLeft;
 		}
 
-		if (type == 3) {
-			if (!isCleared) {
+		if (type == 3)
+		{
+			if (!isCleared)
+			{
 				walkingAnimationUp.clearFrame();
 				walkingAnimationDown.clearFrame();
 				walkingAnimationLeft.clearFrame();
@@ -290,43 +323,53 @@ void Character::update(Clock& frameClock, vector<Object> o)
 	y = animatedSprite.getPosition().y;
 }
 
-void Character::draw(RenderWindow& window)
+void Character::draw(RenderWindow &window)
 {
 	window.draw(animatedSprite);
 }
 
-bool Character::checkCollision(vector<Object> o)
+bool Character::checkCollision(Road &aRoad)
 {
 	float tmpx = x;
 	float tmpy = y;
-	if (type == 0) {
+	if (type == 0)
+	{
 		tmpy -= 0.1f;
 	}
-	else if (type == 1) {
+	else if (type == 1)
+	{
 		tmpy += 0.1f;
 	}
-	else if (type == 2) {
+	else if (type == 2)
+	{
 		tmpx -= 0.1f;
 	}
-	else if (type == 3) {
+	else if (type == 3)
+	{
 		tmpx += 0.1f;
-	} 
-	for (int i = 0; i < o.size(); ++i) {
-		if ((tmpx + 48 >= o[i].getX()) && (tmpy + 48 >= o[i].getY()) && (tmpy - o[i].getHeight() <= o[i].getY()) && (tmpx - o[i].getWidth() <= o[i].getX())) {
-			if (type == 0) {
-				y = o[i].getY() + o[i].getHeight() + 0.01f;
+	}
+	for (int i = 0; i < aRoad.objects.size(); ++i)
+	{
+		if ((tmpx + 48 >= aRoad.objects[i].getX()) && (tmpy + 48 >= aRoad.objects[i].getY()) && (tmpy - aRoad.objects[i].getHeight() <= aRoad.objects[i].getY()) && (tmpx - aRoad.objects[i].getWidth() <= aRoad.objects[i].getX()))
+		{
+			if (type == 0)
+			{
+				y = aRoad.objects[i].getY() + aRoad.objects[i].getHeight() + 0.01f;
 				animatedSprite.setPosition(x, y);
 			}
-			else if (type == 1) {
-				y = o[i].getY() - 48.01f;
+			else if (type == 1)
+			{
+				y = aRoad.objects[i].getY() - 48.01f;
 				animatedSprite.setPosition(x, y);
 			}
-			else if (type == 2) {
-				x = o[i].getX() + o[i].getWidth() + 0.01f;
+			else if (type == 2)
+			{
+				x = aRoad.objects[i].getX() + aRoad.objects[i].getWidth() + 0.01f;
 				animatedSprite.setPosition(x, y);
 			}
-			else if (type == 3) {
-				x = o[i].getX() - 48.01f;
+			else if (type == 3)
+			{
+				x = aRoad.objects[i].getX() - 48.01f;
 				animatedSprite.setPosition(x, y);
 			}
 			return true;

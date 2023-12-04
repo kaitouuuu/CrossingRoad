@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "AnimatedSprite.hpp"
-#include "Object.h"
+#include "Road.h"
 #include <iostream>
 
 using namespace sf;
@@ -40,7 +40,7 @@ private:
 	Skin skin;
 
 public:
-	bool checkCollision(vector<Object> o);
+	bool checkCollision(Road& aRoad);
 	void changeskin();
 
 	Character(string fileName, float x, float y, bool paused, bool looped);
@@ -53,9 +53,9 @@ public:
 	void setDown();
 	void setLeft();
 	void setRight();
-	void update(Clock& frameClock, vector<Object> o);
+	void update(Clock& frameClock, Road& aRoad);
 	void draw(RenderWindow& window);
     float getY();
 	float getX();
-	bool getIsLose() { return isLose; }
+	bool getCondition() { return isLose; }
 };

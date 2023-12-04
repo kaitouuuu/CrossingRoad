@@ -14,9 +14,9 @@ void Base::randomGame(int difficulty)
 {
 	const float widthLane = 54.0;
 	const int numLane = 20;
-	std::string allRoadType[] = { "Road", "Field", "Land"};
-	std::string allObjectType[] = { "thin_tree", "big_tree" };
-	float allObjectSize[] = { 36.0, 48.0 };
+	std::string allRoadType[] = {"Road", "Field", "Land"};
+	std::string allObjectType[] = {"thin_tree", "big_tree"};
+	float allObjectSize[] = {36.0, 48.0};
 
 	// Initial road
 	lanes.clear();
@@ -51,6 +51,13 @@ void Base::randomGame(int difficulty)
 		{
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
 
+			if (type == "Road")
+			{
+				float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
+				float xPosition = float(randomNumber(960 - 250, 960 + 250));
+				CTRAFFICLIGHT newTrafficLight(xPosition, widthLane * i);
+				newRoad.setTrafficLight(0);
+			}
 			if (lanes.back().getType() == "Road")
 			{
 				// Consecutive roads will have the same direction
@@ -87,7 +94,7 @@ void Base::randomGame(int difficulty)
 			{
 				int temp = randomNumber(0, 1);
 				Object newObj = Object(float(randomNumber(0, 1919)), widthLane * i, allObjectSize[temp],
-					allObjectSize[temp], allObjectType[temp]);
+									   allObjectSize[temp], allObjectType[temp]);
 				newRoad.addObject(newObj);
 			}
 		}
@@ -115,18 +122,16 @@ void Base::randomGame(int difficulty)
 
 		lanes.push_back(newRoad);
 	}
-	if (type == "Ro")
-
 	// Last road
 	newRoad = Road("Field", widthLane);
 	lanes.push_back(newRoad);
 }
 
 // TODO: Testing with Character
-void Base::playGame(int difficulty)
+void Base::playGame(sf::RenderWindow &window, int difficulty)
 {
 	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-    Character champ("Character1.png",960.f,1070.f,true,false);
+	Character champ("Character1.png", 960.f, 1070.f, true, false);
 	sf::Clock clock;
 	for (int i = 1; i <= numStage; ++i)
 	{
@@ -142,20 +147,26 @@ void Base::playGame(int difficulty)
 		{
 			randomGame(difficulty);
 		}
+		while (window.isOpen())
+		{
+			champ.update(clock, lanes[champ.getY() / 54]);
+			// if (champ.getCondition())
+			// std::cout << "Dead";
+		}
 		// For debug
 		printAll();
 		int temp;
 		std::cin >> temp;
 	}
-	champ.update(clock, lanes[champ.getY()/54]);
 }
 
 Base::Base(std::mt19937_64 seed)
 	: rng(seed) {}
 
-void Base::printAll ()
+void Base::printAll()
 {
-	for (Road& road : lanes) {
+	for (Road &road : lanes)
+	{
 		road.printAll();
 		std::cout << "-------------" << std::endl;
 	}

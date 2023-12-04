@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "Object.h"
+#include "TrafficLight.h"
 
 class Road {
 private:
@@ -14,14 +15,16 @@ private:
 	bool hasTrafficLight;
 	int trafficLightColor; // 0: Green, 1: Yellow, 2: Red
 	float speed;
-	std::vector<Object> objects;
+	
 
 public:
 	Road();
 	Road(std::string type, float yPos);
 
+    std::vector<Object> objects;
 	std::string getType() const;
 	float getY() const;
+	void setTrafficLight(bool having) const;
 	bool getHasTrafficLight() const;
 	int getTrafficLightColor() const;
 	float getSpeed() const;
