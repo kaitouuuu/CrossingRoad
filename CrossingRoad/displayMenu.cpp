@@ -4,6 +4,10 @@ void displayMenu(RenderWindow& window)
 {
 	//Test
 	window.setFramerateLimit(60);
+	View view;
+	view.setCenter(960, 540);
+	view.setSize(Vector2f(1920, 1080));
+	window.setView(view);
 
 	Texture Image;
 	Image.loadFromFile("Content/Image/Screen.png");
@@ -30,14 +34,18 @@ void displayMenu(RenderWindow& window)
 
 	MainMenu m(t, b);
 
-	Character character("Content/Image/Character1.png", 700, 700, true, false);
+	Character character("Content/Image/Character1.png", 700, 200, true, false);
 
 	Object ob1(500, 500, 48, 48);
 	Object ob2(600, 600, 48, 48);
+	Object wall1(-20, -100000, 20, 101080);
+	Object wall2(1920, -100000, 20, 101080);
 
 	vector<Object> o;
 	o.push_back(ob1);
 	o.push_back(ob2);
+	o.push_back(wall1);
+	o.push_back(wall2);
 
 	Clock frameClock;
 
@@ -53,9 +61,13 @@ void displayMenu(RenderWindow& window)
 		}
 
 		character.update(frameClock, o);
+		//cout << window.getPosition().x << " " << window.getPosition().y << endl;
+		if (character.getPositionY() < view.getCenter().y - 540) {
+			view.setCenter(960, view.getCenter().y - 1016);
+			window.setView(view);
+		}
 
 		window.clear(Color::White);
-
 		window.draw(Screen);
 
 		sf::RectangleShape rectangle(sf::Vector2f(48, 48));  // Rectangle size (width, height)

@@ -98,7 +98,7 @@ Character::Character(string fileName, float x, float y, bool paused, bool looped
 	tmp.setPosition(x, y);
 	animatedSprite = tmp;
 
-	speed = 80.f;
+	speed = 640.f;
 	this->x = x;
 	this->y = y;
 
@@ -258,8 +258,8 @@ void Character::update(Clock& frameClock, vector<Object> o)
 
 	animatedSprite.update(frameTime);
 
-	x = animatedSprite.getPosition().x;
-	y = animatedSprite.getPosition().y;
+	x = getPositionX();
+	y = getPositionY();
 }
 
 void Character::changeSkin()
@@ -333,4 +333,14 @@ bool Character::checkCollision(vector<Object> o)
 		}
 	}
 	return false;
+}
+
+float Character::getPositionX()
+{
+	return animatedSprite.getPosition().x;
+}
+
+float Character::getPositionY()
+{
+	return animatedSprite.getPosition().y;
 }

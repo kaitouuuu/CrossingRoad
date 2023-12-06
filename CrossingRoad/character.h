@@ -49,5 +49,8 @@ public:
 	void changeSkin();
 	void draw(RenderWindow& window);
 
+	float getPositionX();
+	float getPositionY();
+
 	bool getIsLose() { return isLose; }
 };
