@@ -50,14 +50,10 @@ void Base::randomGame(int difficulty)
 		if (type == "Road")
 		{
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
-
-			if (type == "Road")
-			{
-				float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
-				float xPosition = float(randomNumber(960 - 250, 960 + 250));
-				CTRAFFICLIGHT newTrafficLight(xPosition, widthLane * i);
-				newRoad.setTrafficLight(0);
-			}
+			float xPosition = float(randomNumber(960 - 250, 960 + 250));
+			TrafficLight newTrafficLight(xPosition, widthLane * i);
+			std::cout << newTrafficLight.getX() << " " << newTrafficLight.getY() << std::endl;
+			newRoad.setTrafficLight(0);
 			if (lanes.back().getType() == "Road")
 			{
 				// Consecutive roads will have the same direction
@@ -84,6 +80,7 @@ void Base::randomGame(int difficulty)
 				Object newCar = Object(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "blue_car");
 				newRoad.addObject(newCar);
 			}
+		    //std::cout << "Road created" << std::endl;
 		}
 
 		if (type == "Field")
@@ -128,10 +125,12 @@ void Base::randomGame(int difficulty)
 }
 
 // TODO: Testing with Character
-void Base::playGame(sf::RenderWindow &window, int difficulty)
+void Base::playGame(int difficulty)
 {
 	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
+	std::cout << 11 << numStage << std::endl;
 	Character champ("Character1.png", 960.f, 1070.f, true, false);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road");
 	sf::Clock clock;
 	for (int i = 1; i <= numStage; ++i)
 	{
@@ -155,8 +154,8 @@ void Base::playGame(sf::RenderWindow &window, int difficulty)
 		}
 		// For debug
 		printAll();
-		int temp;
-		std::cin >> temp;
+		/*int temp;
+		std::cin >> temp;*/
 	}
 }
 

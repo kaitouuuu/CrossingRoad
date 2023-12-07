@@ -1,6 +1,6 @@
 #include "TrafficLight.h"
 
-void CTRAFFICLIGHT::changeLightState(int &curState)
+void TrafficLight::changeLightState(int &curState)
 {
 	if (curState == 0)
 		state = 1;
@@ -10,7 +10,7 @@ void CTRAFFICLIGHT::changeLightState(int &curState)
 		state = 0;
 }
 
-const float CTRAFFICLIGHT::getCurrentDuration(int &state)
+const float TrafficLight::getCurrentDuration(int &state)
 {
 	switch (state)
 	{
@@ -29,7 +29,7 @@ const float CTRAFFICLIGHT::getCurrentDuration(int &state)
 	}
 }
 
-void CTRAFFICLIGHT::operation(sf::RenderWindow &window)
+void TrafficLight::operation(sf::RenderWindow &window)
 {
 	float currentTime = 0.f;
 	std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
@@ -50,4 +50,14 @@ void CTRAFFICLIGHT::operation(sf::RenderWindow &window)
 			startTime = currentTime;
 		}
 	}
+}
+
+float TrafficLight::getX() const
+{
+	return x;
+}
+
+float TrafficLight::getY() const
+{
+	return y;
 }

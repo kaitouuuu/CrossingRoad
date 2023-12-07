@@ -146,8 +146,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedSprite.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="character.cpp" />
     <ClCompile Include="DisplayMenu.cpp" />
     <ClCompile Include="Frontend.cpp" />
     <ClCompile Include="main.cpp" />
@@ -155,16 +158,24 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="TextBox.cpp" />
+    <ClCompile Include="TrafficLight.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedSprite.hpp" />
+    <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="character.h" />
     <ClInclude Include="DisplayMenu.h" />
     <ClInclude Include="Frontend.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="TextBox.h" />
+    <ClInclude Include="TrafficLight.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Character1.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

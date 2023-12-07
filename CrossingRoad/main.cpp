@@ -6,7 +6,7 @@ using namespace sf;
 int main()
 {
 	Base test = Base();
-	// test.playGame(2);
+	test.playGame(3);
 	Frontend();
 
 	return 0;

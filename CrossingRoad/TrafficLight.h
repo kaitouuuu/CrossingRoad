@@ -2,7 +2,7 @@
 #include <iostream>
 #include <chrono>
 #include <windows.h>
-class CTRAFFICLIGHT
+class TrafficLight
 {
 private:
 	float x;
@@ -16,7 +16,11 @@ private:
 	const float yellowDuration = 0.8f;
 
 public:
-	CTRAFFICLIGHT(float xRoad, float yRoad) : state(0), timer(0.0f), x(xRoad), y(yRoad) {}
+	TrafficLight(float xRoad, float yRoad) : state(0), timer(0.0f), x(xRoad), y(yRoad) {}
+
+	float getX() const;
+
+	float getY() const;
 
 	void changeLightState(int &state);
 
