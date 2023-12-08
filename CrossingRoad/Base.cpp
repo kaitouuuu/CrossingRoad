@@ -144,6 +144,7 @@ void Base::playGame(int difficulty)
 			randomGame(difficulty);
 		}
 		//check each Road
+		//test again
 		while (!champ.checkCollision(lanes[champ.getY() / 54]))
 		{
 			champ.update(clock, lanes[champ.getY() / 54]);
