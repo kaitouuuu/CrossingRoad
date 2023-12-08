@@ -8,18 +8,12 @@
 using namespace sf;
 using namespace std;
 
-enum Skin
-{
-	red,
-	blue,
-	green
+enum Skin {
+	red, blue, green
 };
 
-enum Direction
-{
-	front,
-	left,
-	right
+enum Direction {
+	front, left, right
 };
 
 class Character
@@ -32,24 +26,24 @@ private:
 	Animation walkingAnimationDown;
 	Animation walkingAnimationLeft;
 	Animation walkingAnimationRight;
-	Animation *currentAnimation;
+	Animation* currentAnimation;
 
 	float speed;
 	float x, y;
-	float width, height;
 
 	bool isCleared;
 	bool noKeyWasPressed;
+	bool isLose;
 
 	int type;
 
 	Skin skin;
 
 public:
-	bool checkCollision(Road &aRoad);
+	bool checkCollision(Road& aRoad);
 	void changeskin();
 
-	Character(string fileName, float x, float y, float width, float height, bool paused, bool looped);
+	Character(string fileName, float x, float y, bool paused, bool looped);
 
 	void setMoveUp();
 	void setMoveDown();
@@ -59,11 +53,9 @@ public:
 	void setDown();
 	void setLeft();
 	void setRight();
-	void update(Clock &frameClock, Road &aRoad);
-	void draw(RenderWindow &window);
-	float getY();
+	void update(Clock& frameClock, Road& aRoad);
+	void draw(RenderWindow& window);
+    float getY();
 	float getX();
-	float getWidth();
-	float getHeight();
-	bool condition(float xTL, float yTL, float objH, float objW);
+	bool getCondition() { return isLose; }
 };

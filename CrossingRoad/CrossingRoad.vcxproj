@@ -159,7 +159,6 @@
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="TrafficLight.cpp" />
-    <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.hpp" />
@@ -174,7 +173,6 @@
     <ClInclude Include="Road.h" />
     <ClInclude Include="TextBox.h" />
     <ClInclude Include="TrafficLight.h" />
-    <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Character1.png" />

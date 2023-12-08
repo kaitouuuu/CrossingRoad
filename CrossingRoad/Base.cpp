@@ -52,7 +52,8 @@ void Base::randomGame(int difficulty)
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
 			float xPosition = float(randomNumber(960 - 250, 960 + 250));
 			TrafficLight newTrafficLight(xPosition, widthLane * i);
-			newRoad.setTrafficLight(0); 
+			std::cout << newTrafficLight.getX() << " " << newTrafficLight.getY() << std::endl;
+			newRoad.setTrafficLight(0);
 			if (lanes.back().getType() == "Road")
 			{
 				// Consecutive roads will have the same direction
@@ -76,9 +77,10 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numCar; ++j)
 			{
-				Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "blue_car");
-				newRoad.addVehicle(newVehicle);
+				Object newCar = Object(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "blue_car");
+				newRoad.addObject(newCar);
 			}
+		    //std::cout << "Road created" << std::endl;
 		}
 
 		if (type == "Field")
@@ -110,14 +112,13 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numAnimal; ++j)
 			{
-				Vehicle newAnimal = Vehicle(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "brown_dog");
-				newRoad.addVehicle(newAnimal);
+				Object newAnimal = Object(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "brown_dog");
+				newRoad.addObject(newAnimal);
 			}
 		}
 
 		lanes.push_back(newRoad);
 	}
-
 	// Last road
 	newRoad = Road("Field", widthLane);
 	lanes.push_back(newRoad);
@@ -127,7 +128,9 @@ void Base::randomGame(int difficulty)
 void Base::playGame(int difficulty)
 {
 	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-	Character champ("Character1.png", 960.f, 1000.f, 48.f, 48.f, true, false);
+	std::cout << 11 << numStage << std::endl;
+	Character champ("Character1.png", 960.f, 1070.f, true, false);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road");
 	sf::Clock clock;
 	for (int i = 1; i <= numStage; ++i)
 	{
@@ -143,11 +146,16 @@ void Base::playGame(int difficulty)
 		{
 			randomGame(difficulty);
 		}
-		//check each Road
-		while (!champ.checkCollision(lanes[champ.getY() / 54]))
+		while (window.isOpen())
 		{
 			champ.update(clock, lanes[champ.getY() / 54]);
+			// if (champ.getCondition())
+			// std::cout << "Dead";
 		}
+		// For debug
+		printAll();
+		/*int temp;
+		std::cin >> temp;*/
 	}
 }
 

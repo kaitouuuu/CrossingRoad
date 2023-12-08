@@ -46,6 +46,7 @@ void TrafficLight::operation(sf::RenderWindow &window)
 		{
 			timer -= getCurrentDuration(state);
 			changeLightState(state);
+			// std::cout << state << 111 << std::endl;
 			startTime = currentTime;
 		}
 	}
