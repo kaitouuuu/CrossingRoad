@@ -30,10 +30,10 @@ private:
 
 	float speed;
 	float x, y;
+	float width, height;
 
 	bool isCleared;
 	bool noKeyWasPressed;
-	bool isLose;
 
 	int type;
 
@@ -43,7 +43,7 @@ public:
 	bool checkCollision(Road& aRoad);
 	void changeskin();
 
-	Character(string fileName, float x, float y, bool paused, bool looped);
+	Character(string fileName, float x, float y, float width, float height, bool paused, bool looped);
 
 	void setMoveUp();
 	void setMoveDown();
@@ -57,5 +57,7 @@ public:
 	void draw(RenderWindow& window);
     float getY();
 	float getX();
-	bool getCondition() { return isLose; }
+	float getWidth();
+	float getHeight();
+	bool condition(float xTL, float yTL, float objH, float objW);
 };

@@ -52,7 +52,6 @@ void Base::randomGame(int difficulty)
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
 			float xPosition = float(randomNumber(960 - 250, 960 + 250));
 			TrafficLight newTrafficLight(xPosition, widthLane * i);
-			std::cout << newTrafficLight.getX() << " " << newTrafficLight.getY() << std::endl;
 			newRoad.setTrafficLight(0);
 			if (lanes.back().getType() == "Road")
 			{
@@ -129,30 +128,27 @@ void Base::randomGame(int difficulty)
 void Base::playGame(int difficulty)
 {
 	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-	std::cout << 11 << numStage << std::endl;
-	Character champ("Character1.png", 960.f, 1070.f, true, false);
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road");
+	Character champ("Character1.png", 960.f, 1000.f, 48.f, 48.f, true, false);
 	sf::Clock clock;
 	for (int i = 1; i <= numStage; ++i)
 	{
-		if (i < numStage / 4)
-		{
-			randomGame(std::max(difficulty - 1, 1));
-		}
-		else if (i == numStage)
-		{
-			randomGame(difficulty + 1);
-		}
-		else
-		{
-			randomGame(difficulty);
-		}
-		champ.update(clock, lanes[champ.getY() / 54]);
-		// if (champ.getCondition())
-		// For debug
-		printAll();
-		int temp;
-		std::cin >> temp;
+			if (i < numStage / 4)
+			{
+				randomGame(std::max(difficulty - 1, 1));
+			}
+			else if (i == numStage)
+			{
+				randomGame(difficulty + 1);
+			}
+			else
+			{
+				randomGame(difficulty);
+			}
+			while (!champ.checkCollision(lanes[champ.getY() / 54]))
+			{
+				champ.update(clock, lanes[champ.getY() / 54]);
+				std::cout << champ.getX() << " " << champ.getY() << std::endl;
+			}
 	}
 }
 
