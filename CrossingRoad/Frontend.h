@@ -1,7 +1,17 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "displayMenu.h"
+#include "Base.h"
+#include "MainMenu.h"
 using namespace sf;
 using namespace std;
-void Frontend();
+//void Frontend();
+enum class GameState {
+	mainmenu, game, setting, highscore, loadgame, newgame
+};
+class Frontend {
+
+public:
+	
+	void displayMenu();
+};

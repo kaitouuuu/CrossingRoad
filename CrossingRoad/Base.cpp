@@ -124,18 +124,18 @@ void Base::randomGame(int difficulty)
 }
 
 // TODO: Testing with Character
-void Base::playGame(int difficulty)
+void Base::playGame(int difficulty, RenderWindow & window, const int &state)
 {
 	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
 	Character champ("Character1.png", 960.f, 1000.f, 48.f, 48.f, true, false);
 	sf::Clock clock;
-	for (int i = 1; i <= numStage; ++i)
-	{
-		if (i < numStage / 4)
+
+	if(state<= numStage) {
+		if (state < numStage / 4)
 		{
 			randomGame(std::max(difficulty - 1, 1));
 		}
-		else if (i == numStage)
+		else if (state == numStage)
 		{
 			randomGame(difficulty + 1);
 		}
@@ -145,6 +145,9 @@ void Base::playGame(int difficulty)
 		}
 		//check each Road
 		//test again
+		for (auto& lane : lanes) {
+			lane.draw(window);
+		}
 		while (!champ.checkCollision(lanes[champ.getY() / 54]))
 		{
 			champ.update(clock, lanes[champ.getY() / 54]);
@@ -153,14 +156,14 @@ void Base::playGame(int difficulty)
 	}
 }
 
-Base::Base(std::mt19937_64 seed)
-	: rng(seed) {}
-
-void Base::printAll()
-{
-	for (Road &road : lanes)
-	{
-		road.printAll();
-		std::cout << "-------------" << std::endl;
-	}
-}
+//Base::Base(std::mt19937_64 seed)
+//	: rng(seed) {}
+//
+//void Base::printAll()
+//{
+//	for (Road &road : lanes)
+//	{
+//		road.printAll();
+//		std::cout << "-------------" << std::endl;
+//	}
+//}

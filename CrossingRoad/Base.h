@@ -19,11 +19,11 @@ public:
 	int randomNumber(int l, int r);
 
 	void randomGame(int difficulty);
-	void playGame(int difficulty);
+	void playGame(int difficulty, RenderWindow & window, const int &state);
 
-	// For debug
-	Base(std::mt19937_64 seed);
-	void printAll();
+	//// For debug
+	//Base(std::mt19937_64 seed);
+	//void printAll();
 };
 
 #endif // BASE_H

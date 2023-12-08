@@ -16,7 +16,8 @@ private:
 	bool hasTrafficLight;
 	int trafficLightColor; // 0: Green, 1: Yellow, 2: Red
 	float speed;
-	
+	Texture texture;
+	Sprite sprite;
 
 public:
     std::vector<Object> objects;
@@ -36,7 +37,7 @@ public:
 	void addVehicle(const Vehicle& added);
 	void addObject(const Object& added);
 	void updateVehicles();
-
+	void draw(RenderWindow& window);
 	// For debug
 	void setY(const float y);
 	void setType(const std::string t);
