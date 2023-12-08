@@ -77,8 +77,8 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numCar; ++j)
 			{
-				Object newCar = Object(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "blue_car");
-				newRoad.addObject(newCar);
+				Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "blue_car");
+				newRoad.addVehicle(newVehicle);
 			}
 		    //std::cout << "Road created" << std::endl;
 		}
@@ -112,13 +112,14 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numAnimal; ++j)
 			{
-				Object newAnimal = Object(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "brown_dog");
-				newRoad.addObject(newAnimal);
+				Vehicle newAnimal = Vehicle(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "brown_dog");
+				newRoad.addVehicle(newAnimal);
 			}
 		}
 
 		lanes.push_back(newRoad);
 	}
+
 	// Last road
 	newRoad = Road("Field", widthLane);
 	lanes.push_back(newRoad);

@@ -58,19 +58,6 @@ std::string Object::getType() const
 	return type;
 }
 
-void Object::updatePosition(float speed)
-{
-	xPos += speed;
-	if (xPos >= 1920)
-	{
-		xPos -= 1920;
-	}
-	else if (xPos < 0)
-	{
-		xPos += 1920;
-	}
-}
-
 FloatRect Object::getglobalBounds()
 {
 	return sprite.getGlobalBounds();
