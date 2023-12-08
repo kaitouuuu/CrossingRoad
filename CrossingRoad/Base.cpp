@@ -147,16 +147,12 @@ void Base::playGame(int difficulty)
 		{
 			randomGame(difficulty);
 		}
-		while (window.isOpen())
-		{
-			champ.update(clock, lanes[champ.getY() / 54]);
-			// if (champ.getCondition())
-			// std::cout << "Dead";
-		}
+		champ.update(clock, lanes[champ.getY() / 54]);
+		// if (champ.getCondition())
 		// For debug
 		printAll();
-		/*int temp;
-		std::cin >> temp;*/
+		int temp;
+		std::cin >> temp;
 	}
 }
 

@@ -348,28 +348,28 @@ bool Character::checkCollision(Road &aRoad)
 	{
 		tmpx += 0.1f;
 	}
-	for (int i = 0; i < aRoad.objects.size(); ++i)
+	for (int i = 0; i < aRoad.vehicles.size(); ++i)
 	{
-		if ((tmpx + 48 >= aRoad.objects[i].getX()) && (tmpy + 48 >= aRoad.objects[i].getY()) && (tmpy - aRoad.objects[i].getHeight() <= aRoad.objects[i].getY()) && (tmpx - aRoad.objects[i].getWidth() <= aRoad.objects[i].getX()))
+		if ((tmpx + 48 >= aRoad.vehicles[i].getX()) && (tmpy + 48 >= aRoad.vehicles[i].getY()) && (tmpy - aRoad.vehicles[i].getHeight() <= aRoad.vehicles[i].getY()) && (tmpx - aRoad.vehicles[i].getWidth() <= aRoad.vehicles[i].getX()))
 		{
 			if (type == 0)
 			{
-				y = aRoad.objects[i].getY() + aRoad.objects[i].getHeight() + 0.01f;
+				y = aRoad.vehicles[i].getY() + aRoad.vehicles[i].getHeight() + 0.01f;
 				animatedSprite.setPosition(x, y);
 			}
 			else if (type == 1)
 			{
-				y = aRoad.objects[i].getY() - 48.01f;
+				y = aRoad.vehicles[i].getY() - 48.01f;
 				animatedSprite.setPosition(x, y);
 			}
 			else if (type == 2)
 			{
-				x = aRoad.objects[i].getX() + aRoad.objects[i].getWidth() + 0.01f;
+				x = aRoad.vehicles[i].getX() + aRoad.vehicles[i].getWidth() + 0.01f;
 				animatedSprite.setPosition(x, y);
 			}
 			else if (type == 3)
 			{
-				x = aRoad.objects[i].getX() - 48.01f;
+				x = aRoad.vehicles[i].getX() - 48.01f;
 				animatedSprite.setPosition(x, y);
 			}
 			return true;
