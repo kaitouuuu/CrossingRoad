@@ -5,8 +5,8 @@ using namespace sf;
 
 int main()
 {
-	Base test = Base();
-	test.playGame(3);
+	/*Base test = Base();
+	test.playGame(3);*/
 	Frontend();
 
 	return 0;

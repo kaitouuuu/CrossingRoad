@@ -9,7 +9,22 @@ Road::Road()
 Road::Road(std::string type, float yPos)
 	: type(type), yPos(yPos), hasTrafficLight(false), trafficLightColor(0), speed(0)
 {
+	
 	objects.clear();
+	string filename;
+	if (type == "Road") {
+		filename = "Content/Image/Road.png";
+	}
+	else if (type == "Field") {
+		filename = "Content/Image/field.png";
+	}
+	if (!texture.loadFromFile(filename))
+	{
+		cout << "Failed to load road!" << endl;
+	}
+	sprite.setTexture(texture);
+	sprite.setPosition(Vector2f(0.f, yPos));
+
 }
 
 std::string Road::getType() const
@@ -76,6 +91,10 @@ void Road::updateObjects()
 	}
 }
 
+void Road::draw(RenderWindow& window)
+{
+	window.draw(sprite);
+}
 void Road::setY(const float y)
 {
 	yPos = y;

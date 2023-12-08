@@ -14,7 +14,7 @@ void Base::randomGame(int difficulty)
 {
 	const float widthLane = 54.0;
 	const int numLane = 20;
-	std::string allRoadType[] = {"Road", "Field", "Land"};
+	std::string allRoadType[] = {"Road", "Field", "River"};
 	std::string allObjectType[] = {"thin_tree", "big_tree"};
 	float allObjectSize[] = {36.0, 48.0};
 
@@ -125,12 +125,12 @@ void Base::randomGame(int difficulty)
 }
 
 // TODO: Testing with Character
-void Base::playGame(int difficulty)
+void Base::playGame(int difficulty, RenderWindow& window)
 {
 	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
 	std::cout << 11 << numStage << std::endl;
 	Character champ("Character1.png", 960.f, 1070.f, true, false);
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road");
+	
 	sf::Clock clock;
 	for (int i = 1; i <= numStage; ++i)
 	{
@@ -151,9 +151,13 @@ void Base::playGame(int difficulty)
 			champ.update(clock, lanes[champ.getY() / 54]);
 			// if (champ.getCondition())
 			// std::cout << "Dead";
+
+			for (auto& lane : lanes) {
+				lane.draw(window);
+			}
 		}
 		// For debug
-		printAll();
+		//printAll();
 		/*int temp;
 		std::cin >> temp;*/
 	}

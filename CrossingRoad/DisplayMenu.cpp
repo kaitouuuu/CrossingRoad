@@ -94,7 +94,7 @@ void displayMenu(RenderWindow& window)
 						for (auto& button : c) {
 							if (button.isClicked(mousePosF)) {
 								if (button.type() == "New game") {
-									currentState = GameState::newgame;
+									currentState = GameState::playgame;
 								}
 								else if (button.type() == "Load game") {
 									currentState = GameState::loadgame;
@@ -128,8 +128,19 @@ void displayMenu(RenderWindow& window)
 			// Optionally handle cleanup and exit the loop
 			window.close();
 			break;
-		}
 
+		case GameState::playgame:
+
+			Base b;
+			b.playGame(3, window);
+
+			break;
+		}
 		window.display();
 	}
+}
+
+void playGame(RenderWindow& window) {
+	
+
 }

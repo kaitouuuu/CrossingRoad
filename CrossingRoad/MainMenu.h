@@ -5,10 +5,9 @@
 #include "Button.h"
 
 using namespace sf;
-using namespace std;
 
 enum class GameState {
-    mainmenu,game,setting,highscore, loadgame, newgame
+    mainmenu,game,setting,highscore, loadgame, newgame,playgame
 };
 
 

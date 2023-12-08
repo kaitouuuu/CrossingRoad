@@ -7,7 +7,7 @@
 
 #include "Object.h"
 #include "TrafficLight.h"
-
+using namespace std;
 class Road {
 private:
 	std::string type;
@@ -15,6 +15,8 @@ private:
 	bool hasTrafficLight;
 	int trafficLightColor; // 0: Green, 1: Yellow, 2: Red
 	float speed;
+	Texture texture;
+	Sprite sprite;
 	
 
 public:
@@ -33,7 +35,7 @@ public:
 
 	void addObject(const Object& added);
 	void updateObjects();
-
+	void draw(RenderWindow& window);
 	// For debug
 	void setY(const float y);
 	void setType(const std::string t);
