@@ -147,7 +147,6 @@ void Base::playGame(int difficulty)
 		while (!champ.checkCollision(lanes[champ.getY() / 54]))
 		{
 			champ.update(clock, lanes[champ.getY() / 54]);
-			std::cout << champ.getX() << " " << champ.getY() << std::endl;
 		}
 	}
 }
