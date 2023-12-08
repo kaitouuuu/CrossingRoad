@@ -48,9 +48,9 @@ void Road::setTrafficLight(const int color)
 	trafficLightColor = color;
 }
 
-void Road::addObject(const Object& added)
+void Road::addObject(const Object &added)
 {
-	for (Object& object : objects)
+	for (Object &object : objects)
 	{
 		float objX = object.getX();
 		float objX2 = objX + object.getWidth();
@@ -66,9 +66,9 @@ void Road::addObject(const Object& added)
 	objects.push_back(added);
 }
 
-void Road::addVehicle(const Vehicle& added)
+void Road::addVehicle(const Vehicle &added)
 {
-	for (Vehicle& vehicle : vehicles)
+	for (Vehicle &vehicle : vehicles)
 	{
 		float objX = vehicle.getX();
 		float objX2 = objX + vehicle.getWidth();
@@ -88,7 +88,7 @@ void Road::updateVehicles()
 {
 	if (type != "Field")
 	{
-		for (Vehicle& vehicle : vehicles)
+		for (Vehicle &vehicle : vehicles)
 		{
 			vehicle.updatePosition(speed);
 		}
@@ -107,16 +107,18 @@ void Road::setType(const std::string t)
 
 void Road::printAll()
 {
-	std::cout << type << " " << speed << std::endl << "Car: ";
+	std::cout << type << " " << speed << std::endl
+			  << "Car: ";
 
-	for (Vehicle& vehicle : vehicles)
+	for (Vehicle &vehicle : vehicles)
 	{
 		std::cout << vehicle.getX() << ":" << vehicle.getY() << " ";
 	}
 
-	std::cout << std::endl << "Object: ";
+	std::cout << std::endl
+			  << "Object: ";
 
-	for (Object& object : objects)
+	for (Object &object : objects)
 	{
 		std::cout << object.getX() << ":" << object.getY() << " ";
 	}

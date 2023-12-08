@@ -14,9 +14,10 @@ private:
 	const float redDuration = 3.f;
 	const float greenDuration = 5.f;
 	const float yellowDuration = 0.8f;
+	//Green:0, Yellow: 1, Red: 2
 
 public:
-	TrafficLight(float xRoad, float yRoad) : state(0), timer(0.0f), x(xRoad), y(yRoad) {}
+	TrafficLight(float xRoad, float yRoad) : state(0), timer(0.0f), x(xRoad), y(yRoad) {} 
 
 	float getX() const;
 

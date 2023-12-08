@@ -52,7 +52,7 @@ void Base::randomGame(int difficulty)
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
 			float xPosition = float(randomNumber(960 - 250, 960 + 250));
 			TrafficLight newTrafficLight(xPosition, widthLane * i);
-			newRoad.setTrafficLight(0);
+			newRoad.setTrafficLight(0); 
 			if (lanes.back().getType() == "Road")
 			{
 				// Consecutive roads will have the same direction
@@ -79,7 +79,6 @@ void Base::randomGame(int difficulty)
 				Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "blue_car");
 				newRoad.addVehicle(newVehicle);
 			}
-		    //std::cout << "Road created" << std::endl;
 		}
 
 		if (type == "Field")
@@ -132,23 +131,24 @@ void Base::playGame(int difficulty)
 	sf::Clock clock;
 	for (int i = 1; i <= numStage; ++i)
 	{
-			if (i < numStage / 4)
-			{
-				randomGame(std::max(difficulty - 1, 1));
-			}
-			else if (i == numStage)
-			{
-				randomGame(difficulty + 1);
-			}
-			else
-			{
-				randomGame(difficulty);
-			}
-			while (!champ.checkCollision(lanes[champ.getY() / 54]))
-			{
-				champ.update(clock, lanes[champ.getY() / 54]);
-				std::cout << champ.getX() << " " << champ.getY() << std::endl;
-			}
+		if (i < numStage / 4)
+		{
+			randomGame(std::max(difficulty - 1, 1));
+		}
+		else if (i == numStage)
+		{
+			randomGame(difficulty + 1);
+		}
+		else
+		{
+			randomGame(difficulty);
+		}
+		//check each Road
+		while (!champ.checkCollision(lanes[champ.getY() / 54]))
+		{
+			champ.update(clock, lanes[champ.getY() / 54]);
+			std::cout << champ.getX() << " " << champ.getY() << std::endl;
+		}
 	}
 }
 

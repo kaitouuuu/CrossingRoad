@@ -343,7 +343,7 @@ bool Character::checkCollision(Road &aRoad)
 {
 	float tmpx = x;
 	float tmpy = y;
-	//0: Up, 1: Down, 2: Left, 3: Right
+	// 0: Up, 1: Down, 2: Left, 3: Right
 	if (type == 0)
 	{
 		tmpy -= 0.1f;
@@ -360,7 +360,7 @@ bool Character::checkCollision(Road &aRoad)
 	{
 		tmpx += 0.1f;
 	}
-	if (!(0 < tmpx && tmpx + 48 < 1920 && 0 < tmpy && tmpy + 48 < 1080)) //check out of bound
+	if (!(0 < tmpx && tmpx + 48 < 1920 && 0 < tmpy && tmpy + 48 < 1080)) // check out of bound
 	{
 		if (type == 0)
 		{
@@ -387,7 +387,7 @@ bool Character::checkCollision(Road &aRoad)
 	{
 		for (int i = 0; i < aRoad.vehicles.size(); ++i)
 		{
-			//tmpx + 48 >= aRoad.vehicles[i].getX()) && (tmpy + 48 >= aRoad.vehicles[i].getY()) && (tmpy - aRoad.vehicles[i].getHeight() <= aRoad.vehicles[i].getY()) && (tmpx - aRoad.vehicles[i].getWidth() <= aRoad.vehicles[i].getX()))
+			// tmpx + 48 >= aRoad.vehicles[i].getX()) && (tmpy + 48 >= aRoad.vehicles[i].getY()) && (tmpy - aRoad.vehicles[i].getHeight() <= aRoad.vehicles[i].getY()) && (tmpx - aRoad.vehicles[i].getWidth() <= aRoad.vehicles[i].getX()))
 			if (condition(aRoad.vehicles[i].getX(), aRoad.vehicles[i].getY(), aRoad.vehicles[i].getHeight(), aRoad.vehicles[i].getWidth()))
 			{
 				if (type == 0)

@@ -4,13 +4,14 @@ Object::Object()
 	: xPos(0), yPos(0), width(0), height(0), type("") {}
 
 Object::Object(float xPos, float yPos, float width, float height, std::string type)
-	: xPos(xPos), yPos(yPos), width(width), height(height), type(type) {
+	: xPos(xPos), yPos(yPos), width(width), height(height), type(type)
+{
 
 	std::string filename;
 
 	if (type == "thin_tree")
 	{
-		 filename = "Content/Image/thintree.png";
+		filename = "Content/Image/thintree.png";
 	}
 	else if (type == "big_tree")
 	{
@@ -19,7 +20,7 @@ Object::Object(float xPos, float yPos, float width, float height, std::string ty
 
 	if (!texture.loadFromFile(filename))
 	{
-		std::cout << "Failed to load stable object!" << std::endl;	
+		std::cout << "Failed to load stable object!" << std::endl;
 	}
 
 	sprite.setTexture(texture);
@@ -63,12 +64,12 @@ FloatRect Object::getglobalBounds()
 	return sprite.getGlobalBounds();
 }
 
-bool Object::doesIntersect(Object* other)
+bool Object::doesIntersect(Object *other)
 {
 	return this->sprite.getGlobalBounds().intersects(other->sprite.getGlobalBounds());
 }
 
-void Object::draw(RenderWindow& window)
+void Object::draw(RenderWindow &window)
 {
 	window.draw(sprite);
 }
