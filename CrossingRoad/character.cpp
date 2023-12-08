@@ -455,4 +455,5 @@ float Character::getX()
 {
 	return x;
 }
+
 void Character::changeskin() {}

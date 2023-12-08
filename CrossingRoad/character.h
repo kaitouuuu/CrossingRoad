@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CHARACTER_H
+#define CHARACTER_H
 
 #include <SFML/Graphics.hpp>
 #include "AnimatedSprite.hpp"
@@ -67,3 +68,5 @@ public:
 	float getHeight();
 	bool condition(float xTL, float yTL, float objH, float objW);
 };
+
+#endif // CHARACTER_H
