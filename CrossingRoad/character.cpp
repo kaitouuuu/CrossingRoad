@@ -72,7 +72,7 @@ void Character::setRight()
 	walkingAnimationRight.addFrame(sf::IntRect(1 * w, 3 * w, 1 * w, 1 * w));
 }
 
-Character::Character(string fileName, float x, float y, bool paused, bool looped)
+Character::Character(string fileName, float x, float y, float width, float height, bool paused, bool looped)
 {
 	if (!texture.loadFromFile(fileName))
 	{
@@ -98,7 +98,6 @@ Character::Character(string fileName, float x, float y, bool paused, bool looped
 	type = 1;
 
 	noKeyWasPressed = true;
-	isLose = false;
 }
 
 void Character::update(Clock &frameClock, Road &aRoad)
@@ -111,7 +110,6 @@ void Character::update(Clock &frameClock, Road &aRoad)
 	{
 		if (checkCollision(aRoad))
 		{
-
 			if (!isCleared)
 			{
 				walkingAnimationUp.clearFrame();
@@ -137,8 +135,6 @@ void Character::update(Clock &frameClock, Road &aRoad)
 				setMoveUp();
 			movement.y = -speed;
 		}
-		if (aRoad.getType() != "Field")
-			isLose = true;
 		type = 0;
 		noKeyWasPressed = false;
 		currentAnimation = &walkingAnimationUp;
@@ -172,8 +168,6 @@ void Character::update(Clock &frameClock, Road &aRoad)
 				setMoveDown();
 			movement.y = speed;
 		}
-		if (aRoad.getType() != "Field")
-			isLose = true;
 		type = 1;
 		noKeyWasPressed = false;
 		currentAnimation = &walkingAnimationDown;
@@ -207,8 +201,6 @@ void Character::update(Clock &frameClock, Road &aRoad)
 				setMoveLeft();
 			movement.x = -speed;
 		}
-		if (aRoad.getType() != "Field")
-			isLose = true;
 		type = 2;
 		noKeyWasPressed = false;
 		currentAnimation = &walkingAnimationLeft;
@@ -242,8 +234,6 @@ void Character::update(Clock &frameClock, Road &aRoad)
 				setMoveRight();
 			movement.x = speed;
 		}
-		if (aRoad.getType() != "Field")
-			isLose = true;
 		type = 3;
 		noKeyWasPressed = false;
 		currentAnimation = &walkingAnimationRight;
@@ -328,10 +318,32 @@ void Character::draw(RenderWindow &window)
 	window.draw(animatedSprite);
 }
 
+float Character::getWidth()
+{
+	return width;
+}
+
+float Character::getHeight()
+{
+	return height;
+}
+
+bool Character::condition(float xTL, float yTL, float objH, float objW)
+{
+	float checkX = max(xTL, x);
+	float checkY = max(yTL, y);
+	float checkX2 = min(xTL + objW, x + width);
+	float checkY2 = min(yTL + objH, y + height);
+	if (checkX <= checkX2 && checkY <= checkY2)
+		return true;
+	return false;
+}
+
 bool Character::checkCollision(Road &aRoad)
 {
 	float tmpx = x;
 	float tmpy = y;
+	// 0: Up, 1: Down, 2: Left, 3: Right
 	if (type == 0)
 	{
 		tmpy -= 0.1f;
@@ -348,31 +360,87 @@ bool Character::checkCollision(Road &aRoad)
 	{
 		tmpx += 0.1f;
 	}
-	for (int i = 0; i < aRoad.objects.size(); ++i)
+	if (!(0 < tmpx && tmpx + 48 < 1920 && 0 < tmpy && tmpy + 48 < 1080)) // check out of bound
 	{
-		if ((tmpx + 48 >= aRoad.objects[i].getX()) && (tmpy + 48 >= aRoad.objects[i].getY()) && (tmpy - aRoad.objects[i].getHeight() <= aRoad.objects[i].getY()) && (tmpx - aRoad.objects[i].getWidth() <= aRoad.objects[i].getX()))
+		if (type == 0)
 		{
-			if (type == 0)
+			y = 0.01f;
+			animatedSprite.setPosition(x, y);
+		}
+		else if (type == 1)
+		{
+			y = 1080 - 48.01f;
+			animatedSprite.setPosition(x, y);
+		}
+		else if (type == 2)
+		{
+			x = 0.01f;
+			animatedSprite.setPosition(x, y);
+		}
+		else if (type == 3)
+		{
+			x = 1920 - 48.01f;
+			animatedSprite.setPosition(x, y);
+		}
+	}
+	if (aRoad.getType() != "Field")
+	{
+		for (int i = 0; i < aRoad.vehicles.size(); ++i)
+		{
+			// tmpx + 48 >= aRoad.vehicles[i].getX()) && (tmpy + 48 >= aRoad.vehicles[i].getY()) && (tmpy - aRoad.vehicles[i].getHeight() <= aRoad.vehicles[i].getY()) && (tmpx - aRoad.vehicles[i].getWidth() <= aRoad.vehicles[i].getX()))
+			if (condition(aRoad.vehicles[i].getX(), aRoad.vehicles[i].getY(), aRoad.vehicles[i].getHeight(), aRoad.vehicles[i].getWidth()))
 			{
-				y = aRoad.objects[i].getY() + aRoad.objects[i].getHeight() + 0.01f;
-				animatedSprite.setPosition(x, y);
+				if (type == 0)
+				{
+					y = aRoad.vehicles[i].getY() + aRoad.vehicles[i].getHeight() + 0.01f;
+					animatedSprite.setPosition(x, y);
+				}
+				else if (type == 1)
+				{
+					y = aRoad.vehicles[i].getY() - 48.01f;
+					animatedSprite.setPosition(x, y);
+				}
+				else if (type == 2)
+				{
+					x = aRoad.vehicles[i].getX() + aRoad.vehicles[i].getWidth() + 0.01f;
+					animatedSprite.setPosition(x, y);
+				}
+				else if (type == 3)
+				{
+					x = aRoad.vehicles[i].getX() - 48.01f;
+					animatedSprite.setPosition(x, y);
+				}
 			}
-			else if (type == 1)
+		}
+		return true;
+	}
+	else
+	{
+		for (int i = 0; i < aRoad.objects.size(); ++i)
+		{
+			if (condition(aRoad.objects[i].getX(), aRoad.objects[i].getY(), aRoad.objects[i].getHeight(), aRoad.objects[i].getWidth()))
 			{
-				y = aRoad.objects[i].getY() - 48.01f;
-				animatedSprite.setPosition(x, y);
+				if (type == 0)
+				{
+					y = aRoad.objects[i].getY() + aRoad.objects[i].getHeight() + 0.01f;
+					animatedSprite.setPosition(x, y);
+				}
+				else if (type == 1)
+				{
+					y = aRoad.objects[i].getY() - 48.01f;
+					animatedSprite.setPosition(x, y);
+				}
+				else if (type == 2)
+				{
+					x = aRoad.objects[i].getX() + aRoad.objects[i].getWidth() + 0.01f;
+					animatedSprite.setPosition(x, y);
+				}
+				else if (type == 3)
+				{
+					x = aRoad.objects[i].getX() - 48.01f;
+					animatedSprite.setPosition(x, y);
+				}
 			}
-			else if (type == 2)
-			{
-				x = aRoad.objects[i].getX() + aRoad.objects[i].getWidth() + 0.01f;
-				animatedSprite.setPosition(x, y);
-			}
-			else if (type == 3)
-			{
-				x = aRoad.objects[i].getX() - 48.01f;
-				animatedSprite.setPosition(x, y);
-			}
-			return true;
 		}
 	}
 	return false;

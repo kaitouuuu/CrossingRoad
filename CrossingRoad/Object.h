@@ -26,7 +26,6 @@ public:
 	float getWidth() const;
 	float getHeight() const;
 	std::string getType() const;
-	void updatePosition(float speed);
 
 	FloatRect getglobalBounds();
 	bool doesIntersect(Object* other);
