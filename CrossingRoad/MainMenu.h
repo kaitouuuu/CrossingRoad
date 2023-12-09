@@ -7,9 +7,7 @@
 using namespace sf;
 using namespace std;
 
-enum class GameState {
-    mainmenu,game,setting,highscore, loadgame, newgame
-};
+
 
 
 
