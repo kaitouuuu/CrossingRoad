@@ -4,7 +4,9 @@ Vehicle::Vehicle()
 	: xPos(0), yPos(0), width(0), height(0), type("") {}
 
 Vehicle::Vehicle(float xPos, float yPos, float width, float height, std::string type)
-	: xPos(xPos), yPos(yPos), width(width), height(height), type(type) {}
+	: xPos(xPos), yPos(yPos), width(width), height(height), type(type) {
+	std::cout << xPos << std::endl;
+}
 
 float Vehicle::getX() const
 {
@@ -44,4 +46,15 @@ void Vehicle::updatePosition(float speed)
 	{
 		xPos += 1920;
 	}
+}
+void Vehicle::draw(RenderWindow& window) {
+	std::string filename = "Content/Image/bigtree.png";
+	if (!texture.loadFromFile(filename)) {
+		std::cout << "Can not load image\n";
+
+		exit(0);
+	}
+	sprite.setTexture(texture);
+	sprite.setPosition(xPos, yPos);
+	window.draw(sprite);
 }

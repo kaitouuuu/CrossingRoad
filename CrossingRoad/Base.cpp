@@ -24,7 +24,7 @@ void Base::randomGame(int difficulty)
 
 	for (int i = 1; i < numLane-1; ++i)
 	{
-		std::string type = allRoadType[randomNumber(1, 1)];
+		std::string type = allRoadType[randomNumber(0, 0)];
 
 		// The harder the game the fewer Field type roads appear
 		if (difficulty > 3 && type == "Field")

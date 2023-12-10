@@ -28,6 +28,7 @@ public:
 	float getHeight() const;
 	std::string getType() const;
 	void updatePosition(float speed);
+	void draw(RenderWindow& window);
 };
 
 #endif // VEHICLE_H

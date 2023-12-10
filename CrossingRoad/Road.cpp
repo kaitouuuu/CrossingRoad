@@ -116,6 +116,10 @@ void Road::draw(RenderWindow& window) {
 	sprite.setTexture(texture);
 	sprite.setPosition(0.f, yPos);
 	window.draw(sprite);
+
+	for (auto& vehicle : vehicles) {
+		vehicle.draw(window);
+	}
 }
 
 void Road::setY(const float y)
