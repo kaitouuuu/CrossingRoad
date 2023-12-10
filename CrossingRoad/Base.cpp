@@ -122,48 +122,6 @@ void Base::randomGame(int difficulty)
 	lanes.push_back(newRoad);
 }
 
-//void Base::playGame(int difficulty, int stage, RenderWindow & window)
-//{
-//	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-//	Character champ("Character1.png", 1060.f, 1000.f, 48.f, 48.f, true, false);
-//	sf::Clock clock;
-//	int stage = 1;
-//	bool newStage = true;
-//
-//	while (window.isOpen()) {
-//		if (newStage == true) {
-//			if (stage < numStage / 4)
-//			{
-//				randomGame(std::max(difficulty - 1, 1));
-//			}
-//			else if (stage == numStage)
-//			{
-//				randomGame(difficulty + 1);
-//			}
-//			else
-//			{
-//				randomGame(difficulty);
-//			}
-//
-//			for (Road& lane : lanes) {
-//				lane.draw(window);
-//			}
-//
-//			newStage = false;
-//		}
-//
-//		for (Road& lane : lanes) {
-//			lane.updateVehicles(clock);
-//		}
-//
-//		champ.update(clock, lanes[champ.getY() / 54]);
-//		std::cout << champ.getX() << " " << champ.getY() << std::endl;
-//
-//		if (champ.checkCollision(lanes[champ.getY() / 54]) == true) {
-//		}
-//	}
-//}
-
 //Base::Base(std::mt19937_64 seed)
 //	: rng(seed) {}
 //
