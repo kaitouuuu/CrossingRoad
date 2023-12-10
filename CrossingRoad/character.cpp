@@ -96,6 +96,8 @@ Character::Character(string fileName, float x, float y, float width, float heigh
 	speed = 80.f;
 	this->x = x;
 	this->y = y;
+	this->width = width;
+	this->height = height;
 
 	isCleared = true;
 	type = 1;
@@ -337,8 +339,10 @@ bool Character::condition(float xTL, float yTL, float objH, float objW)
 	float checkY = max(yTL, y);
 	float checkX2 = min(xTL + objW, x + width);
 	float checkY2 = min(yTL + objH, y + height);
-	if (checkX <= checkX2 && checkY <= checkY2)
+	if (checkX <= checkX2 && checkY <= checkY2) {
+		std::cout << xTL << " " << yTL << " " << objH << " " << objW << " " << x << " " << y << " " << width << " " << height << std::endl;
 		return true;
+	}
 	return false;
 }
 
@@ -363,7 +367,7 @@ bool Character::checkCollision(Road &aRoad)
 	{
 		tmpx += 0.1f;
 	}
-	if (!(0 < tmpx && tmpx + 48 < 1920 && 0 < tmpy && tmpy + 48 < 1080)) // check out of bound
+	if (!(0 <= tmpx && tmpx + 48 < 1920 && 0 <= tmpy && tmpy + 48 < 1080)) // check out of bound
 	{
 		if (type == 0)
 		{
@@ -413,9 +417,9 @@ bool Character::checkCollision(Road &aRoad)
 					x = aRoad.vehicles[i].getX() - 48.01f;
 					animatedSprite.setPosition(x, y);
 				}
+				return true;
 			}
 		}
-		return true;
 	}
 	else
 	{

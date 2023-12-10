@@ -22,7 +22,7 @@ void Base::randomGame(int difficulty)
 	Road newRoad = Road("Field", 0);
 	lanes.push_back(newRoad);
 
-	for (int i = 1; i < numLane-1; ++i)
+	for (int i = 1; i < numLane - 1; ++i)
 	{
 		std::string type = allRoadType[randomNumber(0, 0)];
 
@@ -109,7 +109,7 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numAnimal; ++j)
 			{
-				Vehicle newAnimal = Vehicle(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "brown_dog");
+				Vehicle newAnimal = Vehicle(float(randomNumber(0, 1919)), widthLane * (i - 1) + 48 / 2, 48, 48, "brown_dog");
 				newRoad.addVehicle(newAnimal);
 			}
 		}
@@ -118,7 +118,7 @@ void Base::randomGame(int difficulty)
 	}
 
 	// Last road
-	newRoad = Road("Field", widthLane*19);
+	newRoad = Road("Field", widthLane * (numLane - 1));
 	lanes.push_back(newRoad);
 }
 

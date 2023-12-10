@@ -8,6 +8,7 @@
 
 void Frontend::displayMenu() {
 	RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road");
+	//RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road", sf::Style::Fullscreen);
 	window.setFramerateLimit(60);
 	string filename = "Content/Image/background.jpg";
 	Texture backgroundTexture;
@@ -176,18 +177,40 @@ void Frontend::displayMenu() {
 				lane.draw(window);
 			}
 
+			for (Road& lane : base.lanes) {
+				for (Vehicle& vehicle : lane.vehicles) {
+					vehicle.draw(window);
+				}
+			}
 
-			/*for (Road& lane : base.lanes) {
+
+			for (Road& lane : base.lanes) {
 				lane.updateVehicles();
-			}*/
-		
-			champ.update(frameClock, base.lanes[champ.getY() / 54]);
+			}
+
+			int pos1 = max(int(champ.getY() / 54) - 1, 0);
+			int pos2 = int(champ.getY() / 54);
+			int pos3 = min(int(champ.getY() / 54) + 1, int(base.lanes.size() - 1));
+
+			champ.update(frameClock, base.lanes[pos1]);
+			champ.update(frameClock, base.lanes[pos2]);
+			champ.update(frameClock, base.lanes[pos3]);
+
+			//std::cout << champ.getX() << " " << champ.getY() << " " << int(champ.getY() / 54) << std::endl;
+			//for (Vehicle& u : base.lanes[int(champ.getY() / 54)].vehicles) {
+			//	std::cout << u.getX() << " " << u.getY() << std::endl;
+			//}
+
+			if (champ.checkCollision(base.lanes[pos1]) || champ.checkCollision(base.lanes[pos2])
+				|| champ.checkCollision(base.lanes[pos3])) {
+				currentState = GameState::newgame;
+				//std::cout << champ.getX() << " " << champ.getY() << " " << int(champ.getY() / 54) << std::endl;
+				//for (Vehicle& u : base.lanes[champ.getY() / 54].vehicles) {
+				//	std::cout << u.getX() << " " << u.getY() << std::endl;
+				//}
+				//std::cin >> stage;
+			}
 			champ.draw(window);
-			//std::cout << champ.getX() << " " << champ.getY() << std::endl;
-
-			/*if (champ.checkCollision(base.lanes[champ.getY() / 54]) == true) {
-
-			}*/
 
 			break;
 		}
