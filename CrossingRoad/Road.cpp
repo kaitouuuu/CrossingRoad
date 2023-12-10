@@ -93,6 +93,28 @@ void Road::updateVehicles()
 }
 
 void Road::draw(RenderWindow& window) {
+
+	std::string filename;
+	if (type == "Road") {
+		filename = "Content/Image/Road.png";
+	
+	}
+	else if (type == "Field") {
+		filename = "Content/Image/field.png";
+		
+	}
+	else if (type == "Land") {
+		filename = "Content/Image/River.png";
+	
+	}
+	if (!texture.loadFromFile(filename)) {
+		std::cout << filename << std::endl;
+		std::cout << "Can not load image\n";
+
+		exit(0);
+	}
+	sprite.setTexture(texture);
+	sprite.setPosition(0.f, yPos);
 	window.draw(sprite);
 }
 

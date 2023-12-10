@@ -19,12 +19,12 @@ void Base::randomGame(int difficulty)
 
 	// Initial road
 	lanes.clear();
-	Road newRoad = Road("Field", widthLane);
+	Road newRoad = Road("Field", 0);
 	lanes.push_back(newRoad);
 
-	for (int i = 2; i < numLane; ++i)
+	for (int i = 1; i < numLane-1; ++i)
 	{
-		std::string type = allRoadType[randomNumber(0, 2)];
+		std::string type = allRoadType[randomNumber(1, 1)];
 
 		// The harder the game the fewer Field type roads appear
 		if (difficulty > 3 && type == "Field")
@@ -118,7 +118,7 @@ void Base::randomGame(int difficulty)
 	}
 
 	// Last road
-	newRoad = Road("Field", widthLane);
+	newRoad = Road("Field", widthLane*19);
 	lanes.push_back(newRoad);
 }
 

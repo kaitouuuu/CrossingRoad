@@ -19,7 +19,7 @@ void Frontend::displayMenu() {
 	Sprite background(backgroundTexture);
 
 
-	GameState currentState = GameState::mainmenu;
+	GameState currentState = GameState::newgame;
 
 	Button A("Content/Image/Game.png", 1452, 353, "Game");
 	Button B("Content/Image/Rule.png", 1462, 466, "Rule");
@@ -61,10 +61,11 @@ void Frontend::displayMenu() {
 
 	// base game
 	Base base;
+	base.randomGame(1);
 	Character champ;
 	int difficulty;
 	int numStage;
-	int stage;
+	int stage ;
 	bool newStage;
 
 	while (window.isOpen()) {
@@ -168,22 +169,25 @@ void Frontend::displayMenu() {
 					base.randomGame(difficulty);
 				}
 
-				for (Road& lane : base.lanes) {
-					lane.draw(window);
-				}
-
 				newStage = false;
 			}
-
 			for (Road& lane : base.lanes) {
-				lane.updateVehicles();
+				//cout << lane.getType() << endl;
+				lane.draw(window);
 			}
 
+
+			/*for (Road& lane : base.lanes) {
+				lane.updateVehicles();
+			}*/
+		
 			champ.update(frameClock, base.lanes[champ.getY() / 54]);
+			champ.draw(window);
 			std::cout << champ.getX() << " " << champ.getY() << std::endl;
 
-			if (champ.checkCollision(base.lanes[champ.getY() / 54]) == true) {
-			}
+			/*if (champ.checkCollision(base.lanes[champ.getY() / 54]) == true) {
+
+			}*/
 
 			break;
 		}
