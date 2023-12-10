@@ -24,31 +24,31 @@ void Base::randomGame(int difficulty)
 
 	for (int i = 1; i < numLane - 1; ++i)
 	{
-		std::string type = allRoadType[randomNumber(0, 0)];
+		std::string type = allRoadType[randomNumber(0, 1)];
 
 		// The harder the game the fewer Field type roads appear
 		if (difficulty > 3 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 2)];
+			std::string type = allRoadType[randomNumber(0, 1)];
 		}
 		if (difficulty > 10 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 2)];
+			std::string type = allRoadType[randomNumber(0, 1)];
 		}
 		if (difficulty > 28 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 2)];
+			std::string type = allRoadType[randomNumber(0, 1)];
 		}
 		if (difficulty > 67 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 2)];
+			std::string type = allRoadType[randomNumber(0, 1)];
 		}
 
 		newRoad = Road(type, widthLane * i);
 
 		if (type == "Road")
 		{
-			float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
+			float speed = float(randomNumber(400 + std::min(difficulty * 200, 190000), 250000 + std::min(difficulty * 2500, 240000))) / 10000 + 60;
 			float xPosition = float(randomNumber(960 - 250, 960 + 250));
 			TrafficLight newTrafficLight(xPosition, widthLane * i);
 			newRoad.setTrafficLight(0); 
@@ -71,7 +71,7 @@ void Base::randomGame(int difficulty)
 
 			newRoad.setSpeed(speed);
 
-			int numCar = 1 + difficulty + randomNumber(0, difficulty);
+			int numCar = min(1 + difficulty + randomNumber(0, difficulty), 18);
 
 			for (int j = 1; j <= numCar; ++j)
 			{

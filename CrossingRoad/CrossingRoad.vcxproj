@@ -150,6 +150,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Car1.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Frontend.cpp" />
     <ClCompile Include="main.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Car1.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Frontend.h" />
     <ClInclude Include="MainMenu.h" />

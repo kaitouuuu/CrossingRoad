@@ -93,7 +93,7 @@ Character::Character(string fileName, float x, float y, float width, float heigh
 	tmp.setPosition(x, y);
 	animatedSprite = tmp;
 
-	speed = 80.f;
+	speed = 120.f;
 	this->x = x;
 	this->y = y;
 	this->width = width;
@@ -113,7 +113,7 @@ void Character::update(Clock& frameClock, Road& aRoad)
 
 	if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W))
 	{
-		if (checkCollision(aRoad))
+		if (checkCollision(aRoad) == 1)
 		{
 			if (!isCleared)
 			{
@@ -146,7 +146,7 @@ void Character::update(Clock& frameClock, Road& aRoad)
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S))
 	{
-		if (checkCollision(aRoad))
+		if (checkCollision(aRoad) == 1)
 		{
 			if (!isCleared)
 			{
@@ -179,7 +179,7 @@ void Character::update(Clock& frameClock, Road& aRoad)
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
 	{
-		if (checkCollision(aRoad))
+		if (checkCollision(aRoad) == 1)
 		{
 			if (!isCleared)
 			{
@@ -212,7 +212,7 @@ void Character::update(Clock& frameClock, Road& aRoad)
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
 	{
-		if (checkCollision(aRoad))
+		if (checkCollision(aRoad) == 1)
 		{
 			if (!isCleared)
 			{
@@ -346,7 +346,7 @@ bool Character::condition(float xTL, float yTL, float objH, float objW)
 	return false;
 }
 
-bool Character::checkCollision(Road &aRoad)
+int Character::checkCollision(Road &aRoad)
 {
 	float tmpx = x;
 	float tmpy = y;
@@ -373,6 +373,7 @@ bool Character::checkCollision(Road &aRoad)
 		{
 			y = 0.01f;
 			animatedSprite.setPosition(x, y);
+			return 2;
 		}
 		else if (type == 1)
 		{
@@ -417,7 +418,7 @@ bool Character::checkCollision(Road &aRoad)
 					x = aRoad.vehicles[i].getX() - 48.01f;
 					animatedSprite.setPosition(x, y);
 				}
-				return true;
+				return 1;
 			}
 		}
 	}
@@ -450,7 +451,7 @@ bool Character::checkCollision(Road &aRoad)
 			}
 		}
 	}
-	return false;
+	return 0;
 }
 
 float Character::getY()

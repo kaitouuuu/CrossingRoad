@@ -149,7 +149,7 @@ void Frontend::displayMenu() {
 		case GameState::newgame:
 			difficulty = 1;
 			numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-			champ = Character("Character1.png", 1060.f, 30.f, 48.f, 48.f, true, false);
+			champ = Character("Character1.png", 1060.f, 1080.f - 48.f, 48.f, 48.f, true, false);
 			stage = 1;
 			newStage = true;
 			currentState = GameState::playingGame;
@@ -171,9 +171,9 @@ void Frontend::displayMenu() {
 				}
 
 				newStage = false;
+				champ = Character("Character1.png", 1060.f, 1080.f - 48.f, 48.f, 48.f, true, false);
 			}
 			for (Road& lane : base.lanes) {
-				//cout << lane.getType() << endl;
 				lane.draw(window);
 			}
 
@@ -201,14 +201,25 @@ void Frontend::displayMenu() {
 			//	std::cout << u.getX() << " " << u.getY() << std::endl;
 			//}
 
-			if (champ.checkCollision(base.lanes[pos1]) || champ.checkCollision(base.lanes[pos2])
-				|| champ.checkCollision(base.lanes[pos3])) {
+			int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
+				max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
+
+			if (checkCondition == 1) {
 				currentState = GameState::newgame;
 				//std::cout << champ.getX() << " " << champ.getY() << " " << int(champ.getY() / 54) << std::endl;
 				//for (Vehicle& u : base.lanes[champ.getY() / 54].vehicles) {
 				//	std::cout << u.getX() << " " << u.getY() << std::endl;
 				//}
 				//std::cin >> stage;
+			}
+			else if (checkCondition == 2) {
+				++stage;
+				if (stage > numStage) {
+					currentState = GameState::mainmenu;
+				}
+				else {
+					newStage = true;
+				}
 			}
 			champ.draw(window);
 

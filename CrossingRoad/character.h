@@ -47,7 +47,7 @@ private:
 	Skin skin;
 
 public:
-	bool checkCollision(Road &aRoad);
+	int checkCollision(Road &aRoad);
 	void changeskin();
 
 	Character();
