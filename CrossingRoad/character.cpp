@@ -72,6 +72,9 @@ void Character::setRight()
 	walkingAnimationRight.addFrame(sf::IntRect(1 * w, 3 * w, 1 * w, 1 * w));
 }
 
+Character::Character() {
+}
+
 Character::Character(string fileName, float x, float y, float width, float height, bool paused, bool looped)
 {
 	if (!texture.loadFromFile(fileName))
@@ -100,7 +103,7 @@ Character::Character(string fileName, float x, float y, float width, float heigh
 	noKeyWasPressed = true;
 }
 
-void Character::update(Clock &frameClock, Road &aRoad)
+void Character::update(Clock& frameClock, Road& aRoad)
 {
 	Time frameTime = frameClock.restart();
 

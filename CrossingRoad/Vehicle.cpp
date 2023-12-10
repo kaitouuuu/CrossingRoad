@@ -33,8 +33,8 @@ std::string Vehicle::getType() const
 
 void Vehicle::updatePosition(Clock& frameClock, float speed)
 {
-	sf::Time deltaTime = frameClock.restart();
-	xPos += speed * deltaTime.asSeconds();
+	//sf::Time deltaTime = frameClock.getElapsedTime();
+	xPos += speed;
 
 	if (xPos >= 1920)
 	{

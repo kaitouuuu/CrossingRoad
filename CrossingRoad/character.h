@@ -50,6 +50,7 @@ public:
 	bool checkCollision(Road &aRoad);
 	void changeskin();
 
+	Character();
 	Character(string fileName, float x, float y, float width, float height, bool paused, bool looped);
 
 	void setMoveUp();

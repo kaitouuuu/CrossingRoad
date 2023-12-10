@@ -7,7 +7,7 @@ using namespace sf;
 using namespace std;
 //void Frontend();
 enum class GameState {
-	mainmenu, game, setting, highscore, loadgame, newgame
+	mainmenu, game, setting, highscore, loadgame, newgame, playingGame
 };
 class Frontend {
 

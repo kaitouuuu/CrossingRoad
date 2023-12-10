@@ -10,16 +10,18 @@
 
 class Base {
 private:
-	std::vector<Road> lanes;
 	std::mt19937_64 rng;
+	
 
 public:
+	std::vector<Road> lanes;
+
 	Base();
 
 	int randomNumber(int l, int r);
 
 	void randomGame(int difficulty);
-	void playGame(int difficulty, RenderWindow & window);
+	void playGame(int difficulty, int stage, RenderWindow& window);
 
 	//// For debug
 	//Base(std::mt19937_64 seed);

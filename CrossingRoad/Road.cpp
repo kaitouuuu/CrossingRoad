@@ -95,6 +95,7 @@ void Road::updateVehicles(Clock& frameClock)
 void Road::draw(RenderWindow& window) {
 	window.draw(sprite);
 }
+
 void Road::setY(const float y)
 {
 	yPos = y;

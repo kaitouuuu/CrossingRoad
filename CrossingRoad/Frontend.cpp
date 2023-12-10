@@ -61,6 +61,12 @@ void Frontend::displayMenu() {
 
 	// base game
 	Base base;
+	Character champ;
+	int difficulty;
+	int numStage;
+	sf::Clock clock;
+	int stage;
+	bool newStage;
 
 	while (window.isOpen()) {
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
@@ -140,8 +146,46 @@ void Frontend::displayMenu() {
 			break;
 
 		case GameState::newgame:
+			difficulty = 1;
+			numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
+			champ = Character("Character1.png", 1060.f, 1000.f, 48.f, 48.f, true, false);
+			stage = 1;
+			newStage = true;
+			currentState = GameState::playingGame;
+			break;
 
-			base.playGame(1, window);
+		case GameState::playingGame:
+			if (newStage == true) {
+				if (stage < numStage / 4)
+				{
+					base.randomGame(std::max(difficulty - 1, 1));
+				}
+				else if (stage == numStage)
+				{
+					base.randomGame(difficulty + 1);
+				}
+				else
+				{
+					base.randomGame(difficulty);
+				}
+
+				for (Road& lane : base.lanes) {
+					lane.draw(window);
+				}
+
+				newStage = false;
+			}
+
+			//for (Road& lane : base.lanes) {
+			//	lane.updateVehicles(clock);
+			//}
+
+			champ.update(clock, base.lanes[champ.getY() / 54]);
+			std::cout << champ.getX() << " " << champ.getY() << std::endl;
+
+			if (champ.checkCollision(base.lanes[champ.getY() / 54]) == true) {
+			}
+
 			break;
 		}
 		window.display();
