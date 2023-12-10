@@ -16,6 +16,7 @@ private:
 	std::string type;
 	Texture texture;
 	Sprite sprite;
+	Clock clock;
 
 public:
 	Vehicle();
@@ -26,7 +27,7 @@ public:
 	float getWidth() const;
 	float getHeight() const;
 	std::string getType() const;
-	void updatePosition(Clock& frameClock, float speed);
+	void updatePosition(float speed);
 };
 
 #endif // VEHICLE_H

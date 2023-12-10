@@ -14,7 +14,7 @@ void Base::randomGame(int difficulty)
 	const float widthLane = 54.0;
 	const int numLane = 20;
 	std::string allRoadType[] = {"Road", "Field", "Land"};
-	std::string allObjectType[] = {"thin_tree", "big_tree"};
+	std::string allObjectType[] = {"thintree", "bigtree"};
 	float allObjectSize[] = {36.0, 48.0};
 
 	// Initial road

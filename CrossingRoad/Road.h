@@ -36,7 +36,7 @@ public:
 	void setTrafficLight(const int color);
 	void addVehicle(const Vehicle& added);
 	void addObject(const Object& added);
-	void updateVehicles(Clock& frameClock);
+	void updateVehicles();
 	void draw(RenderWindow& window);
 	// For debug
 	void setY(const float y);

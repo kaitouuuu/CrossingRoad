@@ -64,7 +64,6 @@ void Frontend::displayMenu() {
 	Character champ;
 	int difficulty;
 	int numStage;
-	sf::Clock clock;
 	int stage;
 	bool newStage;
 
@@ -148,7 +147,7 @@ void Frontend::displayMenu() {
 		case GameState::newgame:
 			difficulty = 1;
 			numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-			champ = Character("Character1.png", 1060.f, 1000.f, 48.f, 48.f, true, false);
+			champ = Character("Character1.png", 1060.f, 1030.f, 48.f, 48.f, true, false);
 			stage = 1;
 			newStage = true;
 			currentState = GameState::playingGame;
@@ -176,11 +175,11 @@ void Frontend::displayMenu() {
 				newStage = false;
 			}
 
-			//for (Road& lane : base.lanes) {
-			//	lane.updateVehicles(clock);
-			//}
+			for (Road& lane : base.lanes) {
+				lane.updateVehicles();
+			}
 
-			champ.update(clock, base.lanes[champ.getY() / 54]);
+			champ.update(frameClock, base.lanes[champ.getY() / 54]);
 			std::cout << champ.getX() << " " << champ.getY() << std::endl;
 
 			if (champ.checkCollision(base.lanes[champ.getY() / 54]) == true) {

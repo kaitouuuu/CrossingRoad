@@ -31,10 +31,10 @@ std::string Vehicle::getType() const
 	return type;
 }
 
-void Vehicle::updatePosition(Clock& frameClock, float speed)
+void Vehicle::updatePosition(float speed)
 {
-	//sf::Time deltaTime = frameClock.getElapsedTime();
-	xPos += speed;
+	sf::Time deltaTime = clock.restart();
+	xPos += speed * deltaTime.asSeconds();
 
 	if (xPos >= 1920)
 	{

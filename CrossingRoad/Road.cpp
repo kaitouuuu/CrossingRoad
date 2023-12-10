@@ -84,11 +84,11 @@ void Road::addVehicle(const Vehicle &added)
 	vehicles.push_back(added);
 }
 
-void Road::updateVehicles(Clock& frameClock)
+void Road::updateVehicles()
 {
 	for (Vehicle &vehicle : vehicles)
 	{
-		vehicle.updatePosition(frameClock, speed);
+		vehicle.updatePosition(speed);
 	}
 }
 
