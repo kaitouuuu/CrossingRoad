@@ -123,35 +123,44 @@ void Base::randomGame(int difficulty)
 	lanes.push_back(newRoad);
 }
 
-// TODO: Testing with Character
-void Base::playGame(int difficulty, RenderWindow & window, const int &state)
+void Base::playGame(int difficulty, RenderWindow & window)
 {
 	int numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
 	Character champ("Character1.png", 960.f, 1000.f, 48.f, 48.f, true, false);
 	sf::Clock clock;
+	int stage = 1;
+	bool newStage = true;
 
-	if(state<= numStage) {
-		if (state < numStage / 4)
-		{
-			randomGame(std::max(difficulty - 1, 1));
+	while (window.isOpen()) {
+		if (newStage == true) {
+			if (stage < numStage / 4)
+			{
+				randomGame(std::max(difficulty - 1, 1));
+			}
+			else if (stage == numStage)
+			{
+				randomGame(difficulty + 1);
+			}
+			else
+			{
+				randomGame(difficulty);
+			}
+
+			for (Road& lane : lanes) {
+				lane.draw(window);
+			}
+
+			newStage = false;
 		}
-		else if (state == numStage)
-		{
-			randomGame(difficulty + 1);
+
+		for (Road& lane : lanes) {
+			lane.updateVehicles(clock);
 		}
-		else
-		{
-			randomGame(difficulty);
-		}
-		//check each Road
-		//test again
-		for (auto& lane : lanes) {
-			lane.draw(window);
-		}
-		while (!champ.checkCollision(lanes[champ.getY() / 54]))
-		{
-			champ.update(clock, lanes[champ.getY() / 54]);
-			std::cout << champ.getX() << " " << champ.getY() << std::endl;
+
+		champ.update(clock, lanes[champ.getY() / 54]);
+		std::cout << champ.getX() << " " << champ.getY() << std::endl;
+
+		if (champ.checkCollision(lanes[champ.getY() / 54]) == true) {
 		}
 	}
 }

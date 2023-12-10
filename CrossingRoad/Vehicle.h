@@ -26,7 +26,7 @@ public:
 	float getWidth() const;
 	float getHeight() const;
 	std::string getType() const;
-	void updatePosition(float speed);
+	void updatePosition(Clock& frameClock, float speed);
 };
 
 #endif // VEHICLE_H

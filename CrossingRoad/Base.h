@@ -5,7 +5,7 @@
 #include <random>
 #include <chrono>
 
-#include "character.h"
+#include "Character.h"
 #include "Road.h"
 
 class Base {
@@ -19,7 +19,7 @@ public:
 	int randomNumber(int l, int r);
 
 	void randomGame(int difficulty);
-	void playGame(int difficulty, RenderWindow & window, const int &state);
+	void playGame(int difficulty, RenderWindow & window);
 
 	//// For debug
 	//Base(std::mt19937_64 seed);

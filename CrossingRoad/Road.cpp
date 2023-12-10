@@ -84,14 +84,11 @@ void Road::addVehicle(const Vehicle &added)
 	vehicles.push_back(added);
 }
 
-void Road::updateVehicles()
+void Road::updateVehicles(Clock& frameClock)
 {
-	if (type != "Field")
+	for (Vehicle &vehicle : vehicles)
 	{
-		for (Vehicle &vehicle : vehicles)
-		{
-			vehicle.updatePosition(speed);
-		}
+		vehicle.updatePosition(frameClock, speed);
 	}
 }
 

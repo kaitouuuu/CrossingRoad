@@ -1,4 +1,5 @@
 #include "Frontend.h"
+
 //void Frontend()
 //{
 //	RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road");
@@ -60,8 +61,7 @@ void Frontend::displayMenu() {
 
 	// base game
 	Base base;
-	
-	int state = 1;
+
 	while (window.isOpen()) {
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
 		Event e;
@@ -141,10 +141,7 @@ void Frontend::displayMenu() {
 
 		case GameState::newgame:
 
-			base.playGame(1,window,state);
-
-
-			state++;
+			base.playGame(1, window);
 			break;
 		}
 		window.display();
