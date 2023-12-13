@@ -9,20 +9,6 @@
 using namespace sf;
 using namespace std;
 
-enum Skin
-{
-	red,
-	blue,
-	green
-};
-
-enum Direction
-{
-	front,
-	left,
-	right
-};
-
 class Character
 {
 private:
@@ -35,6 +21,8 @@ private:
 	Animation walkingAnimationRight;
 	Animation *currentAnimation;
 
+	int skin = 0;
+
 	float speed;
 	float x, y;
 	float width, height;
@@ -44,11 +32,8 @@ private:
 
 	int type;
 
-	Skin skin;
-
 public:
 	int checkCollision(Road &aRoad);
-	void changeskin();
 
 	Character();
 	Character(string fileName, float x, float y, float width, float height, bool paused, bool looped);
@@ -61,12 +46,15 @@ public:
 	void setDown();
 	void setLeft();
 	void setRight();
+	void changeSkin();
 	void update(Clock &frameClock, Road &aRoad);
 	void draw(RenderWindow &window);
+
 	float getY();
 	float getX();
 	float getWidth();
 	float getHeight();
+
 	bool condition(float xTL, float yTL, float objH, float objW);
 };
 

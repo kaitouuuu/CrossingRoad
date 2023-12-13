@@ -13,22 +13,29 @@ private:
 	float yPos;
 	float width;
 	float height;
+
 	std::string type;
+
 	Texture texture;
 	Sprite sprite;
 	Clock clock;
 
 public:
 	Vehicle();
-	Vehicle(float xPos, float yPos, float width, float height, std::string type);
+	Vehicle(float xPos, float yPos, std::string type);
 
 	float getX() const;
 	float getY() const;
 	float getWidth() const;
 	float getHeight() const;
+
+	Sprite getSprite();
+	void setSprite(Sprite &other);
+
 	std::string getType() const;
+
 	void updatePosition(float speed);
-	void draw(RenderWindow& window);
+	virtual void draw(RenderWindow& window);
 };
 
 #endif // VEHICLE_H

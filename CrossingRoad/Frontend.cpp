@@ -135,6 +135,8 @@ void Frontend::displayMenu()
 					}
 				}
 			}
+
+			champ.changeSkin();
 		}
 
 		window.clear(Color::White);

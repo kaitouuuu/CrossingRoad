@@ -5,7 +5,9 @@
 
 class Car1 : public Vehicle {
 public:
-	int abc;
+	Car1(float xPos, float yPos, std::string type) : Vehicle(xPos, yPos, type) {}
+
+	void draw(RenderWindow& window) override;
 };
 
 #endif // CAR1_H

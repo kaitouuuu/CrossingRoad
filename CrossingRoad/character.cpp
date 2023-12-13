@@ -398,7 +398,7 @@ int Character::checkCollision(Road &aRoad)
 			// tmpx + 48 >= aRoad.vehicles[i].getX()) && (tmpy + 48 >= aRoad.vehicles[i].getY()) && (tmpy - aRoad.vehicles[i].getHeight() <= aRoad.vehicles[i].getY()) && (tmpx - aRoad.vehicles[i].getWidth() <= aRoad.vehicles[i].getX()))
 			if (condition(aRoad.vehicles[i].getX(), aRoad.vehicles[i].getY(), aRoad.vehicles[i].getHeight(), aRoad.vehicles[i].getWidth()))
 			{
-				if (type == 0)
+				/*if (type == 0)
 				{
 					y = aRoad.vehicles[i].getY() + aRoad.vehicles[i].getHeight() + 0.01f;
 					animatedSprite.setPosition(x, y);
@@ -417,7 +417,7 @@ int Character::checkCollision(Road &aRoad)
 				{
 					x = aRoad.vehicles[i].getX() - 48.01f;
 					animatedSprite.setPosition(x, y);
-				}
+				}*/
 				return 1;
 			}
 		}
@@ -463,4 +463,31 @@ float Character::getX()
 {
 	return x;
 }
-void Character::changeskin() {}
+
+void Character::changeSkin()
+{
+	if (Keyboard::isKeyPressed(Keyboard::Tab)) {
+		if (skin < 4) {
+			++skin;
+		}
+		else {
+			skin = 0;
+		}
+
+		if (skin == 0) {
+			animatedSprite.setColor(Color::White);
+		}
+		else if (skin == 1) {
+			animatedSprite.setColor(Color(255, 165, 79));
+		}
+		else if (skin == 2) {
+			animatedSprite.setColor(Color(139, 69, 19));
+		}
+		else if (skin == 3) {
+			animatedSprite.setColor(Color(82, 84, 41));
+		}
+		else if (skin == 4) {
+			animatedSprite.setColor(Color(176, 250, 255));
+		}
+	}
+}

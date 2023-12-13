@@ -7,6 +7,7 @@
 
 #include "Object.h"
 #include "Vehicle.h"
+#include "Car1.h"
 #include "TrafficLight.h"
 
 class Road {

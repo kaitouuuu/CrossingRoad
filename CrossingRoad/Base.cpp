@@ -75,7 +75,7 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numCar; ++j)
 			{
-				Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, 48, 48, "blue_car");
+				Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, "blue_car");
 				newRoad.addVehicle(newVehicle);
 			}
 		}
@@ -109,7 +109,7 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numAnimal; ++j)
 			{
-				Vehicle newAnimal = Vehicle(float(randomNumber(0, 1919)), widthLane * (i - 1) + 48 / 2, 48, 48, "brown_dog");
+				Vehicle newAnimal = Vehicle(float(randomNumber(0, 1919)), widthLane * (i - 1) + 48 / 2, "brown_dog");
 				newRoad.addVehicle(newAnimal);
 			}
 		}
