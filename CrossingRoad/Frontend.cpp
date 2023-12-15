@@ -16,16 +16,47 @@ void Frontend::displayMenu()
 
 	Sprite background(backgroundTexture);
 
-	GameState currentState = GameState::newgame;
+	filename = "Content/Image/setting_background.png";
+	Texture setting_backgroundTexture;
 
+	if (!setting_backgroundTexture.loadFromFile(filename))
+	{
+		// Handle error if the image fails to load
+		return;
+	}
+
+	Sprite setting_background(setting_backgroundTexture);
+
+	filename = "Content/Image/pop up screen.png";
+	Texture pop_up_background;
+	if (!pop_up_background.loadFromFile(filename))
+	{
+		// Handle error if the image fails to load
+		return;
+	}
+	Sprite pop_up_screen(pop_up_background);
+
+	GameState currentState = GameState::mainmenu;
+	// Button main menu
 	Button A("Content/Image/Game.png", 1452, 353, "Game");
 	Button B("Content/Image/Rule.png", 1462, 466, "Rule");
 	Button C("Content/Image/Setting.png", 1410, 579, "Setting");
 	Button D("Content/Image/High score.png", 1403, 692, "High score");
 	Button E("Content/Image/Exit.png", 1465, 811, "Exit");
+
+	//Button game
 	Button F("Content/Image/New Game.png", 1415, 410, "New game");
 	Button G("Content/Image/Load game.png", 1406, 522, "Load game");
 	Button H("Content/Image/Back.png", 1483, 634, "Back");
+
+	//Button setting
+	Button H2("Content/Image/Back.png", 1681, 945, "Back");
+	////Button setting
+	//Button I("Content/Image/moveright.png", 683, 261, "moveright");
+	//Button J("Content/Image/moveleft.png", 664, 393, "moveleft");
+	//Button K("Content/Image/moveup.png", 635, 525, "moveup");
+	//Button L("Content/Image/movedown.png", 664, 657, "movedown");
+	//Button M("Content/Image/changeskin.png", 664, 789, "changeskin");
 
 	vector<Button> b;
 	b.push_back(A);
@@ -40,18 +71,39 @@ void Frontend::displayMenu()
 	c.push_back(G);
 	c.push_back(H);
 
-	TextBox At("Content/Font/SuperMario256.ttf", Color::White, "CROSSY ROAD", 100, 401, 157);
+	/*vector<Button>d;
+	d.push_back(I);
+	d.push_back(J);
+	d.push_back(K);
+	d.push_back(L);
+	d.push_back(M);*/
 
+	TextBox At("Content/Font/SuperMario256.ttf", Color::White, "CROSSY ROAD", 100, 401, 157);
+	TextBox Bt("Content/Font/SuperMario256.ttf", Color::White, "SETTING", 100, 445, 81);
 	vector<TextBox> t;
+	
 	t.push_back(At);
+	
 	//t.push_back(Bt);
 	//t.push_back(Ct);
 	Menu n(b, t);
 	Menu q(c, t);
+	//Menu p(d, y);
 	//MainMenu m(b);
 
-	//Character character("Content/Image/Character1.png", 500, 500, true, false);
-
+	Settingbut setbut;
+	settingState setstate = settingState::Normal;
+	string result;
+	
+	keyMap = {
+			{"Move Left: ", sf::Keyboard::A},
+			{"Move Right: ", sf::Keyboard::D},
+			{"Move Up: ", sf::Keyboard::W},
+			{"Move Down: ", sf::Keyboard::S},
+			{"Change Skin: ", sf::Keyboard::Tab}
+		
+	};
+	TextBox popuptext("Content/Font/SuperMario256.ttf", Color::White, "PRESS ANY KEY OR BUTTON", 100, 201, 325);
 	Clock frameClock;
 
 	// base game
@@ -62,7 +114,7 @@ void Frontend::displayMenu()
 	int numStage;
 	int stage ;
 	bool newStage;
-
+	champ.updatekeymap(keyMap);
 	while (window.isOpen())
 	{
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
@@ -104,6 +156,7 @@ void Frontend::displayMenu()
 								else if (button.type() == "Setting")
 								{
 									currentState = GameState::setting;
+									 
 								}
 								else if (button.type() == "Exit")
 								{
@@ -112,7 +165,7 @@ void Frontend::displayMenu()
 							}
 						}
 					}
-					else
+					else if (currentState==GameState::game)
 					{
 						for (auto& button : c)
 						{
@@ -133,9 +186,56 @@ void Frontend::displayMenu()
 							}
 						}
 					}
+					else if (currentState == GameState::setting) {
+						if(H2.isClicked(mousePosF))
+						currentState = GameState::mainmenu;
+					}
+					
 				}
 			}
+			else if (currentState == GameState::setting) {
+				if (setstate == settingState::Normal) {
 
+					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+					for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter) {
+						if ((*iter).first.isClicked(mousePosF)) {
+							std::string buttontext = (*iter).second.getText();
+							int firstSpacePos = buttontext.find_first_of(":");
+							result = buttontext.substr(0, firstSpacePos);
+							if (result == "Move Left") {
+								setbut = Settingbut::left;
+							}
+							else if (result == "Move Right") {
+								setbut = Settingbut::right;
+							}
+							else if (result == "Move Up") {
+								setbut = Settingbut::up;
+							}
+							else if (result == "Move Down") {
+								setbut = Settingbut::down;
+							}
+							else if (result == "Change Skin") {
+								setbut == Settingbut::changeskin;
+							}
+							setstate = settingState::Popup;
+						}
+
+					}
+					
+				}
+				else if (setstate == settingState::Popup) {
+					
+					if (e.type == sf::Event::KeyPressed) {
+						Keyboard::Key pressedKey = e.key.code;
+						cout << "presskey: " << pressedKey;
+						handleKeyPressed(e.key.code, result);
+						setstate = settingState::Normal;
+					}
+
+
+				}
+			}
 			champ.changeSkin();
 		}
 
@@ -143,6 +243,22 @@ void Frontend::displayMenu()
 		//character.draw(window);
 
 		switch (currentState) {
+		case GameState::setting:
+			if (setstate == settingState::Normal) {
+				createButtons();
+				window.draw(setting_background);
+				Bt.draw(window);
+				H2.draw(window, mouse);
+				for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter) {
+					(*iter).first.draw(window, mouse);
+					(*iter).second.draw(window);
+				}
+			}
+			else if (setstate == settingState::Popup) {
+				window.draw(pop_up_screen);
+				popuptext.draw(window);
+			}
+			break;
 		case GameState::mainmenu:
 			window.draw(background);
 
@@ -162,7 +278,9 @@ void Frontend::displayMenu()
 		case GameState::newgame:
 			difficulty = 1;
 			numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-			champ = Character("Character1.png", 1060.f, 1080.f - 48.f, 48.f, 48.f, true, false);
+			champ = Character("Character1.png", 1060.f, 500.f //1080.f - 48.f
+				, 48.f, 48.f, true, false);
+			champ.updatekeymap(keyMap);
 			stage = 1;
 			newStage = true;
 			currentState = GameState::playingGame;
@@ -185,6 +303,7 @@ void Frontend::displayMenu()
 
 				newStage = false;
 				champ = Character("Character1.png", 1060.f, 1080.f - 48.f, 48.f, 48.f, true, false);
+				champ.updatekeymap(keyMap);
 			}
 
 			for (Road& lane : base.lanes)
@@ -209,9 +328,9 @@ void Frontend::displayMenu()
 			int pos2 = int(champ.getY() / 54);
 			int pos3 = min(int(champ.getY() / 54) + 1, int(base.lanes.size() - 1));
 
-			champ.update(frameClock, base.lanes[pos1]);
-			champ.update(frameClock, base.lanes[pos2]);
-			champ.update(frameClock, base.lanes[pos3]);
+			champ.update(frameClock, base.lanes[pos1],e);
+			champ.update(frameClock, base.lanes[pos2],e);
+			champ.update(frameClock, base.lanes[pos3],e);
 
 			int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
 				max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
@@ -236,9 +355,70 @@ void Frontend::displayMenu()
 			champ.draw(window);
 
 			break;
+		
+		
+		
 		}
-
 		window.display();
+	}
+	
+}
+
+
+void Frontend::createButtons() {
+	settingbutton.clear();
+	float offsetY = 216.f;
+	cout << "keymap: " << keyMap.size();
+	for (const auto& pair : keyMap) {
+		cout << "over\n";
+		const std::string action = pair.first;
+		cout << action << endl;
+		sf::Keyboard::Key key = pair.second;
+		
+		std::string keyString = keyToString(key);
+		cout << keyString << endl;
+		Button but("Content/Image/button.png", 683.f, offsetY,"but");
+		
+		TextBox b("Content/Font/SuperMario256.ttf", Color::White, action+keyToString(key), 40, 683.f, offsetY + 25.f);
+		cout << "Go\n";
+		std::pair<Button, TextBox> buttonAndTextPair(but, b);
+
+		settingbutton.push_back(buttonAndTextPair);
+
+		offsetY += 135.0f;
+	}
+	
+}
+std::string Frontend::keyToString(sf::Keyboard::Key key) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) return "Space";
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) return "Shift";
+	else if (key == sf::Keyboard::Up) return "Up Arrow";
+	else if (key == sf::Keyboard::Down) return "Down Arrow";
+	else if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z) {
+		char letter = static_cast<char>('A' + (key - sf::Keyboard::A));
+		return std::string(1, letter);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) return "Tab";
+	else return "None";
+}
+
+void Frontend::handleKeyPressed(sf::Keyboard::Key keyCode, const std::string& result) {
+	
+		// Update the key mapping for the selected action
+	std::string selectedAction = result + ": ";
+	keyMap[selectedAction] = keyCode;
+	std::string updatedtext = selectedAction + keyToString(keyCode);
+	for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter) {
+		std::string buttontext = (*iter).second.getText();
+		int firstSpacePos = buttontext.find_first_of(":");
+		string get_result = buttontext.substr(0, firstSpacePos);
+		if (result == get_result) {
+			(*iter).second.setText(updatedtext);
+			break;
+		}
+		
+		
+
 	}
 	
 }

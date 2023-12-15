@@ -5,7 +5,8 @@
 #include "AnimatedSprite.hpp"
 #include "Road.h"
 #include <iostream>
-
+#include <map>
+#include <utility>
 using namespace sf;
 using namespace std;
 
@@ -31,7 +32,7 @@ private:
 	bool noKeyWasPressed;
 
 	int type;
-
+	map<std::string, sf::Keyboard::Key> keyMap;
 public:
 	int checkCollision(Road &aRoad);
 
@@ -47,7 +48,7 @@ public:
 	void setLeft();
 	void setRight();
 	void changeSkin();
-	void update(Clock &frameClock, Road &aRoad);
+	void update(Clock &frameClock, Road &aRoad, Event& e);
 	void draw(RenderWindow &window);
 
 	float getY();
@@ -56,6 +57,7 @@ public:
 	float getHeight();
 
 	bool condition(float xTL, float yTL, float objH, float objW);
+	void updatekeymap(map<std::string, sf::Keyboard::Key> keyMap);
 };
 
 #endif // CHARACTER_H

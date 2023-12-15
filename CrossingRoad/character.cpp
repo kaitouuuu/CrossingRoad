@@ -105,217 +105,232 @@ Character::Character(string fileName, float x, float y, float width, float heigh
 	noKeyWasPressed = true;
 }
 
-void Character::update(Clock& frameClock, Road& aRoad)
+void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 {
 	Time frameTime = frameClock.restart();
 
 	Vector2f movement(0.f, 0.f);
-
-	if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W))
-	{
-		if (checkCollision(aRoad) == 1)
-		{
-			if (!isCleared)
-			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = true;
+	
+	
+		std::string action;
+		for (const auto& pair : keyMap) {
+			if (sf::Keyboard::isKeyPressed(pair.second)) {
+				cout << "Keyboard is pressed\n";
+				action = pair.first;
 			}
-			for (int i = 0; i < 100; ++i)
-				setUp();
 		}
-		else
+		//if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W))
+			if (action=="Move Up: ")
 		{
-			if (isCleared)
+			if (checkCollision(aRoad) == 1)
 			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = false;
+				if (!isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = true;
+				}
+				for (int i = 0; i < 100; ++i)
+					setUp();
 			}
-			for (int i = 0; i < 100; ++i)
-				setMoveUp();
-			movement.y = -speed;
-		}
-		type = 0;
-		noKeyWasPressed = false;
-		currentAnimation = &walkingAnimationUp;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S))
-	{
-		if (checkCollision(aRoad) == 1)
-		{
-			if (!isCleared)
+			else
 			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = true;
+				if (isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = false;
+				}
+				for (int i = 0; i < 100; ++i)
+					setMoveUp();
+				movement.y = -speed;
 			}
-			for (int i = 0; i < 100; ++i)
-				setDown();
-		}
-		else
-		{
-			if (isCleared)
-			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = false;
-			}
-			for (int i = 0; i < 100; ++i)
-				setMoveDown();
-			movement.y = speed;
-		}
-		type = 1;
-		noKeyWasPressed = false;
-		currentAnimation = &walkingAnimationDown;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
-	{
-		if (checkCollision(aRoad) == 1)
-		{
-			if (!isCleared)
-			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = true;
-			}
-			for (int i = 0; i < 100; ++i)
-				setLeft();
-		}
-		else
-		{
-			if (isCleared)
-			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = false;
-			}
-			for (int i = 0; i < 100; ++i)
-				setMoveLeft();
-			movement.x = -speed;
-		}
-		type = 2;
-		noKeyWasPressed = false;
-		currentAnimation = &walkingAnimationLeft;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
-	{
-		if (checkCollision(aRoad) == 1)
-		{
-			if (!isCleared)
-			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = true;
-			}
-			for (int i = 0; i < 100; ++i)
-				setRight();
-		}
-		else
-		{
-			if (isCleared)
-			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = false;
-			}
-			for (int i = 0; i < 100; ++i)
-				setMoveRight();
-			movement.x = speed;
-		}
-		type = 3;
-		noKeyWasPressed = false;
-		currentAnimation = &walkingAnimationRight;
-	}
-
-	if (noKeyWasPressed)
-	{
-		if (type == 0)
-		{
-			if (!isCleared)
-			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = true;
-			}
-			for (int i = 0; i < 100; ++i)
-				setUp();
+			type = 0;
+			noKeyWasPressed = false;
 			currentAnimation = &walkingAnimationUp;
 		}
-
-		if (type == 1)
+		//else if (Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S))
+			else if (action=="Move Down: ")
 		{
-			if (!isCleared)
+			if (checkCollision(aRoad) == 1)
 			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = true;
+				if (!isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = true;
+				}
+				for (int i = 0; i < 100; ++i)
+					setDown();
 			}
-			for (int i = 0; i < 100; ++i)
-				setDown();
+			else
+			{
+				if (isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = false;
+				}
+				for (int i = 0; i < 100; ++i)
+					setMoveDown();
+				movement.y = speed;
+			}
+			type = 1;
+			noKeyWasPressed = false;
 			currentAnimation = &walkingAnimationDown;
 		}
-
-		if (type == 2)
+		//else if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
+			else if (action == "Move Left: ")
 		{
-			if (!isCleared)
+			if (checkCollision(aRoad) == 1)
 			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = true;
+				if (!isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = true;
+				}
+				for (int i = 0; i < 100; ++i)
+					setLeft();
 			}
-			for (int i = 0; i < 100; ++i)
-				setLeft();
+			else
+			{
+				if (isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = false;
+				}
+				for (int i = 0; i < 100; ++i)
+					setMoveLeft();
+				movement.x = -speed;
+			}
+			type = 2;
+			noKeyWasPressed = false;
 			currentAnimation = &walkingAnimationLeft;
 		}
-
-		if (type == 3)
+		//else if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
+			else if (action == "Move Right: ")
 		{
-			if (!isCleared)
+			if (checkCollision(aRoad) == 1)
 			{
-				walkingAnimationUp.clearFrame();
-				walkingAnimationDown.clearFrame();
-				walkingAnimationLeft.clearFrame();
-				walkingAnimationRight.clearFrame();
-				isCleared = true;
+				if (!isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = true;
+				}
+				for (int i = 0; i < 100; ++i)
+					setRight();
 			}
-			for (int i = 0; i < 100; ++i)
-				setRight();
+			else
+			{
+				if (isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = false;
+				}
+				for (int i = 0; i < 100; ++i)
+					setMoveRight();
+				movement.x = speed;
+			}
+			type = 3;
+			noKeyWasPressed = false;
 			currentAnimation = &walkingAnimationRight;
 		}
-	}
 
-	animatedSprite.play(*currentAnimation);
-	animatedSprite.move(movement * frameTime.asSeconds());
+		if (noKeyWasPressed)
+		{
+			if (type == 0)
+			{
+				if (!isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = true;
+				}
+				for (int i = 0; i < 100; ++i)
+					setUp();
+				currentAnimation = &walkingAnimationUp;
+			}
 
-	noKeyWasPressed = true;
+			if (type == 1)
+			{
+				if (!isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = true;
+				}
+				for (int i = 0; i < 100; ++i)
+					setDown();
+				currentAnimation = &walkingAnimationDown;
+			}
 
-	animatedSprite.update(frameTime);
+			if (type == 2)
+			{
+				if (!isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = true;
+				}
+				for (int i = 0; i < 100; ++i)
+					setLeft();
+				currentAnimation = &walkingAnimationLeft;
+			}
 
-	x = animatedSprite.getPosition().x;
-	y = animatedSprite.getPosition().y;
+			if (type == 3)
+			{
+				if (!isCleared)
+				{
+					walkingAnimationUp.clearFrame();
+					walkingAnimationDown.clearFrame();
+					walkingAnimationLeft.clearFrame();
+					walkingAnimationRight.clearFrame();
+					isCleared = true;
+				}
+				for (int i = 0; i < 100; ++i)
+					setRight();
+				currentAnimation = &walkingAnimationRight;
+			}
+		}
+
+		animatedSprite.play(*currentAnimation);
+		animatedSprite.move(movement * frameTime.asSeconds());
+
+		noKeyWasPressed = true;
+
+		animatedSprite.update(frameTime);
+
+		x = animatedSprite.getPosition().x;
+		y = animatedSprite.getPosition().y;
+		//}
+	//}
+	
 }
 
 void Character::draw(RenderWindow &window)
@@ -489,5 +504,11 @@ void Character::changeSkin()
 		else if (skin == 4) {
 			animatedSprite.setColor(Color(176, 250, 255));
 		}
+	}
+}
+void Character::updatekeymap(map<std::string, sf::Keyboard::Key> keyMap) {
+	this->keyMap.clear();
+	for (const auto& pair : keyMap) {
+		this->keyMap.emplace(pair);
 	}
 }
