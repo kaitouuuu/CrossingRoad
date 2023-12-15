@@ -1,18 +1,13 @@
 #include "TrafficLight.h"
 
-void TrafficLight::changeLightState(int &curState)
+void TrafficLight::changeLightState()
 {
-	if (curState == 0)
-		state = 1;
-	else if (curState == 1)
-		state = 2;
-	else if (curState == 2)
-		state = 0;
+	color = (color + 1) % 3;
 }
 
-const float TrafficLight::getCurrentDuration(int &state)
+const float TrafficLight::getCurrentDuration(int &color)
 {
-	switch (state)
+	switch (color)
 	{
 	case 0:
 		return greenDuration;
@@ -29,26 +24,16 @@ const float TrafficLight::getCurrentDuration(int &state)
 	}
 }
 
-void TrafficLight::operation(sf::RenderWindow &window)
+void TrafficLight::operation()
 {
-	float currentTime = 0.f;
-	std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-			if (event.type == sf::Event::Closed)
-				window.close();
-		std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
-		std::chrono::duration<float> elapsedTime = currentTime - startTime;
-		timer = elapsedTime.count();
-		if (timer >= getCurrentDuration(state))
+	    sf::Time deltaTime = clock.restart();
+		remainTime -= deltaTime.asSeconds();
+		std::cout << color << " " << remainTime << std::endl;
+		if (remainTime < 0)
 		{
-			timer -= getCurrentDuration(state);
-			changeLightState(state);
-			startTime = currentTime;
+			changeLightState();
+			remainTime = getCurrentDuration(color);
 		}
-	}
 }
 
 float TrafficLight::getX() const
@@ -60,3 +45,9 @@ float TrafficLight::getY() const
 {
 	return y;
 }
+
+int TrafficLight::getColor() const
+{
+	return color;
+}
+

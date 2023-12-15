@@ -2,30 +2,37 @@
 #include <iostream>
 #include <chrono>
 #include <windows.h>
+#include <cstdlib>
 class TrafficLight
 {
 private:
 	float x;
 	float y;
 
-	int state;
+	int color;
 
-	float timer;
-	const float redDuration = 3.f;
-	const float greenDuration = 5.f;
-	const float yellowDuration = 0.8f;
-	//Green:0, Yellow: 1, Red: 2
+	sf::Clock clock;
+	float remainTime;
+	float redDuration;
+	float greenDuration;
+	float yellowDuration;
+	// Green:0, Yellow: 1, Red: 2
 
 public:
-	TrafficLight(float xRoad, float yRoad) : state(0), timer(0.0f), x(xRoad), y(yRoad) {} 
+	TrafficLight() : color(0), x(0), y(0) {}
+
+	TrafficLight(float xRoad, float yRoad) : color(rand() % 3), x(xRoad), y(yRoad), remainTime(6),
+											 redDuration(1 + rand() % 5), greenDuration(5 + rand() % 11), yellowDuration(5) {}
 
 	float getX() const;
 
 	float getY() const;
 
-	void changeLightState(int &state);
+	int getColor() const;
 
-	const float getCurrentDuration(int &state);
+	void changeLightState();
 
-	void operation(sf::RenderWindow &window);
+	const float getCurrentDuration(int &color);
+
+	void operation();
 };

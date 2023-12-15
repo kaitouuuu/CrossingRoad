@@ -15,7 +15,7 @@ private:
 
 public:
 	std::vector<Road> lanes;
-
+    std::vector<TrafficLight> lights;
 	Base();
 
 	int randomNumber(int l, int r);

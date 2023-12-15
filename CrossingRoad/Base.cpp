@@ -50,8 +50,7 @@ void Base::randomGame(int difficulty)
 		{
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 190000), 250000 + std::min(difficulty * 2500, 240000))) / 10000 + 60;
 			float xPosition = float(randomNumber(960 - 250, 960 + 250));
-			TrafficLight newTrafficLight(xPosition, widthLane * i);
-			newRoad.setTrafficLight(0); 
+			newRoad.initTrafficLight(xPosition, widthLane*i);
 			if (lanes.back().getType() == "Road")
 			{
 				// Consecutive roads will have the same direction

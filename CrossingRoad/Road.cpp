@@ -1,13 +1,13 @@
 #include "Road.h"
 
 Road::Road()
-	: type(""), yPos(0), hasTrafficLight(false), trafficLightColor(0), speed(0)
+	: type(""), yPos(0), speed(0)
 {
 	objects.clear();
 }
 
 Road::Road(std::string type, float yPos)
-	: type(type), yPos(yPos), hasTrafficLight(false), trafficLightColor(0), speed(0)
+	: type(type), yPos(yPos), speed(0)
 {
 	objects.clear();
 }
@@ -22,16 +22,15 @@ float Road::getY() const
 	return yPos;
 }
 
-bool Road::getHasTrafficLight() const
+void Road::initTrafficLight(float xPos, float yPos)
 {
-	return hasTrafficLight;
+	trafficLight = TrafficLight(xPos, yPos);
 }
 
-int Road::getTrafficLightColor() const
+void Road::updateTrafficLight()
 {
-	return trafficLightColor;
+	trafficLight.operation();
 }
-
 float Road::getSpeed() const
 {
 	return speed;
@@ -40,12 +39,6 @@ float Road::getSpeed() const
 void Road::setSpeed(const float s)
 {
 	speed = s;
-}
-
-void Road::setTrafficLight(const int color)
-{
-	hasTrafficLight = true;
-	trafficLightColor = color;
 }
 
 void Road::addObject(const Object &added)
@@ -86,28 +79,36 @@ void Road::addVehicle(const Vehicle &added)
 
 void Road::updateVehicles()
 {
-	for (Vehicle &vehicle : vehicles)
-	{
-		vehicle.updatePosition(speed);
-	}
+	if (trafficLight.getColor() != 2)
+		for (Vehicle &vehicle : vehicles)
+		{
+			vehicle.updatePosition(speed);
+		}
+	else
+		for (Vehicle &vehicle : vehicles)
+		{
+			vehicle.updatePosition(0);
+		}
 }
 
-void Road::draw(RenderWindow& window) {
+void Road::draw(RenderWindow &window)
+{
 
 	std::string filename;
-	if (type == "Road") {
+	if (type == "Road")
+	{
 		filename = "Content/Image/Road.png";
-	
 	}
-	else if (type == "Field") {
+	else if (type == "Field")
+	{
 		filename = "Content/Image/field.png";
-		
 	}
-	else if (type == "Land") {
+	else if (type == "Land")
+	{
 		filename = "Content/Image/River.png";
-	
 	}
-	if (!texture.loadFromFile(filename)) {
+	if (!texture.loadFromFile(filename))
+	{
 		std::cout << filename << std::endl;
 		std::cout << "Can not load image\n";
 

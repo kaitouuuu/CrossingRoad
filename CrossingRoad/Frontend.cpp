@@ -199,9 +199,13 @@ void Frontend::displayMenu()
 					vehicle.draw(window);
 				}
 			}
-
+                
 			for (Road& lane : base.lanes)
 			{
+				if (lane.getType() == "Road")
+				{
+					lane.updateTrafficLight();
+				}
 				lane.updateVehicles();
 			}
 

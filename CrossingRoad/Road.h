@@ -14,9 +14,9 @@ class Road {
 private:
 	std::string type;
 	float yPos;
-	bool hasTrafficLight;
-	int trafficLightColor; // 0: Green, 1: Yellow, 2: Red
+	// 0: Green, 1: Yellow, 2: Red
 	float speed;
+	TrafficLight trafficLight;
 	Texture texture;
 	Sprite sprite;
 
@@ -29,12 +29,10 @@ public:
 
 	std::string getType() const;
 	float getY() const;
-	void setTrafficLight(bool having) const;
-	bool getHasTrafficLight() const;
-	int getTrafficLightColor() const;
+	void initTrafficLight(float xPos, float yPos);
+	void updateTrafficLight();
 	float getSpeed() const;
 	void setSpeed(const float s);
-	void setTrafficLight(const int color);
 	void addVehicle(const Vehicle& added);
 	void addObject(const Object& added);
 	void updateVehicles();
