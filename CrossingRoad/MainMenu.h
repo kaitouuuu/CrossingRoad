@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Window/keyboard.hpp>
 #include <iostream>
 #include "TextBox.h"
 #include "Button.h"

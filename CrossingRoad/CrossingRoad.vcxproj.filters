@@ -43,10 +43,7 @@
     <ClCompile Include="Car1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Animal1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Animal.cpp">
+    <ClCompile Include="Setting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -90,10 +87,7 @@
     <ClInclude Include="Car1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Animal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Animal1.h">
+    <ClInclude Include="Setting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

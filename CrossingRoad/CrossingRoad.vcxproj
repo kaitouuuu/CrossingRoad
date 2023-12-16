@@ -159,6 +159,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Road.cpp" />
+    <ClCompile Include="Setting.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="TrafficLight.cpp" />
     <ClCompile Include="Vehicle.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Road.h" />
+    <ClInclude Include="Setting.h" />
     <ClInclude Include="TextBox.h" />
     <ClInclude Include="TrafficLight.h" />
     <ClInclude Include="Vehicle.h" />
