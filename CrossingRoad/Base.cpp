@@ -24,7 +24,7 @@ void Base::randomGame(int difficulty)
 
 	for (int i = 1; i < numLane - 1; ++i)
 	{
-		std::string type = allRoadType[randomNumber(0, 1)];
+		std::string type = allRoadType[randomNumber(0, 2)];
 
 		// The harder the game the fewer Field type roads appear
 		if (difficulty > 3 && type == "Field")
@@ -74,8 +74,19 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numCar; ++j)
 			{
-				Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, "blue_car");
-				newRoad.addVehicle(newVehicle);
+				int random = randomNumber(0, 2);
+				if (random == 0) {
+					Car1 newVehicle = Car1(float(randomNumber(0, 1919)), widthLane * i, "blue_car");
+					newRoad.addVehicle(newVehicle);
+				}
+				else if (random == 1) {
+					Car2 newVehicle = Car2(float(randomNumber(0, 1919)), widthLane * i, "blue_car");
+					newRoad.addVehicle(newVehicle);
+				}
+				else if (random == 2) {
+					Car3 newVehicle = Car3(float(randomNumber(0, 1919)), widthLane * i, "blue_car");
+					newRoad.addVehicle(newVehicle);
+				}
 			}
 		}
 
@@ -108,8 +119,19 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numAnimal; ++j)
 			{
-				Vehicle newAnimal = Vehicle(float(randomNumber(0, 1919)), widthLane * (i - 1) + 48 / 2, "brown_dog");
-				newRoad.addVehicle(newAnimal);
+				int random = randomNumber(0, 2);
+				if (random == 0) {
+					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "CatAnimated");
+					newRoad.addAnimal(newAnimal);
+				}
+				else if (random == 1) {
+					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "DragonflyAnimated");
+					newRoad.addAnimal(newAnimal);
+				}
+				else if (random == 2) {
+					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "HedgehogAnimated");
+					newRoad.addAnimal(newAnimal);
+				}
 			}
 		}
 

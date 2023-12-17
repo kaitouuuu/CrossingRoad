@@ -42,14 +42,9 @@ float Vehicle::getHeight() const
 	return sprite.getLocalBounds().height;
 }
 
-Sprite Vehicle::getSprite()
+void Vehicle::setSpriteColor(const Color& color)
 {
-	return sprite;
-}
-
-void Vehicle::setSprite(Sprite &other)
-{
-	sprite = other;
+	sprite.setColor(color);
 }
 
 std::string Vehicle::getType() const

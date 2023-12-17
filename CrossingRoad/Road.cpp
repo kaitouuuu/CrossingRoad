@@ -59,12 +59,12 @@ void Road::addObject(const Object &added)
 	objects.push_back(added);
 }
 
-void Road::addVehicle(const Vehicle &added)
+void Road::addVehicle(const Vehicle& added)
 {
-	for (Vehicle &vehicle : vehicles)
+	for (Vehicle* vehicle : vehicles)
 	{
-		float objX = vehicle.getX();
-		float objX2 = objX + vehicle.getWidth();
+		float objX = vehicle->getX();
+		float objX2 = objX + vehicle->getWidth();
 		float addedObjX = added.getX();
 		float addedObjX2 = addedObjX + added.getWidth();
 
@@ -74,21 +74,51 @@ void Road::addVehicle(const Vehicle &added)
 		}
 	}
 
-	vehicles.push_back(added);
+	Vehicle* newVehicle = new Vehicle(added);
+
+	vehicles.push_back(newVehicle);
+}
+
+void Road::addAnimal(const Animal& added)
+{
+	for (Animal* animal : animals)
+	{
+		float objX = animal->getX();
+		float objX2 = objX + animal->getWidth();
+		float addedObjX = added.getX();
+		float addedObjX2 = addedObjX + added.getWidth();
+
+		if (objX <= addedObjX && addedObjX <= objX2 || addedObjX <= objX && objX <= addedObjX2)
+		{
+			return;
+		}
+	}
+
+	Animal* newAnimal = new Animal(added);
+
+	animals.push_back(newAnimal);
 }
 
 void Road::updateVehicles()
 {
 	if (trafficLight.getColor() != 2)
-		for (Vehicle &vehicle : vehicles)
+		for (Vehicle* vehicle : vehicles)
 		{
-			vehicle.updatePosition(speed);
+			vehicle->updatePosition(speed);
 		}
 	else
-		for (Vehicle &vehicle : vehicles)
+		for (Vehicle* vehicle : vehicles)
 		{
-			vehicle.updatePosition(0);
+			vehicle->updatePosition(0);
 		}
+}
+
+void Road::updateAnimals()
+{
+	for (Animal* animal : animals)
+	{
+		animal->updatePosition(speed);
+	}
 }
 
 void Road::draw(RenderWindow &window)
@@ -117,6 +147,7 @@ void Road::draw(RenderWindow &window)
 	sprite.setTexture(texture);
 	sprite.setPosition(0.f, yPos);
 	window.draw(sprite);
+	trafficLight.draw(window);
 }
 
 void Road::setY(const float y)
@@ -134,9 +165,9 @@ void Road::printAll()
 	std::cout << type << " " << speed << std::endl
 			  << "Car: ";
 
-	for (Vehicle &vehicle : vehicles)
+	for (Vehicle* vehicle : vehicles)
 	{
-		std::cout << vehicle.getX() << ":" << vehicle.getY() << " ";
+		std::cout << vehicle->getX() << ":" << vehicle->getY() << " ";
 	}
 
 	std::cout << std::endl

@@ -51,3 +51,31 @@ int TrafficLight::getColor() const
 	return color;
 }
 
+void TrafficLight::draw(sf::RenderWindow& window) {
+	if (color == 0) {
+		if (!texture.loadFromFile("Content/Image/TrafficLightGreen.png")) {
+			std::cout << "Can not load image\n";
+
+			exit(0);
+		}
+	}
+	else if (color == 1) {
+		if (!texture.loadFromFile("Content/Image/TrafficLightYellow.png")) {
+			std::cout << "Can not load image\n";
+
+			exit(0);
+		}
+	}
+	else {
+		if (!texture.loadFromFile("Content/Image/TrafficLightRed.png")) {
+			std::cout << "Can not load image\n";
+
+			exit(0);
+		}
+	}
+
+	sprite.setTexture(texture);
+	sprite.setPosition(x, y);
+
+	window.draw(sprite);
+}

@@ -313,9 +313,9 @@ void Frontend::displayMenu()
 
 			for (Road& lane : base.lanes)
 			{
-				for (Vehicle& vehicle : lane.vehicles)
+				for (Vehicle* vehicle : lane.vehicles)
 				{
-					vehicle.draw(window);
+					vehicle->draw(window);
 				}
 			}
                 

@@ -72,7 +72,9 @@ void Character::setRight()
 	walkingAnimationRight.addFrame(sf::IntRect(1 * w, 3 * w, 1 * w, 1 * w));
 }
 
-Character::Character() {
+Character::Character() 
+{
+
 }
 
 Character::Character(string fileName, float x, float y, float width, float height, bool paused, bool looped)
@@ -411,28 +413,8 @@ int Character::checkCollision(Road &aRoad)
 		for (int i = 0; i < aRoad.vehicles.size(); ++i)
 		{
 			// tmpx + 48 >= aRoad.vehicles[i].getX()) && (tmpy + 48 >= aRoad.vehicles[i].getY()) && (tmpy - aRoad.vehicles[i].getHeight() <= aRoad.vehicles[i].getY()) && (tmpx - aRoad.vehicles[i].getWidth() <= aRoad.vehicles[i].getX()))
-			if (condition(aRoad.vehicles[i].getX(), aRoad.vehicles[i].getY(), aRoad.vehicles[i].getHeight(), aRoad.vehicles[i].getWidth()))
+			if (condition(aRoad.vehicles[i]->getX(), aRoad.vehicles[i]->getY(), aRoad.vehicles[i]->getHeight(), aRoad.vehicles[i]->getWidth()))
 			{
-				/*if (type == 0)
-				{
-					y = aRoad.vehicles[i].getY() + aRoad.vehicles[i].getHeight() + 0.01f;
-					animatedSprite.setPosition(x, y);
-				}
-				else if (type == 1)
-				{
-					y = aRoad.vehicles[i].getY() - 48.01f;
-					animatedSprite.setPosition(x, y);
-				}
-				else if (type == 2)
-				{
-					x = aRoad.vehicles[i].getX() + aRoad.vehicles[i].getWidth() + 0.01f;
-					animatedSprite.setPosition(x, y);
-				}
-				else if (type == 3)
-				{
-					x = aRoad.vehicles[i].getX() - 48.01f;
-					animatedSprite.setPosition(x, y);
-				}*/
 				return 1;
 			}
 		}

@@ -29,13 +29,13 @@ public:
 	float getWidth() const;
 	float getHeight() const;
 
-	Sprite getSprite();
-	void setSprite(Sprite& other);
+	void setTexture(std::string tmp);
+	void setSprite();
 
 	std::string getType() const;
 
 	void updatePosition(float speed);
-	virtual void draw(RenderWindow& window);
+	void draw(RenderWindow& window);
 };
 
 #endif // VEHICLE_H

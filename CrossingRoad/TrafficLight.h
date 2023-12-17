@@ -1,8 +1,11 @@
+#pragma once
+
 #include "SFML/Graphics.hpp"
 #include <iostream>
 #include <chrono>
 #include <windows.h>
 #include <cstdlib>
+
 class TrafficLight
 {
 private:
@@ -10,6 +13,9 @@ private:
 	float y;
 
 	int color;
+
+	sf::Texture texture;
+	sf::Sprite sprite;
 
 	sf::Clock clock;
 	float remainTime;
@@ -35,4 +41,6 @@ public:
 	const float getCurrentDuration(int &color);
 
 	void operation();
+
+	void draw(sf::RenderWindow& window);
 };

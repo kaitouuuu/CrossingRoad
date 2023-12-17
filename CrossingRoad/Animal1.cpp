@@ -1,10 +1,8 @@
 #include "Animal1.h"
 
-void Animal1::draw(RenderWindow& window)
+Animal1::Animal1(float xPos, float yPos, std::string type) : Animal(xPos, yPos, type)
 {
-	Sprite tmp = getSprite();
-	tmp.setColor(Color(255, 165, 79));
-	setSprite(tmp);
-
-	Animal::draw(window);
+	std::string tmp = "Content/Image/" + type + ".png";
+	setTexture(tmp);
+	setSprite();
 }

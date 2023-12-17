@@ -29,8 +29,7 @@ public:
 	float getWidth() const;
 	float getHeight() const;
 
-	Sprite getSprite();
-	void setSprite(Sprite &other);
+	void setSpriteColor(const Color& color);
 
 	std::string getType() const;
 

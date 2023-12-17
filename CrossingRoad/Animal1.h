@@ -4,8 +4,6 @@
 
 class Animal1 : public Animal {
 public:
-	Animal1(float xPos, float yPos, std::string type) : Animal(xPos, yPos, type) {}
-
-	void draw(RenderWindow& window) override;
+	Animal1(float xPos, float yPos, std::string type);
 };
 #endif // !1
