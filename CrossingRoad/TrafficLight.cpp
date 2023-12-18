@@ -28,7 +28,7 @@ void TrafficLight::operation()
 {
 	    sf::Time deltaTime = clock.restart();
 		remainTime -= deltaTime.asSeconds();
-		std::cout << color << " " << remainTime << std::endl;
+		//std::cout << color << " " << remainTime << std::endl;
 		if (remainTime < 0)
 		{
 			changeLightState();

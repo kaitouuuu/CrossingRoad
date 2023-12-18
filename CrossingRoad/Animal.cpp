@@ -7,8 +7,8 @@ Animal::Animal()
 
 Animal::Animal(float xPos, float yPos, std::string type)
 	: xPos(xPos), yPos(yPos), type(type) {
-	width = 0;
 	height = 0;
+	width = 0;
 }
 
 float Animal::getX() const
@@ -66,11 +66,11 @@ void Animal::updatePosition(float speed)
 }
 void Animal::draw(RenderWindow& window) {
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(0, 48, 48, 48));
 	sprite.setPosition(xPos, yPos);
 
 	width = getWidth();
 	height = getHeight();
 
 	window.draw(sprite);
+	std::cout << getWidth() << " " << getHeight() << std::endl;
 }

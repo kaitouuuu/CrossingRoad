@@ -29,19 +29,19 @@ void Base::randomGame(int difficulty)
 		// The harder the game the fewer Field type roads appear
 		if (difficulty > 3 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 1)];
+			std::string type = allRoadType[randomNumber(0, 2)];
 		}
 		if (difficulty > 10 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 1)];
+			std::string type = allRoadType[randomNumber(0, 2)];
 		}
 		if (difficulty > 28 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 1)];
+			std::string type = allRoadType[randomNumber(0, 2)];
 		}
 		if (difficulty > 67 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 1)];
+			std::string type = allRoadType[randomNumber(0, 2)];
 		}
 
 		newRoad = Road(type, widthLane * i);
@@ -119,17 +119,21 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numAnimal; ++j)
 			{
-				int random = randomNumber(0, 2);
+				int random = randomNumber(0, 3);
 				if (random == 0) {
-					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "CatAnimated");
+					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Cat");
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 1) {
-					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "DragonflyAnimated");
+					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Dragonfly");
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 2) {
-					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "HedgehogAnimated");
+					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Hedgehog");
+					newRoad.addAnimal(newAnimal);
+				}
+				else if (random == 3) {
+					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Porcupine");
 					newRoad.addAnimal(newAnimal);
 				}
 			}

@@ -162,21 +162,21 @@ void Road::setType(const std::string t)
 
 void Road::printAll()
 {
-	std::cout << type << " " << speed << std::endl
-			  << "Car: ";
+	//std::cout << type << " " << speed << std::endl
+	//		  << "Car: ";
 
-	for (Vehicle* vehicle : vehicles)
-	{
-		std::cout << vehicle->getX() << ":" << vehicle->getY() << " ";
-	}
+	//for (Vehicle* vehicle : vehicles)
+	//{
+	//	std::cout << vehicle->getX() << ":" << vehicle->getY() << " ";
+	//}
 
-	std::cout << std::endl
-			  << "Object: ";
+	//std::cout << std::endl
+	//		  << "Object: ";
 
-	for (Object &object : objects)
-	{
-		std::cout << object.getX() << ":" << object.getY() << " ";
-	}
+	//for (Object &object : objects)
+	//{
+	//	std::cout << object.getX() << ":" << object.getY() << " ";
+	//}
 
-	std::cout << std::endl;
+	//std::cout << std::endl;
 }

@@ -228,7 +228,7 @@ void Frontend::displayMenu()
 					
 					if (e.type == sf::Event::KeyPressed) {
 						Keyboard::Key pressedKey = e.key.code;
-						cout << "presskey: " << pressedKey;
+						//cout << "presskey: " << pressedKey;
 						handleKeyPressed(e.key.code, result);
 						setstate = settingState::Normal;
 					}
@@ -317,6 +317,10 @@ void Frontend::displayMenu()
 				{
 					vehicle->draw(window);
 				}
+				for (Animal* animal : lane.animals)
+				{
+					animal->draw(window);
+				}
 			}
                 
 			for (Road& lane : base.lanes)
@@ -326,6 +330,7 @@ void Frontend::displayMenu()
 					lane.updateTrafficLight();
 				}
 				lane.updateVehicles();
+				lane.updateAnimals();
 			}
 
 			int pos1 = max(int(champ.getY() / 54) - 1, 0);
@@ -372,19 +377,19 @@ void Frontend::displayMenu()
 void Frontend::createButtons() {
 	settingbutton.clear();
 	float offsetY = 216.f;
-	cout << "keymap: " << keyMap.size();
+	//cout << "keymap: " << keyMap.size();
 	for (const auto& pair : keyMap) {
-		cout << "over\n";
+		//cout << "over\n";
 		const std::string action = pair.first;
-		cout << action << endl;
+		//cout << action << endl;
 		sf::Keyboard::Key key = pair.second;
 		
 		std::string keyString = keyToString(key);
-		cout << keyString << endl;
+		//cout << keyString << endl;
 		Button but("Content/Image/button.png", 683.f, offsetY,"but");
 		
 		TextBox b("Content/Font/SuperMario256.ttf", Color::White, action+keyToString(key), 40, 683.f, offsetY + 25.f);
-		cout << "Go\n";
+		//cout << "Go\n";
 		std::pair<Button, TextBox> buttonAndTextPair(but, b);
 
 		settingbutton.push_back(buttonAndTextPair);

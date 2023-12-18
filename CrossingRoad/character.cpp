@@ -357,7 +357,7 @@ bool Character::condition(float xTL, float yTL, float objH, float objW)
 	float checkX2 = min(xTL + objW, x + width);
 	float checkY2 = min(yTL + objH, y + height);
 	if (checkX <= checkX2 && checkY <= checkY2) {
-		std::cout << xTL << " " << yTL << " " << objH << " " << objW << " " << x << " " << y << " " << width << " " << height << std::endl;
+		//std::cout << xTL << " " << yTL << " " << objH << " " << objW << " " << x << " " << y << " " << width << " " << height << std::endl;
 		return true;
 	}
 	return false;
