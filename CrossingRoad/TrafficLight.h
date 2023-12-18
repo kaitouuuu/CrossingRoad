@@ -25,10 +25,9 @@ private:
 	// Green:0, Yellow: 1, Red: 2
 
 public:
-	TrafficLight() : color(0), x(0), y(0) {}
+	TrafficLight();
 
-	TrafficLight(float xRoad, float yRoad) : color(rand() % 3), x(xRoad), y(yRoad), remainTime(6),
-											 redDuration(1 + rand() % 5), greenDuration(5 + rand() % 11), yellowDuration(5) {}
+	TrafficLight(float xRoad, float yRoad);
 
 	float getX() const;
 

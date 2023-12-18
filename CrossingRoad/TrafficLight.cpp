@@ -1,5 +1,11 @@
 #include "TrafficLight.h"
 
+TrafficLight::TrafficLight(float xRoad, float yRoad): color(rand() % 2), x(xRoad), y(yRoad), remainTime(6),
+                                                      redDuration(1 + rand() % 5), greenDuration(5 + rand() % 11), yellowDuration(5) {}
+
+TrafficLight::TrafficLight()
+	: x(0), y(0), color(0), redDuration(0), greenDuration(0), yellowDuration(0), remainTime(0)
+{}
 void TrafficLight::changeLightState()
 {
 	color = (color + 1) % 3;
