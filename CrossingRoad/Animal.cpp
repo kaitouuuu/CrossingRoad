@@ -7,8 +7,14 @@ Animal::Animal()
 
 Animal::Animal(float xPos, float yPos, std::string type)
 	: xPos(xPos), yPos(yPos), type(type) {
-	height = 0;
-	width = 0;
+	if (!texture.loadFromFile("Content/Image/" + type + ".png")) {
+		std::cout << "Can not load image\n";
+
+		exit(0);
+	}
+
+	width = getWidth();
+	height = getHeight();
 }
 
 float Animal::getX() const
@@ -64,6 +70,7 @@ void Animal::updatePosition(float speed)
 		xPos += 1920;
 	}
 }
+
 void Animal::draw(RenderWindow& window) {
 	sprite.setTexture(texture);
 	sprite.setPosition(xPos, yPos);

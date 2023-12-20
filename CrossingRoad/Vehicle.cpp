@@ -2,7 +2,7 @@
 
 Vehicle::Vehicle()
 	: xPos(0), yPos(0), width(0), height(0), type("") {
-	if (!texture.loadFromFile("Content/Image/Car.png")) {
+	if (!texture.loadFromFile("Content/Image/" + type + "Car.png")) {
 		std::cout << "Can not load image\n";
 
 		exit(0);
@@ -11,7 +11,7 @@ Vehicle::Vehicle()
 
 Vehicle::Vehicle(float xPos, float yPos, std::string type)
 	: xPos(xPos), yPos(yPos), type(type) {
-	if (!texture.loadFromFile("Content/Image/Car.png")) {
+	if (!texture.loadFromFile("Content/Image/" + type + "Car.png")) {
 		std::cout << "Can not load image\n";
 
 		exit(0);

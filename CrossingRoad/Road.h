@@ -26,8 +26,8 @@ private:
 
 public:
     std::vector<Object> objects;
-	std::vector<Vehicle*> vehicles;
-	std::vector<Animal*> animals;
+	std::vector<Vehicle> vehicles;
+	std::vector<Animal> animals;
 
 	Road();
 	Road(std::string type, float yPos);

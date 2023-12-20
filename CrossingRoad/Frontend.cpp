@@ -216,7 +216,7 @@ void Frontend::displayMenu()
 								setbut = Settingbut::down;
 							}
 							else if (result == "Change Skin") {
-								setbut == Settingbut::changeskin;
+								setbut = Settingbut::changeskin;
 							}
 							setstate = settingState::Popup;
 						}
@@ -313,13 +313,13 @@ void Frontend::displayMenu()
 
 			for (Road& lane : base.lanes)
 			{
-				for (Vehicle* vehicle : lane.vehicles)
+				for (Vehicle &vehicle : lane.vehicles)
 				{
-					vehicle->draw(window);
+					vehicle.draw(window);
 				}
-				for (Animal* animal : lane.animals)
+				for (Animal &animal : lane.animals)
 				{
-					animal->draw(window);
+					animal.draw(window);
 				}
 			}
                 
