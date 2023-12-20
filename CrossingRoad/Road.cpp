@@ -131,11 +131,11 @@ void Road::draw(RenderWindow &window)
 	}
 	else if (type == "Field")
 	{
-		filename = "Content/Image/field.png";
+		filename = "Content/Image/Field.png";
 	}
 	else if (type == "Land")
 	{
-		filename = "Content/Image/River.png";
+		filename = "Content/Image/Land.png";
 	}
 	if (!texture.loadFromFile(filename))
 	{

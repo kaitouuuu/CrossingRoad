@@ -72,7 +72,6 @@ void Vehicle::updatePosition(float speed)
 }
 void Vehicle::draw(RenderWindow& window) {
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(0, 48, 48, 48));
 	sprite.setPosition(xPos, yPos);
 
 	width = getWidth();

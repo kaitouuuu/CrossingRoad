@@ -119,7 +119,7 @@ void Base::randomGame(int difficulty)
 
 			for (int j = 1; j <= numAnimal; ++j)
 			{
-				int random = randomNumber(0, 3);
+				int random = randomNumber(0, 4);
 				if (random == 0) {
 					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Cat");
 					newRoad.addAnimal(newAnimal);
@@ -134,6 +134,10 @@ void Base::randomGame(int difficulty)
 				}
 				else if (random == 3) {
 					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Porcupine");
+					newRoad.addAnimal(newAnimal);
+				}
+				else if (random == 4) {
+					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Fox");
 					newRoad.addAnimal(newAnimal);
 				}
 			}
