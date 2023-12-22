@@ -4,6 +4,6 @@
 
 class Animal1 : public Animal {
 public:
-	Animal1(float xPos, float yPos, std::string type);
+	Animal1(float xPos, float yPos);
 };
 #endif // !1

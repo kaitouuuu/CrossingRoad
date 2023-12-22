@@ -76,23 +76,23 @@ void Base::randomGame(int difficulty)
 			{
 				int random = randomNumber(0, 4);
 				if (random == 0) {
-					Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, "Blue");
+					Car1 newVehicle = Car1(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 				else if (random == 1) {
-					Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, "Red");
+					Car2 newVehicle = Car2(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 				else if (random == 2) {
-					Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, "Yellow");
+					Car3 newVehicle = Car3(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 				else if (random == 3) {
-					Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, "Black");
+					Car4 newVehicle = Car4(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 				else if (random == 4) {
-					Vehicle newVehicle = Vehicle(float(randomNumber(0, 1919)), widthLane * i, "White");
+					Car5 newVehicle = Car5(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 			}
@@ -129,24 +129,23 @@ void Base::randomGame(int difficulty)
 			{
 				int random = randomNumber(0, 4);
 				if (random == 0) {
-					Animal newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Cat");
+					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 1) {
-					Animal newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Dragonfly");
+					Animal2 newAnimal = Animal2(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 2) {
-					Animal newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Hedgehog");
+					Animal3 newAnimal = Animal3(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 3) {
-					Animal newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Porcupine");
+					Animal4 newAnimal = Animal4(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 4) {
-					Animal newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i, "Fox");
-					newRoad.addAnimal(newAnimal);
+					Animal5 newAnimal = Animal5(float(randomNumber(0, 1919)), widthLane * i);
 				}
 			}
 		}

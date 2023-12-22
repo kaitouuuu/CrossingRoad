@@ -10,8 +10,14 @@
 #include "Car1.h"
 #include "Car2.h"
 #include "Car3.h"
+#include "Car4.h"
+#include "Car5.h"
 #include "Animal.h"
 #include "Animal1.h"
+#include "Animal2.h"
+#include "Animal3.h"
+#include "Animal4.h"
+#include "Animal5.h"
 #include "TrafficLight.h"
 
 class Road {
@@ -26,8 +32,8 @@ private:
 
 public:
     std::vector<Object> objects;
-	std::vector<Vehicle> vehicles;
-	std::vector<Animal> animals;
+	std::vector<Vehicle*> vehicles;
+	std::vector<Animal*> animals;
 
 	Road();
 	Road(std::string type, float yPos);

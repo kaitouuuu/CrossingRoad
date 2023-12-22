@@ -1,6 +1,6 @@
 #include "Car3.h"
 
-void Car3::draw(RenderWindow& window)
+Car3::Car3(float xPos, float yPos) : Vehicle(xPos, yPos, "Yellow")
 {
-	Vehicle::draw(window);
+
 }

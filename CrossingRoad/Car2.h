@@ -5,11 +5,7 @@
 
 class Car2 : public Vehicle {
 public:
-	Car2(float xPos, float yPos, std::string type) : Vehicle(xPos, yPos, type) {
-		setSpriteColor(Color::White);
-	}
-
-	void draw(RenderWindow& window) override;
+	Car2(float xPos, float yPos);
 };
 
 #endif // CAR2_H

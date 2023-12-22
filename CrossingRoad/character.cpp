@@ -413,7 +413,7 @@ int Character::checkCollision(Road &aRoad)
 		for (int i = 0; i < aRoad.vehicles.size(); ++i)
 		{
 			// tmpx + 48 >= aRoad.vehicles[i].getX()) && (tmpy + 48 >= aRoad.vehicles[i].getY()) && (tmpy - aRoad.vehicles[i].getHeight() <= aRoad.vehicles[i].getY()) && (tmpx - aRoad.vehicles[i].getWidth() <= aRoad.vehicles[i].getX()))
-			if (condition(aRoad.vehicles[i].getX(), aRoad.vehicles[i].getY(), aRoad.vehicles[i].getHeight(), aRoad.vehicles[i].getWidth()))
+			if (condition(aRoad.vehicles[i]->getX(), aRoad.vehicles[i]->getY(), aRoad.vehicles[i]->getHeight(), aRoad.vehicles[i]->getWidth()))
 			{
 				return 1;
 			}

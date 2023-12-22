@@ -58,6 +58,24 @@
     <ClCompile Include="Animal1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Car4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Car5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animal2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animal3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animal4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animal5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Road.h">
@@ -112,6 +130,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animal1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Car4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Car5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal5.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
