@@ -76,23 +76,23 @@ void Base::randomGame(int difficulty)
 			{
 				int random = randomNumber(0, 4);
 				if (random == 0) {
-					Car1 newVehicle = Car1(float(randomNumber(0, 1919)), widthLane * i);
+					Car1* newVehicle = new Car1(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 				else if (random == 1) {
-					Car2 newVehicle = Car2(float(randomNumber(0, 1919)), widthLane * i);
+					Car2* newVehicle = new Car2(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 				else if (random == 2) {
-					Car3 newVehicle = Car3(float(randomNumber(0, 1919)), widthLane * i);
+					Car3* newVehicle = new Car3(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 				else if (random == 3) {
-					Car4 newVehicle = Car4(float(randomNumber(0, 1919)), widthLane * i);
+					Car4* newVehicle = new Car4(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 				else if (random == 4) {
-					Car5 newVehicle = Car5(float(randomNumber(0, 1919)), widthLane * i);
+					Car5* newVehicle = new Car5(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addVehicle(newVehicle);
 				}
 			}

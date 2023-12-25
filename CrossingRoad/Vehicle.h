@@ -33,7 +33,7 @@ public:
 
 	std::string getType() const;
 
-	void updatePosition(float speed);
+	virtual void updatePosition(float speed);
 	virtual void draw(RenderWindow& window);
 };
 

@@ -29,9 +29,6 @@ public:
 	float getWidth() const;
 	float getHeight() const;
 
-	void setTexture(std::string tmp);
-	void setSprite();
-
 	std::string getType() const;
 
 	void updatePosition(float speed);

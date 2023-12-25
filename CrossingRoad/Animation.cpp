@@ -55,5 +55,6 @@ std::size_t Animation::getSize() const
 
 const sf::IntRect& Animation::getFrame(std::size_t n) const
 {
+    std::cout << getSize() << std::endl;
     return m_frames[n];
 }

@@ -154,6 +154,12 @@
     <ClCompile Include="Animal5.cpp" />
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationAnimal1.cpp" />
+    <ClCompile Include="AnimationCar1.cpp" />
+    <ClCompile Include="AnimationCar2.cpp" />
+    <ClCompile Include="AnimationCar3.cpp" />
+    <ClCompile Include="AnimationCar4.cpp" />
+    <ClCompile Include="AnimationCar5.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Car1.cpp" />
@@ -180,6 +186,12 @@
     <ClInclude Include="Animal5.h" />
     <ClInclude Include="AnimatedSprite.hpp" />
     <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="AnimationAnimal1.h" />
+    <ClInclude Include="AnimationCar1.h" />
+    <ClInclude Include="AnimationCar2.h" />
+    <ClInclude Include="AnimationCar3.h" />
+    <ClInclude Include="AnimationCar4.h" />
+    <ClInclude Include="AnimationCar5.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Car1.h" />

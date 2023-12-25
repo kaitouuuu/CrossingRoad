@@ -4,6 +4,7 @@
 
 class Animal1 : public Animal {
 public:
+	Animal1();
 	Animal1(float xPos, float yPos);
 };
 #endif // !1

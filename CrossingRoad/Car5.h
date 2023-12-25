@@ -2,10 +2,19 @@
 #define CAR5_H
 
 #include "Vehicle.h"
+#include "AnimationCar5.h"
 
 class Car5 : public Vehicle {
+private:
+	AnimationCar5 animationCar5;
+
 public:
+	Car5();
 	Car5(float xPos, float yPos);
+
+	void updatePosition(float speed) override;
+	void draw(RenderWindow& window) override;
 };
+
 
 #endif // CAR5_H

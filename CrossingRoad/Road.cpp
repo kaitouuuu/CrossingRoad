@@ -59,14 +59,14 @@ void Road::addObject(const Object &added)
 	objects.push_back(added);
 }
 
-void Road::addVehicle(const Vehicle& added)
+void Road::addVehicle(Vehicle* added)
 {
 	for (Vehicle* vehicle : vehicles)
 	{
 		float objX = vehicle->getX();
 		float objX2 = objX + vehicle->getWidth();
-		float addedObjX = added.getX();
-		float addedObjX2 = addedObjX + added.getWidth();
+		float addedObjX = added->getX();
+		float addedObjX2 = addedObjX + added->getWidth();
 
 		if (objX <= addedObjX && addedObjX <= objX2 || addedObjX <= objX && objX <= addedObjX2)
 		{
@@ -74,9 +74,7 @@ void Road::addVehicle(const Vehicle& added)
 		}
 	}
 
-	Vehicle* newVehicle = new Vehicle(added);
-
-	vehicles.push_back(newVehicle);
+	vehicles.push_back(added);
 }
 
 void Road::addAnimal(const Animal& added)

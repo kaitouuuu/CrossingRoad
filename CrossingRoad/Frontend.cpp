@@ -313,6 +313,16 @@ void Frontend::displayMenu()
 
 			for (Road& lane : base.lanes)
 			{
+				if (lane.getType() == "Road")
+				{
+					lane.updateTrafficLight();
+				}
+				lane.updateVehicles();
+				lane.updateAnimals();
+			}
+
+			for (Road& lane : base.lanes)
+			{
 				for (Vehicle* vehicle : lane.vehicles)
 				{
 					vehicle->draw(window);
@@ -321,16 +331,6 @@ void Frontend::displayMenu()
 				{
 					animal->draw(window);
 				}
-			}
-                
-			for (Road& lane : base.lanes)
-			{
-				if (lane.getType() == "Road")
-				{
-					lane.updateTrafficLight();
-				}
-				lane.updateVehicles();
-				lane.updateAnimals();
 			}
 
 			int pos1 = max(int(champ.getY() / 54) - 1, 0);

@@ -122,7 +122,7 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 			}
 		}
 		//if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W))
-			if (action=="Move Up: ")
+		if (action=="Move Up: ")
 		{
 			if (checkCollision(aRoad) == 1)
 			{
@@ -156,7 +156,7 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 			currentAnimation = &walkingAnimationUp;
 		}
 		//else if (Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S))
-			else if (action=="Move Down: ")
+		else if (action=="Move Down: ")
 		{
 			if (checkCollision(aRoad) == 1)
 			{
@@ -190,7 +190,7 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 			currentAnimation = &walkingAnimationDown;
 		}
 		//else if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
-			else if (action == "Move Left: ")
+		else if (action == "Move Left: ")
 		{
 			if (checkCollision(aRoad) == 1)
 			{
@@ -224,7 +224,7 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 			currentAnimation = &walkingAnimationLeft;
 		}
 		//else if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
-			else if (action == "Move Right: ")
+		else if (action == "Move Right: ")
 		{
 			if (checkCollision(aRoad) == 1)
 			{
@@ -488,6 +488,7 @@ void Character::changeSkin()
 		}
 	}
 }
+
 void Character::updatekeymap(map<std::string, sf::Keyboard::Key> keyMap) {
 	this->keyMap.clear();
 	for (const auto& pair : keyMap) {

@@ -37,16 +37,6 @@ float Animal::getHeight() const
 	return sprite.getLocalBounds().height;
 }
 
-void Animal::setTexture(std::string tmp)
-{
-	texture.loadFromFile(tmp);
-}
-
-void Animal::setSprite()
-{
-	sprite.setTexture(texture);
-}
-
 std::string Animal::getType() const
 {
 	return type;

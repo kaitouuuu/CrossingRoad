@@ -56,6 +56,7 @@ void Vehicle::updatePosition(float speed)
 {
 	if (speed < 0) {
 		sprite.setScale(-1.f, 1.f);
+		sprite.setOrigin(getWidth(), 0);
 	}
 
 	sf::Time deltaTime = clock.restart();
@@ -70,6 +71,7 @@ void Vehicle::updatePosition(float speed)
 		xPos += 1920;
 	}
 }
+
 void Vehicle::draw(RenderWindow& window) {
 	sprite.setTexture(texture);
 	sprite.setPosition(xPos, yPos);
@@ -77,5 +79,5 @@ void Vehicle::draw(RenderWindow& window) {
 	width = getWidth();
 	height = getHeight();
 
-	window.draw(sprite);
+	//window.draw(sprite);
 }

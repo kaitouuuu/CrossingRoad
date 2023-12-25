@@ -7,17 +7,20 @@
 
 #include "Object.h"
 #include "Vehicle.h"
+
 #include "Car1.h"
 #include "Car2.h"
 #include "Car3.h"
 #include "Car4.h"
 #include "Car5.h"
+
 #include "Animal.h"
 #include "Animal1.h"
 #include "Animal2.h"
 #include "Animal3.h"
 #include "Animal4.h"
 #include "Animal5.h"
+
 #include "TrafficLight.h"
 
 class Road {
@@ -44,7 +47,7 @@ public:
 	void updateTrafficLight();
 	float getSpeed() const;
 	void setSpeed(const float s);
-	void addVehicle(const Vehicle& added);
+	void addVehicle(Vehicle* added);
 	void addAnimal(const Animal& added);
 	void addObject(const Object& added);
 	void updateVehicles();
