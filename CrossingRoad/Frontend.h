@@ -22,7 +22,7 @@ enum class settingState {
 };
 class Frontend {
 public:
-	
+	//Frontend();
 	void displayMenu();
 	
 private:

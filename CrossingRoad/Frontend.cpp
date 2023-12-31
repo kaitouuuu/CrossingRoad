@@ -18,13 +18,11 @@ void Frontend::displayMenu()
 
 	filename = "Content/Image/setting_background.png";
 	Texture setting_backgroundTexture;
-
 	if (!setting_backgroundTexture.loadFromFile(filename))
 	{
 		// Handle error if the image fails to load
 		return;
 	}
-
 	Sprite setting_background(setting_backgroundTexture);
 
 	filename = "Content/Image/pop up screen.png";
@@ -35,6 +33,16 @@ void Frontend::displayMenu()
 		return;
 	}
 	Sprite pop_up_screen(pop_up_background);
+
+
+	filename = "Content/Image/Escape screen.png";
+	Texture escapescreen;
+	if (!escapescreen.loadFromFile(filename))
+	{
+		return;
+	}
+	Sprite escape_screen(escapescreen);
+	escape_screen.setPosition(699, 339);
 
 	GameState currentState = GameState::mainmenu;
 	// Button main menu
@@ -51,12 +59,11 @@ void Frontend::displayMenu()
 
 	//Button setting
 	Button H2("Content/Image/Back.png", 1681, 945, "Back");
-	////Button setting
-	//Button I("Content/Image/moveright.png", 683, 261, "moveright");
-	//Button J("Content/Image/moveleft.png", 664, 393, "moveleft");
-	//Button K("Content/Image/moveup.png", 635, 525, "moveup");
-	//Button L("Content/Image/movedown.png", 664, 657, "movedown");
-	//Button M("Content/Image/changeskin.png", 664, 789, "changeskin");
+
+	//Button escape menu
+	Button Es1("Content/Image/Back.png", 804, 369, "Back");
+	Button Es2("Content/Image/New Game.png", 790, 499, "New game esc");
+	Button Es3("Content/Image/Save.png", 804, 636, "Save");
 
 	vector<Button> b;
 	b.push_back(A);
@@ -71,12 +78,12 @@ void Frontend::displayMenu()
 	c.push_back(G);
 	c.push_back(H);
 
-	/*vector<Button>d;
-	d.push_back(I);
-	d.push_back(J);
-	d.push_back(K);
-	d.push_back(L);
-	d.push_back(M);*/
+	vector<Button> escapebut;
+	escapebut.push_back(Es1);
+	escapebut.push_back(Es2);
+	escapebut.push_back(Es3);
+
+	bool isappearEscape = false;
 
 	TextBox At("Content/Font/SuperMario256.ttf", Color::White, "CROSSY ROAD", 100, 401, 157);
 	TextBox Bt("Content/Font/SuperMario256.ttf", Color::White, "SETTING", 100, 445, 81);
@@ -88,6 +95,7 @@ void Frontend::displayMenu()
 	//t.push_back(Ct);
 	Menu n(b, t);
 	Menu q(c, t);
+	
 	//Menu p(d, y);
 	//MainMenu m(b);
 
@@ -117,6 +125,7 @@ void Frontend::displayMenu()
 	champ.updatekeymap(keyMap);
 	while (window.isOpen())
 	{
+		
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
 		Event e;
 
@@ -160,7 +169,7 @@ void Frontend::displayMenu()
 								}
 								else if (button.type() == "Exit")
 								{
-									exit(0);
+									return;
 								}
 							}
 						}
@@ -193,9 +202,9 @@ void Frontend::displayMenu()
 					
 				}
 			}
-			else if (currentState == GameState::setting) {
+			if (currentState == GameState::setting) {
 				if (setstate == settingState::Normal) {
-
+					cout << "Normal" << endl;
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 					for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter) {
@@ -203,6 +212,7 @@ void Frontend::displayMenu()
 							std::string buttontext = (*iter).second.getText();
 							int firstSpacePos = buttontext.find_first_of(":");
 							result = buttontext.substr(0, firstSpacePos);
+							cout << result << endl;
 							if (result == "Move Left") {
 								setbut = Settingbut::left;
 							}
@@ -236,6 +246,31 @@ void Frontend::displayMenu()
 
 				}
 			}
+			if (currentState == GameState::playingGame) {
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					isappearEscape = true;
+				}
+				else if (isappearEscape) {
+					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+					for (auto &but : escapebut) {
+						if (but.isClicked(mousePosF)) {
+							if (but.type() == "Back") {
+								isappearEscape = false;
+							}
+							else if (but.type() == "New game esc") {
+								currentState = GameState::newgame;
+							}
+							else if (but.type() == "Save") {
+
+								// DO STH HERE WITH SAVE
+								currentState = GameState::mainmenu;
+							}
+						}
+					}
+				}
+			}
+			
 			champ.changeSkin();
 		}
 
@@ -287,6 +322,7 @@ void Frontend::displayMenu()
 			break;
 
 		case GameState::playingGame:
+			
 			if (newStage == true) {
 				if (stage < numStage / 4)
 				{
@@ -305,22 +341,22 @@ void Frontend::displayMenu()
 				champ = Character("Character1.png", 1060.f, 1080.f - 48.f, 48.f, 48.f, true, false);
 				champ.updatekeymap(keyMap);
 			}
-
+			
 			for (Road& lane : base.lanes)
 			{
 				lane.draw(window);
 			}
-
-			for (Road& lane : base.lanes)
-			{
-				if (lane.getType() == "Road")
+			if (!isappearEscape) {
+				for (Road& lane : base.lanes)
 				{
-					lane.updateTrafficLight();
+					if (lane.getType() == "Road")
+					{
+						lane.updateTrafficLight();
+					}
+					lane.updateVehicles();
+					lane.updateAnimals();
 				}
-				lane.updateVehicles();
-				lane.updateAnimals();
 			}
-
 			for (Road& lane : base.lanes)
 			{
 				for (Vehicle* vehicle : lane.vehicles)
@@ -336,38 +372,46 @@ void Frontend::displayMenu()
 			int pos1 = max(int(champ.getY() / 54) - 1, 0);
 			int pos2 = int(champ.getY() / 54);
 			int pos3 = min(int(champ.getY() / 54) + 1, int(base.lanes.size() - 1));
+			if (!isappearEscape) {
+				champ.update(frameClock, base.lanes[pos1], e);
+				champ.update(frameClock, base.lanes[pos2], e);
+				champ.update(frameClock, base.lanes[pos3], e);
 
-			champ.update(frameClock, base.lanes[pos1],e);
-			champ.update(frameClock, base.lanes[pos2],e);
-			champ.update(frameClock, base.lanes[pos3],e);
+				int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
+					max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
 
-			int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
-				max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
-
-			if (checkCondition == 1)
-			{
-				currentState = GameState::newgame;
-			}
-			else if (checkCondition == 2)
-			{
-				++stage;
-				if (stage > numStage)
+				if (checkCondition == 1)
 				{
-					currentState = GameState::mainmenu;
+					currentState = GameState::newgame;
 				}
-				else
+				else if (checkCondition == 2)
 				{
-					newStage = true;
+					++stage;
+					if (stage > numStage)
+					{
+						currentState = GameState::mainmenu;
+					}
+					else
+					{
+						newStage = true;
+					}
 				}
 			}
-
 			champ.draw(window);
-
+			if (isappearEscape) {
+				window.draw(escape_screen);
+				Es1.draw(window, mouse);
+				Es2.draw(window, mouse);
+				Es3.draw(window, mouse);
+			}
+			
 			break;
 		
 		
 		
 		}
+		
+
 		window.display();
 	}
 	
@@ -426,8 +470,6 @@ void Frontend::handleKeyPressed(sf::Keyboard::Key keyCode, const std::string& re
 			break;
 		}
 		
-		
-
 	}
 	
 }
