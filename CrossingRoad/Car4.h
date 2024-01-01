@@ -12,7 +12,7 @@ public:
 	Car4();
 	Car4(float xPos, float yPos);
 
-	void updatePosition(float speed) override;
+	void updatePosition(float speed, bool isappearEsc) override;
 	void draw(RenderWindow& window) override;
 };
 

@@ -11,10 +11,11 @@ Car4::Car4(float xPos, float yPos) : Vehicle(xPos, yPos, "White")
 	animationCar4 = tmp;
 }
 
-void Car4::updatePosition(float speed)
+void Car4::updatePosition(float speed, bool isappearEsc)
 {
-	Vehicle::updatePosition(speed);
-	animationCar4.update(speed);
+	Vehicle::updatePosition(speed,isappearEsc);
+
+	animationCar4.update(speed,isappearEsc);
 }
 
 void Car4::draw(RenderWindow& window)

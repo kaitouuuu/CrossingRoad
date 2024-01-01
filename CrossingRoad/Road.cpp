@@ -97,17 +97,17 @@ void Road::addAnimal(const Animal& added)
 	animals.push_back(newAnimal);
 }
 
-void Road::updateVehicles()
+void Road::updateVehicles(bool isappearEsc)
 {
 	if (trafficLight.getColor() != 2)
 		for (Vehicle* vehicle : vehicles)
 		{
-			vehicle->updatePosition(speed);
+			vehicle->updatePosition(speed,isappearEsc);
 		}
 	else
 		for (Vehicle* vehicle : vehicles)
 		{
-			vehicle->updatePosition(0);
+			vehicle->updatePosition(0,isappearEsc);
 		}
 }
 

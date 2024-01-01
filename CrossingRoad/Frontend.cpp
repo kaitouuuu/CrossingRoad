@@ -61,7 +61,7 @@ void Frontend::displayMenu()
 	Button H2("Content/Image/Back.png", 1681, 945, "Back");
 
 	//Button escape menu
-	Button Es1("Content/Image/Back.png", 804, 369, "Back");
+	Button Es1("Content/Image/Back.png", 857, 369, "Back");
 	Button Es2("Content/Image/New Game.png", 790, 499, "New game esc");
 	Button Es3("Content/Image/Save.png", 804, 636, "Save");
 
@@ -260,6 +260,7 @@ void Frontend::displayMenu()
 							}
 							else if (but.type() == "New game esc") {
 								currentState = GameState::newgame;
+								isappearEscape = false;
 							}
 							else if (but.type() == "Save") {
 
@@ -346,17 +347,17 @@ void Frontend::displayMenu()
 			{
 				lane.draw(window);
 			}
-			if (!isappearEscape) {
+			
 				for (Road& lane : base.lanes)
 				{
 					if (lane.getType() == "Road")
 					{
 						lane.updateTrafficLight();
 					}
-					lane.updateVehicles();
+					lane.updateVehicles(isappearEscape);
 					lane.updateAnimals();
 				}
-			}
+			
 			for (Road& lane : base.lanes)
 			{
 				for (Vehicle* vehicle : lane.vehicles)
@@ -372,10 +373,10 @@ void Frontend::displayMenu()
 			int pos1 = max(int(champ.getY() / 54) - 1, 0);
 			int pos2 = int(champ.getY() / 54);
 			int pos3 = min(int(champ.getY() / 54) + 1, int(base.lanes.size() - 1));
-			if (!isappearEscape) {
-				champ.update(frameClock, base.lanes[pos1], e);
-				champ.update(frameClock, base.lanes[pos2], e);
-				champ.update(frameClock, base.lanes[pos3], e);
+			
+				champ.update(frameClock, base.lanes[pos1], e,isappearEscape);
+				champ.update(frameClock, base.lanes[pos2], e,isappearEscape);
+				champ.update(frameClock, base.lanes[pos3], e,isappearEscape);
 
 				int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
 					max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
@@ -396,7 +397,7 @@ void Frontend::displayMenu()
 						newStage = true;
 					}
 				}
-			}
+			
 			champ.draw(window);
 			if (isappearEscape) {
 				window.draw(escape_screen);

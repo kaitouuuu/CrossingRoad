@@ -107,13 +107,13 @@ Character::Character(string fileName, float x, float y, float width, float heigh
 	noKeyWasPressed = true;
 }
 
-void Character::update(Clock& frameClock, Road& aRoad,Event& e)
+void Character::update(Clock& frameClock, Road& aRoad,Event& e,bool isappearesc)
 {
 	Time frameTime = frameClock.restart();
 
 	Vector2f movement(0.f, 0.f);
 	
-	
+	if (!isappearesc) {
 		std::string action;
 		for (const auto& pair : keyMap) {
 			if (sf::Keyboard::isKeyPressed(pair.second)) {
@@ -121,8 +121,7 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 				action = pair.first;
 			}
 		}
-		//if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W))
-		if (action=="Move Up: ")
+		if (action == "Move Up: ")
 		{
 			if (checkCollision(aRoad) == 1)
 			{
@@ -155,8 +154,7 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 			noKeyWasPressed = false;
 			currentAnimation = &walkingAnimationUp;
 		}
-		//else if (Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S))
-		else if (action=="Move Down: ")
+		else if (action == "Move Down: ")
 		{
 			if (checkCollision(aRoad) == 1)
 			{
@@ -189,7 +187,6 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 			noKeyWasPressed = false;
 			currentAnimation = &walkingAnimationDown;
 		}
-		//else if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
 		else if (action == "Move Left: ")
 		{
 			if (checkCollision(aRoad) == 1)
@@ -223,7 +220,6 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 			noKeyWasPressed = false;
 			currentAnimation = &walkingAnimationLeft;
 		}
-		//else if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
 		else if (action == "Move Right: ")
 		{
 			if (checkCollision(aRoad) == 1)
@@ -327,7 +323,7 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e)
 		noKeyWasPressed = true;
 
 		animatedSprite.update(frameTime);
-
+	}
 		x = animatedSprite.getPosition().x;
 		y = animatedSprite.getPosition().y;
 		//}

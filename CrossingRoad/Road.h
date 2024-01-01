@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <utility>
 
 #include "Object.h"
 #include "Vehicle.h"
@@ -50,7 +51,7 @@ public:
 	void addVehicle(Vehicle* added);
 	void addAnimal(const Animal& added);
 	void addObject(const Object& added);
-	void updateVehicles();
+	void updateVehicles(bool isappearEsc);
 	void updateAnimals();
 	void draw(RenderWindow& window);
 	// For debug

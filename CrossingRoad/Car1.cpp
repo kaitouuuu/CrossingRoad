@@ -11,14 +11,14 @@ Car1::Car1(float xPos, float yPos) : Vehicle(xPos, yPos, "Red")
 	animationCar1 = tmp;
 }
 
-void Car1::updatePosition(float speed)
+void Car1::updatePosition(float speed, bool isappearEsc)
 {
-	Vehicle::updatePosition(speed);
-	animationCar1.update(speed);
+	//Vehicle::updatePosition(speed,isappearEsc);
+	animationCar1.update(speed,isappearEsc);
 }
 
 void Car1::draw(RenderWindow& window)
 {
-	Vehicle::draw(window);
+	//Vehicle::draw(window);
 	animationCar1.draw(window);
 }

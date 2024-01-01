@@ -29,7 +29,7 @@ public:
 	void setMove();
 	void setStable();
 
-	void update(float speed);
+	void update(float speed, bool isappearesc);
 	void draw(sf::RenderWindow& window);
 
 	float getY();

@@ -48,43 +48,43 @@ AnimationCar3::AnimationCar3(std::string fileName, float x, float y, float width
 	isMoved = true;
 }
 
-void AnimationCar3::update(float speed)
+void AnimationCar3::update(float speed, bool isappearesc)
 {
 	sf::Time frameTime = clock.restart();
 
 	sf::Vector2f movement(speed, 0.f);
-
-	if (speed == 0) {
-		if (isMoved) {
-			walkingAnimation.clearFrame();
-			for (int i = 0; i < 20; ++i) {
-				setMove();
+	if (!isappearesc) {
+		if (speed == 0) {
+			if (isMoved) {
+				walkingAnimation.clearFrame();
+				for (int i = 0; i < 20; ++i) {
+					setMove();
+				}
+				isMoved = false;
 			}
-			isMoved = false;
-		}
-		for (int i = 0; i < 20; ++i) {
-			setStable();
-		}
-		currentAnimation = &waitAnimation;
-	}
-	else {
-		if (!isMoved) {
-			walkingAnimation.clearFrame();
 			for (int i = 0; i < 20; ++i) {
 				setStable();
 			}
-			isMoved = true;
+			currentAnimation = &waitAnimation;
 		}
-		for (int i = 0; i < 20; ++i) {
-			setMove();
+		else {
+			if (!isMoved) {
+				walkingAnimation.clearFrame();
+				for (int i = 0; i < 20; ++i) {
+					setStable();
+				}
+				isMoved = true;
+			}
+			for (int i = 0; i < 20; ++i) {
+				setMove();
+			}
+			currentAnimation = &walkingAnimation;
 		}
-		currentAnimation = &walkingAnimation;
+
+		animatedSprite.play(*currentAnimation);
+		animatedSprite.move(movement * frameTime.asSeconds());
+		animatedSprite.update(frameTime);
 	}
-
-	animatedSprite.play(*currentAnimation);
-	animatedSprite.move(movement * frameTime.asSeconds());
-	animatedSprite.update(frameTime);
-
 	if (x >= 1920)
 	{
 		animatedSprite.setPosition(x - 1920, y);

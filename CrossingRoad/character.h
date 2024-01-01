@@ -48,7 +48,7 @@ public:
 	void setLeft();
 	void setRight();
 	void changeSkin();
-	void update(Clock &frameClock, Road &aRoad, Event& e);
+	void update(Clock &frameClock, Road &aRoad, Event& e,bool isappearesc);
 	void draw(RenderWindow &window);
 
 	float getY();
