@@ -108,7 +108,7 @@ void Frontend::displayMenu()
 			{"Move Right: ", sf::Keyboard::D},
 			{"Move Up: ", sf::Keyboard::W},
 			{"Move Down: ", sf::Keyboard::S},
-			{"Change Skin: ", sf::Keyboard::Tab}
+			{"Change Skin: ", sf::Keyboard::F}
 		
 	};
 	TextBox popuptext("Content/Font/SuperMario256.ttf", Color::White, "PRESS ANY KEY OR BUTTON", 100, 201, 325);
@@ -266,6 +266,7 @@ void Frontend::displayMenu()
 
 								// DO STH HERE WITH SAVE
 								currentState = GameState::mainmenu;
+								isappearEscape = false;
 							}
 						}
 					}
@@ -374,29 +375,29 @@ void Frontend::displayMenu()
 			int pos2 = int(champ.getY() / 54);
 			int pos3 = min(int(champ.getY() / 54) + 1, int(base.lanes.size() - 1));
 			
-				champ.update(frameClock, base.lanes[pos1], e,isappearEscape);
-				champ.update(frameClock, base.lanes[pos2], e,isappearEscape);
-				champ.update(frameClock, base.lanes[pos3], e,isappearEscape);
+			champ.update(frameClock, base.lanes[pos1], e,isappearEscape);
+			champ.update(frameClock, base.lanes[pos2], e,isappearEscape);
+			champ.update(frameClock, base.lanes[pos3], e,isappearEscape);
 
-				int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
-					max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
+			int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
+				max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
 
-				if (checkCondition == 1)
+			if (checkCondition == 1)
+			{
+				currentState = GameState::newgame;
+			}
+			else if (checkCondition == 2)
+			{
+				++stage;
+				if (stage > numStage)
 				{
-					currentState = GameState::newgame;
+					currentState = GameState::mainmenu;
 				}
-				else if (checkCondition == 2)
+				else
 				{
-					++stage;
-					if (stage > numStage)
-					{
-						currentState = GameState::mainmenu;
-					}
-					else
-					{
-						newStage = true;
-					}
+					newStage = true;
 				}
+			}
 			
 			champ.draw(window);
 			if (isappearEscape) {
