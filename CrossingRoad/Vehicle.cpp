@@ -62,19 +62,19 @@ void Vehicle::updatePosition(float speed, bool isappearEsc)
 	sf::Time deltaTime = clock.restart();
 	if (isappearEsc) {
 		
-		std::cout << "Delta time when stop: " << deltaTime.asSeconds() << std::endl;
-		std::cout << "x when stop: " << xPos << std::endl;
+		/*std::cout << "Delta time when stop: " << deltaTime.asSeconds() << std::endl;
+		std::cout << "x when stop: " << xPos << std::endl;*/
 		check = xPos;
 	}
 	else {
 		
-		std::cout << "Delta time: ";
+	/*	std::cout << "Delta time: ";
 		std::cout << deltaTime.asSeconds() << std::endl;
 		std::cout << "x before run: " << xPos << std::endl;
-		std::cout << "check: " << check << std::endl;
+		std::cout << "check: " << check << std::endl;*/
 		if (check != xPos) exit(0);
 		xPos += speed * deltaTime.asSeconds();
-		std::cout << "x after run: " << xPos << std::endl;
+		//std::cout << "x after run: " << xPos << std::endl;
 		check = xPos;
 
 		if (xPos >= 1920)

@@ -72,9 +72,8 @@ void Character::setRight()
 	walkingAnimationRight.addFrame(sf::IntRect(1 * w, 3 * w, 1 * w, 1 * w));
 }
 
-Character::Character() 
+Character::Character()
 {
-
 }
 
 Character::Character(string fileName, float x, float y, float width, float height, bool paused, bool looped)
@@ -107,17 +106,20 @@ Character::Character(string fileName, float x, float y, float width, float heigh
 	noKeyWasPressed = true;
 }
 
-void Character::update(Clock& frameClock, Road& aRoad,Event& e,bool isappearesc)
+void Character::update(Clock &frameClock, Road &aRoad, Event &e, bool isappearesc)
 {
 	Time frameTime = frameClock.restart();
 
 	Vector2f movement(0.f, 0.f);
-	
-	if (!isappearesc) {
+
+	if (!isappearesc)
+	{
 		std::string action;
-		for (const auto& pair : keyMap) {
-			if (sf::Keyboard::isKeyPressed(pair.second)) {
-				cout << "Keyboard is pressed\n";
+		for (const auto &pair : keyMap)
+		{
+			if (sf::Keyboard::isKeyPressed(pair.second))
+			{
+				// cout << "Keyboard is pressed\n";
 				action = pair.first;
 			}
 		}
@@ -234,6 +236,7 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e,bool isappearesc)
 				}
 				for (int i = 0; i < 100; ++i)
 					setRight();
+				noKeyWasPressed = false;
 			}
 			else
 			{
@@ -324,11 +327,10 @@ void Character::update(Clock& frameClock, Road& aRoad,Event& e,bool isappearesc)
 
 		animatedSprite.update(frameTime);
 	}
-		x = animatedSprite.getPosition().x;
-		y = animatedSprite.getPosition().y;
-		//}
+	x = animatedSprite.getPosition().x;
+	y = animatedSprite.getPosition().y;
 	//}
-	
+	//}
 }
 
 void Character::draw(RenderWindow &window)
@@ -346,14 +348,60 @@ float Character::getHeight()
 	return height;
 }
 
+int Character::handleNotCarCollision(float objX, float objY, float hObj, float wObj)
+{
+	if (objX && objY)
+	{
+		if (type == 0)
+		{
+			y = objY + hObj + 0.01f;
+		}
+		else if (type == 1)
+		{
+			y = objY - 48.01f;
+		}
+		else if (type == 2)
+		{
+			x = objX + wObj + 0.01f;
+		}
+		else if (type == 3)
+		{
+			x = objX - 48.01f;
+		}
+	}
+	else // border collision
+	{
+		if (type == 0)
+		{
+			y = 0.01f;
+			return 2;
+		}
+		else if (type == 1)
+		{
+			y = 1080 - 48.01f;
+		}
+		else if (type == 2)
+		{
+			x = 0.01f;
+		}
+		else if (type == 3)
+		{
+			x = 1920 - 48.01f;
+		}
+	}
+	animatedSprite.setPosition(x, y);
+	return 0;
+}
+
 bool Character::condition(float xTL, float yTL, float objH, float objW)
 {
 	float checkX = max(xTL, x);
 	float checkY = max(yTL, y);
 	float checkX2 = min(xTL + objW, x + width);
 	float checkY2 = min(yTL + objH, y + height);
-	if (checkX <= checkX2 && checkY <= checkY2) {
-		//std::cout << xTL << " " << yTL << " " << objH << " " << objW << " " << x << " " << y << " " << width << " " << height << std::endl;
+	if (checkX <= checkX2 && checkY <= checkY2)
+	{
+		// std::cout << xTL << " " << yTL << " " << objH << " " << objW << " " << x << " " << y << " " << width << " " << height << std::endl;
 		return true;
 	}
 	return false;
@@ -363,6 +411,7 @@ int Character::checkCollision(Road &aRoad)
 {
 	float tmpx = x;
 	float tmpy = y;
+	int check;
 	// 0: Up, 1: Down, 2: Left, 3: Right
 	if (type == 0)
 	{
@@ -380,71 +429,29 @@ int Character::checkCollision(Road &aRoad)
 	{
 		tmpx += 0.1f;
 	}
-	if (!(0 <= tmpx && tmpx + 48 < 1920 && 0 <= tmpy && tmpy + 48 < 1080)) // check out of bound
+	if (!(0 <= tmpx && tmpx + 48 < 1920 && 0 <= tmpy && tmpy + 48 < 1080))
 	{
-		if (type == 0)
-		{
-			y = 0.01f;
-			animatedSprite.setPosition(x, y);
-			return 2;
-		}
-		else if (type == 1)
-		{
-			y = 1080 - 48.01f;
-			animatedSprite.setPosition(x, y);
-		}
-		else if (type == 2)
-		{
-			x = 0.01f;
-			animatedSprite.setPosition(x, y);
-		}
-		else if (type == 3)
-		{
-			x = 1920 - 48.01f;
-			animatedSprite.setPosition(x, y);
-		}
+		check = handleNotCarCollision(0, 0, 0, 0);
 	}
-	if (aRoad.getType() != "Field")
+
+	if (aRoad.getType() == "Road")
 	{
 		for (int i = 0; i < aRoad.vehicles.size(); ++i)
 		{
 			// tmpx + 48 >= aRoad.vehicles[i].getX()) && (tmpy + 48 >= aRoad.vehicles[i].getY()) && (tmpy - aRoad.vehicles[i].getHeight() <= aRoad.vehicles[i].getY()) && (tmpx - aRoad.vehicles[i].getWidth() <= aRoad.vehicles[i].getX()))
 			if (condition(aRoad.vehicles[i]->getX(), aRoad.vehicles[i]->getY(), aRoad.vehicles[i]->getHeight(), aRoad.vehicles[i]->getWidth()))
-			{
 				return 1;
-			}
 		}
 	}
-	else
+	else if (aRoad.getType() == "Land")
 	{
-		for (int i = 0; i < aRoad.objects.size(); ++i)
+		for (int i = 0; i < aRoad.animals.size(); ++i)
 		{
-			if (condition(aRoad.objects[i].getX(), aRoad.objects[i].getY(), aRoad.objects[i].getHeight(), aRoad.objects[i].getWidth()))
-			{
-				if (type == 0)
-				{
-					y = aRoad.objects[i].getY() + aRoad.objects[i].getHeight() + 0.01f;
-					animatedSprite.setPosition(x, y);
-				}
-				else if (type == 1)
-				{
-					y = aRoad.objects[i].getY() - 48.01f;
-					animatedSprite.setPosition(x, y);
-				}
-				else if (type == 2)
-				{
-					x = aRoad.objects[i].getX() + aRoad.objects[i].getWidth() + 0.01f;
-					animatedSprite.setPosition(x, y);
-				}
-				else if (type == 3)
-				{
-					x = aRoad.objects[i].getX() - 48.01f;
-					animatedSprite.setPosition(x, y);
-				}
-			}
+			if (condition(aRoad.animals[i]->getX(), aRoad.animals[i]->getY(), aRoad.animals[i]->getHeight(), aRoad.animals[i]->getWidth()))
+				handleNotCarCollision(aRoad.animals[i]->getX(), aRoad.animals[i]->getY(), aRoad.animals[i]->getHeight(), aRoad.animals[i]->getWidth());
 		}
 	}
-	return 0;
+	return max(check, 0);
 }
 
 float Character::getY()
@@ -459,35 +466,45 @@ float Character::getX()
 
 void Character::changeSkin()
 {
-	if (Keyboard::isKeyPressed(Keyboard::Tab)) {
-		if (skin < 4) {
+	if (Keyboard::isKeyPressed(Keyboard::Tab))
+	{
+		if (skin < 4)
+		{
 			++skin;
 		}
-		else {
+		else
+		{
 			skin = 0;
 		}
 
-		if (skin == 0) {
+		if (skin == 0)
+		{
 			animatedSprite.setColor(Color::White);
 		}
-		else if (skin == 1) {
+		else if (skin == 1)
+		{
 			animatedSprite.setColor(Color(255, 165, 79));
 		}
-		else if (skin == 2) {
+		else if (skin == 2)
+		{
 			animatedSprite.setColor(Color(139, 69, 19));
 		}
-		else if (skin == 3) {
+		else if (skin == 3)
+		{
 			animatedSprite.setColor(Color(82, 84, 41));
 		}
-		else if (skin == 4) {
+		else if (skin == 4)
+		{
 			animatedSprite.setColor(Color(176, 250, 255));
 		}
 	}
 }
 
-void Character::updatekeymap(map<std::string, sf::Keyboard::Key> keyMap) {
+void Character::updatekeymap(map<std::string, sf::Keyboard::Key> keyMap)
+{
 	this->keyMap.clear();
-	for (const auto& pair : keyMap) {
+	for (const auto &pair : keyMap)
+	{
 		this->keyMap.emplace(pair);
 	}
 }

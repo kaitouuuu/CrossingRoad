@@ -204,7 +204,7 @@ void Frontend::displayMenu()
 			}
 			if (currentState == GameState::setting) {
 				if (setstate == settingState::Normal) {
-					cout << "Normal" << endl;
+					//cout << "Normal" << endl;
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 					for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter) {
@@ -212,7 +212,7 @@ void Frontend::displayMenu()
 							std::string buttontext = (*iter).second.getText();
 							int firstSpacePos = buttontext.find_first_of(":");
 							result = buttontext.substr(0, firstSpacePos);
-							cout << result << endl;
+							//cout << result << endl;
 							if (result == "Move Left") {
 								setbut = Settingbut::left;
 							}

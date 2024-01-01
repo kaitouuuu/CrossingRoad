@@ -58,6 +58,7 @@ public:
 
 	bool condition(float xTL, float yTL, float objH, float objW);
 	void updatekeymap(map<std::string, sf::Keyboard::Key> keyMap);
+	int handleNotCarCollision(float tmpx, float tmpy, float xObj, float yObj);
 };
 
 #endif // CHARACTER_H
