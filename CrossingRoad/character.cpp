@@ -466,10 +466,16 @@ float Character::getX()
 
 void Character::changeSkin()
 {
-	if (Keyboard::isKeyPressed(Keyboard::Tab))
-	{
-		if (skin < 4)
-		{
+	std::string action;
+	for (const auto& pair : keyMap) {
+		if (sf::Keyboard::isKeyPressed(pair.second)) {
+			cout << "Keyboard is pressed\n";
+			action = pair.first;
+		}
+	}
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
+	if(action=="Change Skin: "){
+		if (skin < 4) {
 			++skin;
 		}
 		else
