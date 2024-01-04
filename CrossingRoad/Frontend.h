@@ -11,7 +11,10 @@ using namespace sf;
 using namespace std;
 
 enum class GameState {
-	mainmenu, game, setting, highscore, loadgame, newgame, playingGame
+	mainmenu, game, setting, highscore, loadgame, newgame, playingGame,gamemode
+};
+enum class Gametype {
+	none, stage, endless
 };
 enum class Settingbut {
 	left,right,up,down,changeskin

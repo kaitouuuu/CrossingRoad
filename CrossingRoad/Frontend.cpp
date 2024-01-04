@@ -51,8 +51,13 @@ void Frontend::displayMenu()
 	Button C("Content/Image/Setting.png", 1410, 579, "Setting");
 	Button D("Content/Image/High score.png", 1403, 692, "High score");
 	Button E("Content/Image/Exit.png", 1465, 811, "Exit");
+	
+	//Button game mode
+	Button stage_("Content/Image/Stage.png", 1458, 410, "Stage");
+	Button endless_("Content/Image/Endless.png", 1443, 522, "Endless");
+	Button back_("Content/Image/Back.png", 1483, 634, "Back");
 
-	//Button game
+	//Button game control
 	Button F("Content/Image/New Game.png", 1415, 410, "New game");
 	Button G("Content/Image/Load game.png", 1406, 522, "Load game");
 	Button H("Content/Image/Back.png", 1483, 634, "Back");
@@ -65,18 +70,25 @@ void Frontend::displayMenu()
 	Button Es2("Content/Image/New Game.png", 790, 499, "New game esc");
 	Button Es3("Content/Image/Save.png", 804, 636, "Save");
 
-	vector<Button> b;
-	b.push_back(A);
-	b.push_back(B);
-	b.push_back(C);
-	b.push_back(D);
-	b.push_back(E);
+	vector<Button> gamemodee;
+	gamemodee.push_back(stage_);
+	gamemodee.push_back(endless_);
+	gamemodee.push_back(back_);	
+
+	
+
+	vector<Button> bmainmenu;
+	bmainmenu.push_back(A);
+	bmainmenu.push_back(B);
+	bmainmenu.push_back(C);
+	bmainmenu.push_back(D);
+	bmainmenu.push_back(E);
 
 
-	vector<Button> c;
-	c.push_back(F);
-	c.push_back(G);
-	c.push_back(H);
+	vector<Button> cgamecontrol;
+	cgamecontrol.push_back(F);
+	cgamecontrol.push_back(G);
+	cgamecontrol.push_back(H);
 
 	vector<Button> escapebut;
 	escapebut.push_back(Es1);
@@ -93,9 +105,9 @@ void Frontend::displayMenu()
 	
 	//t.push_back(Bt);
 	//t.push_back(Ct);
-	Menu n(b, t);
-	Menu q(c, t);
-	
+	Menu mmenu(bmainmenu, t);
+	Menu gcontrol(cgamecontrol, t);
+	Menu gmode(gamemodee, t);
 	//Menu p(d, y);
 	//MainMenu m(b);
 
@@ -113,6 +125,8 @@ void Frontend::displayMenu()
 	};
 	TextBox popuptext("Content/Font/SuperMario256.ttf", Color::White, "PRESS ANY KEY OR BUTTON", 100, 201, 325);
 	Clock frameClock;
+
+	Gametype currenttype = Gametype::none;
 
 	// base game
 	Base base;
@@ -154,13 +168,13 @@ void Frontend::displayMenu()
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 	
 					if (currentState == GameState::mainmenu) {
-						for (auto& button : b)
+						for (auto& button : bmainmenu)
 						{
 							if (button.isClicked(mousePosF))
 							{
 								if (button.type() == "Game")
 								{
-									currentState = GameState::game;
+									currentState = GameState::gamemode;
 								}
 								else if (button.type() == "Setting")
 								{
@@ -174,9 +188,28 @@ void Frontend::displayMenu()
 							}
 						}
 					}
+					else if (currentState == GameState::gamemode) {
+						for (auto& button : gamemodee) {
+							if (button.isClicked(mousePosF)) {
+								if (button.type() == "Stage") {
+									currentState = GameState::game;
+									currenttype = Gametype::stage;
+								}
+								else if (button.type() == "Endless") {
+									currentState = GameState::game;
+									currenttype = Gametype::endless;
+									
+								}
+								else if (button.type() == "Back") {
+									currentState = GameState::mainmenu;
+									currenttype = Gametype::none;
+								}
+							}
+						}
+					}
 					else if (currentState==GameState::game)
 					{
-						for (auto& button : c)
+						for (auto& button : cgamecontrol)
 						{
 							if (button.isClicked(mousePosF))
 							{
@@ -190,7 +223,7 @@ void Frontend::displayMenu()
 								}
 								else if (button.type() == "Back")
 								{
-									currentState = GameState::mainmenu;
+									currentState = GameState::gamemode;
 								}
 							}
 						}
@@ -299,12 +332,18 @@ void Frontend::displayMenu()
 		case GameState::mainmenu:
 			window.draw(background);
 
-			n.draw(window, mouse);
+			mmenu.draw(window, mouse);
 			break;
+		case GameState::gamemode:
+			window.draw(background);
+			gmode.draw(window, mouse);
+			break;
+
 		case GameState::game:
+			cout << "Has come to endless\n";
 			window.draw(background);
 
-			q.draw(window, mouse);
+			gcontrol.draw(window, mouse);
 
 			break;
 		case GameState::highscore:
@@ -313,13 +352,22 @@ void Frontend::displayMenu()
 			break;
 
 		case GameState::newgame:
-			difficulty = 1;
-			numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-			champ = Character("Character1.png", 1060.f, 500.f //1080.f - 48.f
-				, 48.f, 48.f, true, false);
-			champ.updatekeymap(keyMap);
-			stage = 1;
-			newStage = true;
+			
+			//switch (currenttype) {
+			//case Gametype::endless:
+				difficulty = 1;
+				numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
+				champ = Character("Character1.png", 1060.f, 500.f //1080.f - 48.f
+					, 48.f, 48.f, true, false);
+				champ.updatekeymap(keyMap);
+				stage = 1;
+				newStage = true;
+
+			//case Gametype::stage:
+			//	// Do sth here
+			//	break;
+			//}
+			
 			currentState = GameState::playingGame;
 			break;
 
