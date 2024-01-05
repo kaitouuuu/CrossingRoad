@@ -375,16 +375,17 @@ void Frontend::displayMenu()
 			int pos2 = int(champ.getY() / 54);
 			int pos3 = min(int(champ.getY() / 54) + 1, int(base.lanes.size() - 1));
 			
-			champ.update(frameClock, base.lanes[pos1], e,isappearEscape);
-			champ.update(frameClock, base.lanes[pos2], e,isappearEscape);
-			champ.update(frameClock, base.lanes[pos3], e,isappearEscape);
+			champ.update(frameClock, base.lanes[pos1], e, isappearEscape);
+			champ.update(frameClock, base.lanes[pos2], e, isappearEscape);
+			champ.update(frameClock, base.lanes[pos3], e, isappearEscape);
 
 			int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
 				max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
 
 			if (checkCondition == 1)
 			{
-				currentState = GameState::newgame;
+				//currentState = GameState::newgame;
+				//Sleep(100000);
 			}
 			else if (checkCondition == 2)
 			{

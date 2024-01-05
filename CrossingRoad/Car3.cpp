@@ -11,6 +11,11 @@ Car3::Car3(float xPos, float yPos) : Vehicle(xPos + 8, yPos + 16, "Black")
 	animationCar3 = tmp;
 }
 
+void Car3::clearAnimation()
+{
+	animationCar3.gameOver();
+}
+
 void Car3::updatePosition(float speed, bool isappearEsc)
 {
 	Vehicle::updatePosition(speed,isappearEsc);

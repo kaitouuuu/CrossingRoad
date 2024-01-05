@@ -13,13 +13,16 @@ using namespace std;
 enum class GameState {
 	mainmenu, game, setting, highscore, loadgame, newgame, playingGame
 };
+
 enum class Settingbut {
 	left,right,up,down,changeskin
 };
+
 enum class settingState {
 	Normal,
 	Popup,
 };
+
 class Frontend {
 public:
 	//Frontend();

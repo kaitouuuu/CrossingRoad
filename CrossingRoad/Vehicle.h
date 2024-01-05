@@ -31,6 +31,8 @@ public:
 
 	void setSpriteColor(const Color& color);
 
+	virtual void clearAnimation() = 0;
+
 	std::string getType() const;
 
 	virtual void updatePosition(float speed, bool isappearEsc);

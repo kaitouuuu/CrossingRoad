@@ -12,6 +12,8 @@ public:
 	Car1();
 	Car1(float xPos, float yPos);
 
+	void clearAnimation();
+
 	void updatePosition(float speed, bool isappearEsc) override;
 	void draw(RenderWindow& window) override;
 };

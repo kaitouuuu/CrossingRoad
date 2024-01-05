@@ -11,6 +11,11 @@ Car5::Car5(float xPos, float yPos) : Vehicle(xPos + 8, yPos + 16, "Yellow")
 	animationCar5 = tmp;
 }
 
+void Car5::clearAnimation()
+{
+	animationCar5.gameOver();
+}
+
 void Car5::updatePosition(float speed, bool isappearEsc)
 {
 	Vehicle::updatePosition(speed,isappearEsc);

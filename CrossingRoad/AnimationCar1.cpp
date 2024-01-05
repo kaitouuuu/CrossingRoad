@@ -16,6 +16,31 @@ void AnimationCar1::setStable()
 	waitAnimation.addFrame(sf::IntRect(72, 0, 72, 52));
 }
 
+void AnimationCar1::setCollision()
+{
+	deadCar.setSpriteSheet(texture);
+	deadCar.addFrame(sf::IntRect(0, 104, 72, 60));
+	deadCar.addFrame(sf::IntRect(72, 104, 72, 60));
+	deadCar.addFrame(sf::IntRect(144, 104, 72, 60));
+	deadCar.addFrame(sf::IntRect(216, 104, 72, 60));
+}
+
+void AnimationCar1::gameOver()
+{
+	waitAnimation.clearFrame();
+	walkingAnimation.clearFrame();
+	for (int i = 0; i < 20; ++i) {
+		setCollision();
+	}
+	currentAnimation = &deadCar;
+	changeState();
+}
+
+void AnimationCar1::changeState()
+{
+	gameEnd = true;
+}
+
 AnimationCar1::AnimationCar1()
 {
 
@@ -30,6 +55,7 @@ AnimationCar1::AnimationCar1(std::string fileName, float x, float y, float width
 
 	setMove();
 	setStable();
+	setCollision();
 
 	currentAnimation = &walkingAnimation;
 
@@ -53,6 +79,14 @@ void AnimationCar1::update(float speed, bool isappearesc)
 	sf::Time frameTime = clock.restart();
 
 	sf::Vector2f movement(speed, 0.f);
+
+	if (gameEnd) {
+		if (!isappearesc) {
+			animatedSprite.play(*currentAnimation);
+			animatedSprite.update(frameTime);
+		}
+		return;
+	}
 
 	if (!isappearesc) {
 		if (speed == 0) {

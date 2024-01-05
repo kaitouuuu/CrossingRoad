@@ -14,6 +14,7 @@ private:
 	AnimatedSprite animatedSprite;
 	Animation walkingAnimation;
 	Animation waitAnimation;
+	Animation deadCar;
 	Animation* currentAnimation;
 
 	float speed;
@@ -28,6 +29,8 @@ public:
 
 	void setMove();
 	void setStable();
+	void setCollision();
+	void gameOver();
 
 	void update(float speed, bool isappearesc);
 	void draw(sf::RenderWindow& window);
