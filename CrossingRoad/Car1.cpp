@@ -19,6 +19,7 @@ void Car1::clearAnimation()
 void Car1::updatePosition(float speed, bool isappearEsc)
 {
 	Vehicle::updatePosition(speed,isappearEsc);
+
 	animationCar1.update(speed,isappearEsc);
 }
 

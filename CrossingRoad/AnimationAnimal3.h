@@ -14,6 +14,7 @@ private:
 	AnimatedSprite animatedSprite;
 	Animation walkingAnimation;
 	Animation waitAnimation;
+	Animation deadAnimal;
 	Animation* currentAnimation;
 
 	float speed;
@@ -21,6 +22,7 @@ private:
 	float width, height;
 
 	bool isMoved;
+	bool gameEnd;
 
 public:
 	AnimationAnimal3();
@@ -28,6 +30,9 @@ public:
 
 	void setMove();
 	void setStable();
+	void setCollision();
+	void gameOver();
+	void changeState();
 
 	void update(float speed);
 	void draw(sf::RenderWindow& window);

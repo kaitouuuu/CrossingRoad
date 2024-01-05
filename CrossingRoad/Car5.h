@@ -13,9 +13,9 @@ public:
 	Car5(float xPos, float yPos);
 
 	void clearAnimation();
+
 	void updatePosition(float speed, bool isappearEsc) override;
 	void draw(RenderWindow& window) override;
 };
-
 
 #endif // CAR5_H

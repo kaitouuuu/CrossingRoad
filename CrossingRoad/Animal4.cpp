@@ -11,6 +11,11 @@ Animal4::Animal4(float xPos, float yPos) : Animal(xPos, yPos, "Hedgehog")
 	animationAnimal4 = tmp;
 }
 
+void Animal4::clearAnimation()
+{
+	animationAnimal4.gameOver();
+}
+
 void Animal4::updatePosition(float speed)
 {
 	Animal::updatePosition(speed);

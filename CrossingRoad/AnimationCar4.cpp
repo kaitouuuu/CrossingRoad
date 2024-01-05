@@ -19,18 +19,28 @@ void AnimationCar4::setStable()
 void AnimationCar4::setCollision()
 {
 	deadCar.setSpriteSheet(texture);
-	deadCar.addFrame(sf::IntRect(0, 104, 72, 52));
-	deadCar.addFrame(sf::IntRect(72, 104, 72, 52));
-	deadCar.addFrame(sf::IntRect(144, 104, 72, 52));
-	deadCar.addFrame(sf::IntRect(216, 104, 72, 52));
+	deadCar.addFrame(sf::IntRect(0, 104, 72, 60));
+	deadCar.addFrame(sf::IntRect(72, 104, 72, 60));
+	deadCar.addFrame(sf::IntRect(144, 104, 72, 60));
+	deadCar.addFrame(sf::IntRect(216, 104, 72, 60));
 }
 
 void AnimationCar4::gameOver()
 {
 	waitAnimation.clearFrame();
 	walkingAnimation.clearFrame();
+	for (int i = 0; i < 20; ++i) {
+		setCollision();
+	}
 	currentAnimation = &deadCar;
+	changeState();
 }
+
+void AnimationCar4::changeState()
+{
+	gameEnd = true;
+}
+
 
 AnimationCar4::AnimationCar4()
 {
@@ -70,6 +80,15 @@ void AnimationCar4::update(float speed, bool isappearesc)
 	sf::Time frameTime = clock.restart();
 
 	sf::Vector2f movement(speed, 0.f);
+
+	if (gameEnd) {
+		if (!isappearesc) {
+			animatedSprite.play(*currentAnimation);
+			animatedSprite.update(frameTime);
+		}
+		return;
+	}
+
 	if (!isappearesc) {
 		if (speed == 0) {
 			if (isMoved) {

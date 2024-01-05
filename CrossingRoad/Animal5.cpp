@@ -11,6 +11,11 @@ Animal5::Animal5(float xPos, float yPos) : Animal(xPos, yPos, "Porcupine")
 	animationAnimal5 = tmp;
 }
 
+void Animal5::clearAnimation()
+{
+	animationAnimal5.gameOver();
+}
+
 void Animal5::updatePosition(float speed)
 {
 	Animal::updatePosition(speed);

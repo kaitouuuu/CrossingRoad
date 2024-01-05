@@ -19,7 +19,6 @@ Vehicle::Vehicle(float xPos, float yPos, std::string type)
 
 	width = getWidth();
 	height = getHeight();
-	//std::cout << xPos << std::endl;
 }
 
 float Vehicle::getX() const

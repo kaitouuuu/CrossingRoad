@@ -11,6 +11,11 @@ Animal3::Animal3(float xPos, float yPos) : Animal(xPos, yPos, "Fox")
 	animationAnimal3 = tmp;
 }
 
+void Animal3::clearAnimation()
+{
+	animationAnimal3.gameOver();
+}
+
 void Animal3::updatePosition(float speed)
 {
 	Animal::updatePosition(speed);

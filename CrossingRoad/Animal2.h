@@ -1,5 +1,6 @@
 #ifndef ANIMAL2_H
 #define ANIMAL2_H
+
 #include "Animal.h"
 #include "AnimationAnimal2.h"
 
@@ -10,6 +11,8 @@ private:
 public:
 	Animal2();
 	Animal2(float xPos, float yPos);
+
+	void clearAnimation();
 
 	void updatePosition(float speed) override;
 	void draw(RenderWindow& window) override;

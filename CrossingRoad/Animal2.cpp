@@ -11,6 +11,10 @@ Animal2::Animal2(float xPos, float yPos) : Animal(xPos, yPos, "Dragonfly")
 	animationAnimal2 = tmp;
 }
 
+void Animal2::clearAnimation()
+{
+	animationAnimal2.gameOver();
+}
 void Animal2::updatePosition(float speed)
 {
 	Animal::updatePosition(speed);

@@ -12,6 +12,8 @@ public:
 	Animal3();
 	Animal3(float xPos, float yPos);
 
+	void clearAnimation();
+
 	void updatePosition(float speed) override;
 	void draw(RenderWindow& window) override;
 };

@@ -16,6 +16,31 @@ void AnimationAnimal1::setStable()
 	waitAnimation.addFrame(sf::IntRect(48, 0, 48, 48));
 }
 
+void AnimationAnimal1::setCollision()
+{
+	deadAnimal.setSpriteSheet(texture);
+	deadAnimal.addFrame(sf::IntRect(0, 0, 48, 48));
+	deadAnimal.addFrame(sf::IntRect(48, 0, 48, 48));
+	deadAnimal.addFrame(sf::IntRect(96, 0, 48, 48));
+	deadAnimal.addFrame(sf::IntRect(144, 0, 48, 48));
+}
+
+void AnimationAnimal1::gameOver()
+{
+	waitAnimation.clearFrame();
+	walkingAnimation.clearFrame();
+	for (int i = 0; i < 20; ++i) {
+		setCollision();
+	}
+	currentAnimation = &deadAnimal;
+	changeState();
+}
+
+void AnimationAnimal1::changeState()
+{
+	gameEnd = true;
+}
+
 AnimationAnimal1::AnimationAnimal1()
 {
 
@@ -51,6 +76,12 @@ void AnimationAnimal1::update(float speed)
 	sf::Time frameTime = clock.restart();
 
 	sf::Vector2f movement(speed, 0.f);
+
+	if (gameEnd) {
+		animatedSprite.play(*currentAnimation);
+		animatedSprite.update(frameTime);
+		return;
+	}
 
 	if (speed == 0) {
 		if (isMoved) {

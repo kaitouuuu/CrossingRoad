@@ -46,6 +46,7 @@ void Animal::updatePosition(float speed)
 {
 	if (speed < 0) {
 		sprite.setScale(-1.f, 1.f);
+		sprite.setOrigin(getWidth(), 0);
 	}
 
 	sf::Time deltaTime = clock.restart();

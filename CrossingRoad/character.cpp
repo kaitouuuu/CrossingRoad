@@ -448,8 +448,10 @@ int Character::checkCollision(Road &aRoad)
 	{
 		for (int i = 0; i < aRoad.animals.size(); ++i)
 		{
-			if (condition(aRoad.animals[i]->getX(), aRoad.animals[i]->getY(), aRoad.animals[i]->getHeight(), aRoad.animals[i]->getWidth()))
+			if (condition(aRoad.animals[i]->getX(), aRoad.animals[i]->getY(), aRoad.animals[i]->getHeight(), aRoad.animals[i]->getWidth())) {
+				aRoad.animals[i]->clearAnimation();
 				return 1;
+			}
 		}
 	}
 	return max(check, 0);

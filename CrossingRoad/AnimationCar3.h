@@ -22,6 +22,7 @@ private:
 	float width, height;
 
 	bool isMoved;
+	bool gameEnd;
 
 public:
 	AnimationCar3();
@@ -31,6 +32,7 @@ public:
 	void setStable();
 	void setCollision();
 	void gameOver();
+	void changeState();
 
 	void update(float speed, bool isappearesc);
 	void draw(sf::RenderWindow& window);
