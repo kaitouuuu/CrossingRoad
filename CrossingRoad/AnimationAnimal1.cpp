@@ -3,36 +3,40 @@
 void AnimationAnimal1::setMove()
 {
 	walkingAnimation.setSpriteSheet(texture);
-	walkingAnimation.addFrame(sf::IntRect( 0, 13, 18, 13));
-	walkingAnimation.addFrame(sf::IntRect(18, 13, 18, 13));
-	walkingAnimation.addFrame(sf::IntRect(36, 13, 18, 13));
-	walkingAnimation.addFrame(sf::IntRect(54, 13, 18, 13));
+	walkingAnimation.addFrame(sf::IntRect(0, 48, 48, 48));
+	walkingAnimation.addFrame(sf::IntRect(48, 48, 48, 48));
+	walkingAnimation.addFrame(sf::IntRect(96, 48, 48, 48));
+	walkingAnimation.addFrame(sf::IntRect(144, 48, 48, 48));
 }
 
 void AnimationAnimal1::setStable()
 {
-	walkingAnimation.setSpriteSheet(texture);
-	walkingAnimation.addFrame(sf::IntRect( 0, 0, 18, 13));
-	walkingAnimation.addFrame(sf::IntRect(18, 0, 18, 13));
+	waitAnimation.setSpriteSheet(texture);
+	waitAnimation.addFrame(sf::IntRect(0, 0, 48, 48));
+	waitAnimation.addFrame(sf::IntRect(48, 0, 48, 48));
 }
 
-AnimationAnimal1::AnimationAnimal1(string fileName, float x, float y, float width, float height, bool paused, bool looped)
+AnimationAnimal1::AnimationAnimal1()
+{
+
+}
+
+AnimationAnimal1::AnimationAnimal1(std::string fileName, float x, float y, float width, float height, bool paused, bool looped)
 {
 	if (!texture.loadFromFile(fileName))
 	{
-		cout << "Failed to load player spritesheet!" << endl;
+		std::cout << "Failed to load player spritesheet!" << std::endl;
+		exit(0);
 	}
 
 	setMove();
+	setStable();
 
 	currentAnimation = &walkingAnimation;
 
-	AnimatedSprite tmp(seconds(0.2f), true, false);
+	AnimatedSprite tmp(sf::seconds(0.2f), true, false);
 	tmp.setPosition(x, y);
 	animatedSprite = tmp;
-
-	Animal1 tmpp(x, y);
-	animal1 = tmpp;
 
 	this->x = x;
 	this->y = y;
@@ -44,38 +48,58 @@ AnimationAnimal1::AnimationAnimal1(string fileName, float x, float y, float widt
 
 void AnimationAnimal1::update(float speed)
 {
-	Time frameTime = clock.restart();
+	sf::Time frameTime = clock.restart();
 
-	Vector2f movement(speed, 0.f);
+	sf::Vector2f movement(speed, 0.f);
 
 	if (speed == 0) {
 		if (isMoved) {
 			walkingAnimation.clearFrame();
+			for (int i = 0; i < 20; ++i) {
+				setMove();
+			}
 			isMoved = false;
 		}
-		for (int i = 0; i < 25; ++i) 
+		for (int i = 0; i < 20; ++i) {
 			setStable();
+		}
+		currentAnimation = &waitAnimation;
 	}
 	else {
 		if (!isMoved) {
 			walkingAnimation.clearFrame();
+			for (int i = 0; i < 20; ++i) {
+				setStable();
+			}
 			isMoved = true;
 		}
-		for (int i = 0; i < 25; ++i)
+		for (int i = 0; i < 20; ++i) {
 			setMove();
+		}
+		currentAnimation = &walkingAnimation;
 	}
-	currentAnimation = &walkingAnimation;
+
 	animatedSprite.play(*currentAnimation);
 	animatedSprite.move(movement * frameTime.asSeconds());
 	animatedSprite.update(frameTime);
-	
+	if (speed < 0) {
+		animatedSprite.setScale(-1.f, 1.f);
+		animatedSprite.setOrigin(getWidth(), 0);
+	}
+
+	if (x >= 1920)
+	{
+		animatedSprite.setPosition(x - 1920, y);
+	}
+	else if (x < 0)
+	{
+		animatedSprite.setPosition(x + 1920, y);
+	}
 	x = animatedSprite.getPosition().x;
 	y = animatedSprite.getPosition().y;
-
-	std::cout << "Update" << std::endl;
 }
 
-void AnimationAnimal1::draw(RenderWindow& window)
+void AnimationAnimal1::draw(sf::RenderWindow& window)
 {
 	window.draw(animatedSprite);
 }

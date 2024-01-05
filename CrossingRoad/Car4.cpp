@@ -5,7 +5,7 @@ Car4::Car4()
 
 }
 
-Car4::Car4(float xPos, float yPos) : Vehicle(xPos, yPos, "White")
+Car4::Car4(float xPos, float yPos) : Vehicle(xPos + 8, yPos + 16, "White")
 {
 	AnimationCar4 tmp("Content/Image/WhiteCarSprite.png", xPos, yPos, 72.f, 52.f, true, false);
 	animationCar4 = tmp;

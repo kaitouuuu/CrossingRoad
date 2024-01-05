@@ -155,6 +155,10 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationAnimal1.cpp" />
+    <ClCompile Include="AnimationAnimal2.cpp" />
+    <ClCompile Include="AnimationAnimal3.cpp" />
+    <ClCompile Include="AnimationAnimal4.cpp" />
+    <ClCompile Include="AnimationAnimal5.cpp" />
     <ClCompile Include="AnimationCar1.cpp" />
     <ClCompile Include="AnimationCar2.cpp" />
     <ClCompile Include="AnimationCar3.cpp" />
@@ -187,6 +191,10 @@
     <ClInclude Include="AnimatedSprite.hpp" />
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="AnimationAnimal1.h" />
+    <ClInclude Include="AnimationAnimal2.h" />
+    <ClInclude Include="AnimationAnimal3.h" />
+    <ClInclude Include="AnimationAnimal4.h" />
+    <ClInclude Include="AnimationAnimal5.h" />
     <ClInclude Include="AnimationCar1.h" />
     <ClInclude Include="AnimationCar2.h" />
     <ClInclude Include="AnimationCar3.h" />

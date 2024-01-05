@@ -31,8 +31,8 @@ public:
 
 	std::string getType() const;
 
-	void updatePosition(float speed);
-	void draw(RenderWindow& window);
+	virtual void updatePosition(float speed);
+	virtual void draw(RenderWindow& window);
 };
 
 #endif // VEHICLE_H

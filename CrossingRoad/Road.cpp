@@ -77,14 +77,14 @@ void Road::addVehicle(Vehicle* added)
 	vehicles.push_back(added);
 }
 
-void Road::addAnimal(const Animal& added)
+void Road::addAnimal(Animal* added)
 {
 	for (Animal* animal : animals)
 	{
 		float objX = animal->getX();
 		float objX2 = objX + animal->getWidth();
-		float addedObjX = added.getX();
-		float addedObjX2 = addedObjX + added.getWidth();
+		float addedObjX = added->getX();
+		float addedObjX2 = addedObjX + added->getWidth();
 
 		if (objX <= addedObjX && addedObjX <= objX2 || addedObjX <= objX && objX <= addedObjX2)
 		{
@@ -92,9 +92,7 @@ void Road::addAnimal(const Animal& added)
 		}
 	}
 
-	Animal* newAnimal = new Animal(added);
-
-	animals.push_back(newAnimal);
+	animals.push_back(added);
 }
 
 void Road::updateVehicles(bool isappearEsc)

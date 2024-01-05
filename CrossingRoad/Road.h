@@ -49,7 +49,7 @@ public:
 	float getSpeed() const;
 	void setSpeed(const float s);
 	void addVehicle(Vehicle* added);
-	void addAnimal(const Animal& added);
+	void addAnimal(Animal* added);
 	void addObject(const Object& added);
 	void updateVehicles(bool isappearEsc);
 	void updateAnimals();

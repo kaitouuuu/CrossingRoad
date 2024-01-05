@@ -5,7 +5,6 @@
 #include "AnimatedSprite.hpp"
 #include <iostream>
 
-
 class AnimationCar1
 {
 private:

@@ -3,22 +3,17 @@
 
 #include <SFML/Graphics.hpp>
 #include "AnimatedSprite.hpp"
-#include "Road.h"
 #include <iostream>
-
-using namespace sf;
-using namespace std;
 
 class AnimationAnimal1
 {
 private:
-	Texture texture;
-	Clock clock;
-
-	Animal1 animal1;
+	sf::Texture texture;
+	sf::Clock clock;
 
 	AnimatedSprite animatedSprite;
 	Animation walkingAnimation;
+	Animation waitAnimation;
 	Animation* currentAnimation;
 
 	float speed;
@@ -28,13 +23,14 @@ private:
 	bool isMoved;
 
 public:
-	AnimationAnimal1(string fileName, float x, float y, float width, float height, bool paused, bool looped);
+	AnimationAnimal1();
+	AnimationAnimal1(std::string fileName, float x, float y, float width, float height, bool paused, bool looped);
 
 	void setMove();
 	void setStable();
 
 	void update(float speed);
-	void draw(RenderWindow& window);
+	void draw(sf::RenderWindow& window);
 
 	float getY();
 	float getX();

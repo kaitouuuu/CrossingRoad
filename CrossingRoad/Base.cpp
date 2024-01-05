@@ -129,23 +129,24 @@ void Base::randomGame(int difficulty)
 			{
 				int random = randomNumber(0, 4);
 				if (random == 0) {
-					Animal1 newAnimal = Animal1(float(randomNumber(0, 1919)), widthLane * i);
+					Animal1* newAnimal = new Animal1(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 1) {
-					Animal2 newAnimal = Animal2(float(randomNumber(0, 1919)), widthLane * i);
+					Animal2* newAnimal = new Animal2(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 2) {
-					Animal3 newAnimal = Animal3(float(randomNumber(0, 1919)), widthLane * i);
+					Animal3* newAnimal = new Animal3(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 3) {
-					Animal4 newAnimal = Animal4(float(randomNumber(0, 1919)), widthLane * i);
+					Animal4* newAnimal = new Animal4(float(randomNumber(0, 1919)), widthLane * i);
 					newRoad.addAnimal(newAnimal);
 				}
 				else if (random == 4) {
-					Animal5 newAnimal = Animal5(float(randomNumber(0, 1919)), widthLane * i);
+					Animal5* newAnimal = new Animal5(float(randomNumber(0, 1919)), widthLane * i);
+					newRoad.addAnimal(newAnimal);
 				}
 			}
 		}

@@ -51,7 +51,9 @@ AnimationCar1::AnimationCar1(std::string fileName, float x, float y, float width
 void AnimationCar1::update(float speed, bool isappearesc)
 {
 	sf::Time frameTime = clock.restart();
+
 	sf::Vector2f movement(speed, 0.f);
+
 	if (!isappearesc) {
 		if (speed == 0) {
 			if (isMoved) {
@@ -84,6 +86,12 @@ void AnimationCar1::update(float speed, bool isappearesc)
 		animatedSprite.move(movement * frameTime.asSeconds());
 		animatedSprite.update(frameTime);
 	}
+
+	if (speed < 0) {
+		animatedSprite.setScale(-1.f, 1.f);
+		animatedSprite.setOrigin(getWidth(), 0);
+	}
+
 	if (x >= 1920)
 	{
 		animatedSprite.setPosition(x - 1920, y);

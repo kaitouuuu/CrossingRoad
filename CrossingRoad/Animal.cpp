@@ -68,6 +68,5 @@ void Animal::draw(RenderWindow& window) {
 	width = getWidth();
 	height = getHeight();
 
-	window.draw(sprite);
-	std::cout << getWidth() << " " << getHeight() << std::endl;
+	//window.draw(sprite);
 }
