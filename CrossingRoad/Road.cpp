@@ -95,16 +95,32 @@ void Road::addAnimal(Animal* added)
 	animals.push_back(added);
 }
 
-void Road::updateVehicles(bool isappearEsc)
+void Road::updateVehicles(bool isappearEsc, float x, float y,float width, float height)
 {
 	if (trafficLight.getColor() != 2)
 		for (Vehicle* vehicle : vehicles)
 		{
+			float checkX = max(vehicle->getX(), x);
+			float checkY = max(vehicle->getY(), y);
+			float checkX2 = min(vehicle->getX() + vehicle->getWidth(), x + width);
+			float checkY2 = min(vehicle->getY() + vehicle->getHeight(), y + height);
+			if (checkX <= checkX2 && checkY <= checkY2)
+			{
+				isappearEsc = false;
+			}
 			vehicle->updatePosition(speed,isappearEsc);
 		}
 	else
 		for (Vehicle* vehicle : vehicles)
 		{
+			float checkX = max(vehicle->getX(), x);
+			float checkY = max(vehicle->getY(), y);
+			float checkX2 = min(vehicle->getX() + vehicle->getWidth(), x + width);
+			float checkY2 = min(vehicle->getY() + vehicle->getHeight(), y + height);
+			if (checkX <= checkX2 && checkY <= checkY2)
+			{
+				isappearEsc = false;
+			}
 			vehicle->updatePosition(0,isappearEsc);
 		}
 }

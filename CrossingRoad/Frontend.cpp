@@ -84,9 +84,11 @@ void Frontend::displayMenu()
 	escapebut.push_back(Es3);
 
 	bool isappearEscape = false;
+	bool islose = false;
 
 	TextBox At("Content/Font/SuperMario256.ttf", Color::White, "CROSSY ROAD", 100, 401, 157);
 	TextBox Bt("Content/Font/SuperMario256.ttf", Color::White, "SETTING", 100, 445, 81);
+	TextBox Ct("Content/Font/SuperMario256.ttf", Color::Black, "YOU LOSE!!!", 40, 827, 369);
 	vector<TextBox> t;
 	
 	t.push_back(At);
@@ -113,6 +115,8 @@ void Frontend::displayMenu()
 	};
 	TextBox popuptext("Content/Font/SuperMario256.ttf", Color::White, "PRESS ANY KEY OR BUTTON", 100, 201, 325);
 	Clock frameClock;
+
+	
 
 	// base game
 	Base base;
@@ -355,7 +359,7 @@ void Frontend::displayMenu()
 					{
 						lane.updateTrafficLight();
 					}
-					lane.updateVehicles(isappearEscape);
+					lane.updateVehicles(isappearEscape,champ.getX(),champ.getY(),champ.getWidth(),champ.getHeight());
 					lane.updateAnimals();
 				}
 			
@@ -381,11 +385,13 @@ void Frontend::displayMenu()
 
 			int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
 				max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
-
 			if (checkCondition == 1)
 			{
 				//currentState = GameState::newgame;
 				//Sleep(100000);
+				cout << "Condition1\n";
+				isappearEscape = true;
+				islose = true;
 			}
 			else if (checkCondition == 2)
 			{
@@ -402,10 +408,19 @@ void Frontend::displayMenu()
 			
 			champ.draw(window);
 			if (isappearEscape) {
-				window.draw(escape_screen);
-				Es1.draw(window, mouse);
-				Es2.draw(window, mouse);
-				Es3.draw(window, mouse);
+				if (!islose) {
+					window.draw(escape_screen);
+					Es1.draw(window, mouse);
+					Es2.draw(window, mouse);
+					Es3.draw(window, mouse);
+				}
+				else {
+					window.draw(escape_screen);
+					Ct.draw(window);
+					
+					Es2.draw(window, mouse);
+					Es3.draw(window, mouse);
+				}
 			}
 			
 			break;

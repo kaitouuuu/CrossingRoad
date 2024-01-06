@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <utility>
-
+#include <algorithm>
 #include "Object.h"
 #include "Vehicle.h"
 
@@ -23,7 +23,7 @@
 #include "Animal5.h"
 
 #include "TrafficLight.h"
-
+using namespace std;
 class Road {
 private:
 	std::string type;
@@ -51,7 +51,7 @@ public:
 	void addVehicle(Vehicle* added);
 	void addAnimal(Animal* added);
 	void addObject(const Object& added);
-	void updateVehicles(bool isappearEsc);
+	void updateVehicles(bool isappearEsc,float x, float y,float width, float height);
 	void updateAnimals();
 	void draw(RenderWindow& window);
 	// For debug
