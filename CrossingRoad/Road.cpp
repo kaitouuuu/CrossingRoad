@@ -106,8 +106,10 @@ void Road::updateVehicles(bool isappearEsc, float x, float y,float width, float 
 			float checkY2 = min(vehicle->getY() + vehicle->getHeight(), y + height);
 			if (checkX <= checkX2 && checkY <= checkY2)
 			{
-				isappearEsc = false;
+				vehicle->updatePosition(speed, false);
+				continue;
 			}
+			//else isappearEsc = true;
 			vehicle->updatePosition(speed,isappearEsc);
 		}
 	else
@@ -119,8 +121,10 @@ void Road::updateVehicles(bool isappearEsc, float x, float y,float width, float 
 			float checkY2 = min(vehicle->getY() + vehicle->getHeight(), y + height);
 			if (checkX <= checkX2 && checkY <= checkY2)
 			{
-				isappearEsc = false;
+				vehicle->updatePosition(0, false);
+				continue;
 			}
+			//else isappearEsc = true;
 			vehicle->updatePosition(0,isappearEsc);
 		}
 }
