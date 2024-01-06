@@ -429,7 +429,7 @@ void Frontend::displayMenu()
 		
 		}
 		
-
+		cout << "Hello\n";
 		window.display();
 	}
 	
