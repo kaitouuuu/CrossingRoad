@@ -35,7 +35,7 @@ private:
 	Sprite sprite;
 
 public:
-    std::vector<Object> objects;
+    std::vector<Object*> objects;
 	std::vector<Vehicle*> vehicles;
 	std::vector<Animal*> animals;
 
@@ -50,7 +50,7 @@ public:
 	void setSpeed(const float s);
 	void addVehicle(Vehicle* added);
 	void addAnimal(Animal* added);
-	void addObject(const Object& added);
+	void addObject(Object* added);
 	void updateVehicles(bool isappearEsc,float x, float y,float width, float height);
 	void updateAnimals();
 	void draw(RenderWindow& window);

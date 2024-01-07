@@ -14,8 +14,8 @@ void Base::randomGame(int difficulty)
 	const float widthLane = 54.0;
 	const int numLane = 20;
 	std::string allRoadType[] = {"Road", "Field", "Land"};
-	std::string allObjectType[] = {"thintree", "bigtree"};
-	float allObjectSize[] = {36.0, 48.0};
+	std::string allObjectType[] = {"big1", "big2", "square1", "square2", "square3",
+									"square4", "square5", "square6", "vertical1"};
 
 	// Initial road
 	lanes.clear();
@@ -100,13 +100,13 @@ void Base::randomGame(int difficulty)
 
 		if (type == "Field")
 		{
-			int numObj = randomNumber(0, std::max(0, difficulty - 1));
+			//int numObj = randomNumber(0, std::max(0, difficulty - 1));
+			int numObj = 2;
 
 			for (int j = 1; j <= numObj; ++j)
 			{
-				int temp = randomNumber(0, 1);
-				Object newObj = Object(float(randomNumber(0, 1919)), widthLane * i, allObjectSize[temp],
-									   allObjectSize[temp], allObjectType[temp]);
+				int temp = randomNumber(0, 8);
+				Object* newObj = new Object(float(randomNumber(0, 1919)), widthLane * i, allObjectType[temp]);
 				newRoad.addObject(newObj);
 			}
 		}

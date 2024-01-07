@@ -365,6 +365,10 @@ void Frontend::displayMenu()
 			
 			for (Road& lane : base.lanes)
 			{
+				for (Object* object : lane.objects)
+				{
+					object->draw(window);
+				}
 				for (Vehicle* vehicle : lane.vehicles)
 				{
 					vehicle->draw(window);
@@ -428,8 +432,6 @@ void Frontend::displayMenu()
 		
 		
 		}
-		
-		cout << "Hello\n";
 		window.display();
 	}
 	
