@@ -39,6 +39,7 @@ void Frontend::displayMenu()
 	Texture escapescreen;
 	if (!escapescreen.loadFromFile(filename))
 	{
+		std::cout << "File unload" << std::endl;
 		return;
 	}
 	Sprite escape_screen(escapescreen);
@@ -208,7 +209,6 @@ void Frontend::displayMenu()
 			}
 			if (currentState == GameState::setting) {
 				if (setstate == settingState::Normal) {
-					//cout << "Normal" << endl;
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 					for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter) {
@@ -242,7 +242,6 @@ void Frontend::displayMenu()
 					
 					if (e.type == sf::Event::KeyPressed) {
 						Keyboard::Key pressedKey = e.key.code;
-						//cout << "presskey: " << pressedKey;
 						handleKeyPressed(e.key.code, result);
 						setstate = settingState::Normal;
 					}
@@ -385,11 +384,11 @@ void Frontend::displayMenu()
 
 			int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
 				max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
+			std::cout << checkCondition << std::endl;
 			if (checkCondition == 1)
 			{
 				//currentState = GameState::newgame;
 				//Sleep(100000);
-				cout << "Condition1\n";
 				isappearEscape = true;
 				islose = true;
 			}
@@ -428,8 +427,7 @@ void Frontend::displayMenu()
 		
 		
 		}
-		
-		cout << "Hello\n";
+
 		window.display();
 	}
 	

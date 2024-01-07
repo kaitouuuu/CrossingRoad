@@ -411,7 +411,7 @@ int Character::checkCollision(Road &aRoad)
 {
 	float tmpx = x;
 	float tmpy = y;
-	int check;
+	int check = 0;
 	// 0: Up, 1: Down, 2: Left, 3: Right
 	if (type == 0)
 	{
@@ -454,7 +454,7 @@ int Character::checkCollision(Road &aRoad)
 			}
 		}
 	}
-	return max(check, 0);
+	return check;
 }
 
 float Character::getY()
@@ -472,7 +472,6 @@ void Character::changeSkin()
 	std::string action;
 	for (const auto& pair : keyMap) {
 		if (sf::Keyboard::isKeyPressed(pair.second)) {
-			cout << "Keyboard is pressed\n";
 			action = pair.first;
 		}
 	}
