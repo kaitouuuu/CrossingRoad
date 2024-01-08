@@ -364,7 +364,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
 Debug/CrossingRoad.exe
 Debug/CrossingRoad.pdb
 Release/CrossingRoad.exe
 Release/CrossingRoad.pdb
+*.exe
+*.pdb

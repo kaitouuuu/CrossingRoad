@@ -109,7 +109,6 @@ void Road::updateVehicles(bool isappearEsc, float x, float y,float width, float 
 				vehicle->updatePosition(speed, false);
 				continue;
 			}
-			//else isappearEsc = true;
 			vehicle->updatePosition(speed,isappearEsc);
 		}
 	else
@@ -124,7 +123,6 @@ void Road::updateVehicles(bool isappearEsc, float x, float y,float width, float 
 				vehicle->updatePosition(0, false);
 				continue;
 			}
-			//else isappearEsc = true;
 			vehicle->updatePosition(0,isappearEsc);
 		}
 }
@@ -178,21 +176,4 @@ void Road::setType(const std::string t)
 
 void Road::printAll()
 {
-	//std::cout << type << " " << speed << std::endl
-	//		  << "Car: ";
-
-	//for (Vehicle* vehicle : vehicles)
-	//{
-	//	std::cout << vehicle->getX() << ":" << vehicle->getY() << " ";
-	//}
-
-	//std::cout << std::endl
-	//		  << "Object: ";
-
-	//for (Object &object : objects)
-	//{
-	//	std::cout << object.getX() << ":" << object.getY() << " ";
-	//}
-
-	//std::cout << std::endl;
 }

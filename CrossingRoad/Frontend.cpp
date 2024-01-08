@@ -222,31 +222,30 @@ void Frontend::displayMenu()
 						for (auto& button : stagelv) {
 							if (button.isClicked(mousePosF)) {
 								if (button.type() == "Lv1") {
-									currentState = GameState::game;
+									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv1;
-									cout << "Lv1 is clicked\n";
 								}
 								else if (button.type() == "Lv2") {
-									currentState = GameState::game;
+									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv2;
 
 								}
 								else if (button.type() == "Lv3") {
-									currentState = GameState::game;
+									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv3;
 
 								}
 								else if (button.type() == "Lv4") {
-									currentState = GameState::game;
+									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv4;
 
 								}
-								else if (button.type() == "Back") {
-									currentState = GameState::gamemode;
+								else if (button.type() == "Lv5") {
+									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv5;
 
@@ -260,25 +259,26 @@ void Frontend::displayMenu()
 					}
 					else if (currentState == GameState::game)
 					{
-						for (auto& button : c)
-						{
-							if (button.isClicked(mousePosF))
+						if (currenttype != Gametype::endless) {
+							currentState = GameState::newgame;
+						}
+						else {
+							for (auto& button : c)
 							{
-								if (button.type() == "New game")
+								if (button.isClicked(mousePosF))
 								{
-									currentState = GameState::newgame;
-								}
-								else if (button.type() == "Load game")
-								{
-									currentState = GameState::loadgame;
-								}
-								else if (button.type() == "Back")
-								{
-									if (currenttype == Gametype::stage) {
-										currentState = GameState::stagemode;
+									if (button.type() == "New game")
+									{
+										currentState = GameState::newgame;
 									}
-									else
-									currentState = GameState::gamemode;
+									else if (button.type() == "Load game")
+									{
+										currentState = GameState::loadgame;
+									}
+									else if (button.type() == "Back")
+									{
+										currentState = GameState::gamemode;
+									}
 								}
 							}
 						}
