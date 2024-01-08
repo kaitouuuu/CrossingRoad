@@ -50,8 +50,8 @@ void Frontend::displayMenu()
 	Button A("Content/Image/Game.png", 1452, 353, "Game");
 	Button B("Content/Image/Rule.png", 1462, 466, "Rule");
 	Button C("Content/Image/Setting.png", 1410, 579, "Setting");
-	Button D("Content/Image/High score.png", 1403, 692, "High score");
-	Button E("Content/Image/Exit.png", 1465, 811, "Exit");
+	//Button D("Content/Image/High score.png", 1403, 692, "High score");
+	Button E("Content/Image/Exit.png", 1462, 692, "Exit");
 
 	//Button game
 	Button F("Content/Image/New Game.png", 1415, 410, "New game");
@@ -84,6 +84,16 @@ void Frontend::displayMenu()
 	Button Es1("Content/Image/Back.png", 857, 369, "Back");
 	Button Es2("Content/Image/New Game.png", 790, 499, "New game esc");
 	Button Es3("Content/Image/Save.png", 804, 636, "Save");
+	Button L2("Content/Image/Exit.png", 854, 636, "Exit");
+
+	//Rule menu
+	Button Rule1("Content/Image/Rule01.png", 379, 242, "Rule01");
+	Button Rule2("Content/Image/Rule02.png", 379, 630, "Rule02");
+	Button Ruleback("Content/Image/Back.png", 1628, 933, "Back");
+	vector<Button> rulemenu;
+	rulemenu.push_back(Rule1);
+	rulemenu.push_back(Rule2);
+	rulemenu.push_back(Ruleback);
 
 	vector<Button> gamemodee;
 	gamemodee.push_back(stage_);
@@ -94,7 +104,7 @@ void Frontend::displayMenu()
 	b.push_back(A);
 	b.push_back(B);
 	b.push_back(C);
-	b.push_back(D);
+	//b.push_back(D);
 	b.push_back(E);
 
 
@@ -122,16 +132,19 @@ void Frontend::displayMenu()
 	TextBox At("Content/Font/SuperMario256.ttf", Color::White, "CROSSY ROAD", 100, 401, 157);
 	TextBox Bt("Content/Font/SuperMario256.ttf", Color::White, "SETTING", 100, 445, 81);
 	TextBox Ct("Content/Font/SuperMario256.ttf", Color::Black, "YOU LOSE!!!", 40, 827, 369);
+	TextBox Dt("Content/Font/SuperMario256.ttf", Color::White, "RULE", 100, 412, 38);
+	TextBox Et("Content/Font/SuperMario256.ttf", Color::White, "Highscore: ", 60, 1018, 820);
 	vector<TextBox> t;
-	
+	vector<TextBox> tt;
 	t.push_back(At);
-	
+	tt.push_back(Dt);
 	//t.push_back(Bt);
 	//t.push_back(Ct);
 	Menu n(b, t);
 	Menu q(c, t);
 	Menu gmode(gamemodee, t);
 	Menu slv(stagelv, t);
+	Menu menurule(rulemenu, tt);
 	//Menu p(d, y);
 	//MainMenu m(b);
 
@@ -185,7 +198,7 @@ void Frontend::displayMenu()
 					// Get the mouse position
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-	
+
 					if (currentState == GameState::mainmenu) {
 						for (auto& button : b)
 						{
@@ -198,15 +211,24 @@ void Frontend::displayMenu()
 								else if (button.type() == "Setting")
 								{
 									currentState = GameState::setting;
-									 
+
 								}
 								else if (button.type() == "Exit")
 								{
 									return;
 								}
+								else if (button.type() == "Rule") {
+									currentState = GameState::rule;
+								}
 							}
 						}
 					}
+					else if (currentState == GameState::rule) {
+						if (Ruleback.isClicked(mousePosF)) {
+							currentState = GameState::mainmenu;
+						}
+					}
+					
 					else if (currentState == GameState::gamemode) {
 						for (auto& button : gamemodee) {
 							if (button.isClicked(mousePosF)) {
@@ -390,11 +412,19 @@ void Frontend::displayMenu()
 							}
 							else if (but.type() == "Save") {
 								outputSave();
+							else if (but.type() == "Exit") {
+
+								// DO STH HERE WITH SAVE
 								currentState = GameState::mainmenu;
 								isappearEscape = false;
 								islose = false;
 							}
 						}
+					}
+					if (L2.isClicked(mousePosF)) {
+						currentState = GameState::mainmenu;
+						isappearEscape = false;
+						islose = false;
 					}
 				}
 			}
@@ -434,11 +464,19 @@ void Frontend::displayMenu()
 			window.draw(background);
 			slv.draw(window, mouse);
 			break;
+		case GameState::rule:
+			window.draw(setting_background);
+			menurule.draw(window, mouse);
+			break;
 		case GameState::game:
 			window.draw(background);
 
 			q.draw(window, mouse);
 
+			if (currenttype == Gametype::endless) {
+				Et.draw(window);
+				drawhighscore(0, window);
+			}
 			break;
 		case GameState::highscore:
 			// Optionally handle cleanup and exit the loop
@@ -511,7 +549,7 @@ void Frontend::displayMenu()
 						lane.updateTrafficLight();
 					}
 					lane.updateVehicles(isappearEscape,champ.getX(),champ.getY(),champ.getWidth(),champ.getHeight());
-					lane.updateAnimals();
+					lane.updateAnimals(isappearEscape, champ.getX(), champ.getY(), champ.getWidth(), champ.getHeight());
 				}
 			
 			for (Road& lane : base.lanes)
@@ -629,7 +667,7 @@ void Frontend::createButtons()
 }
 std::string Frontend::keyToString(sf::Keyboard::Key key) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) return "Space";
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) return "Shift";
+	//else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) return "Shift";
 	else if (key == sf::Keyboard::Up) return "Up Arrow";
 	else if (key == sf::Keyboard::Down) return "Down Arrow";
 	else if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z) {
@@ -657,4 +695,9 @@ void Frontend::handleKeyPressed(sf::Keyboard::Key keyCode, const std::string& re
 		}
 		
 	}
+}
+void Frontend::drawhighscore(int highscore, RenderWindow& window) {
+	string scorestr = to_string(highscore);
+	TextBox score("Content/Font/SuperMario256.ttf", Color::White, scorestr, 60, 1428.f, 820.f);
+	score.draw(window);
 }

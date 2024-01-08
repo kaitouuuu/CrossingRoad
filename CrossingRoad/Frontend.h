@@ -12,7 +12,7 @@ using namespace sf;
 using namespace std;
 
 enum class GameState {
-	mainmenu, game, setting, highscore, loadgame, newgame, playingGame, gamemode,stagemode
+	mainmenu, game, setting, highscore, loadgame, newgame, playingGame, gamemode,stagemode,rule
 };
 enum class Gametype {
 	none, stage, endless
@@ -48,7 +48,7 @@ private:
 	int numStage;
 	int stage;
 	bool newStage;
-	
+	void drawhighscore(int highscore, RenderWindow& window);
 
 };
 

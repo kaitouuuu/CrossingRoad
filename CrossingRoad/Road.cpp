@@ -127,11 +127,20 @@ void Road::updateVehicles(bool isappearEsc, float x, float y,float width, float 
 		}
 }
 
-void Road::updateAnimals()
+void Road::updateAnimals(bool isappearEsc, float x, float y, float width, float height)
 {
 	for (Animal* animal : animals)
 	{
-		animal->updatePosition(speed);
+		float checkX = max(animal->getX(), x);
+		float checkY = max(animal->getY(), y);
+		float checkX2 = min(animal->getX() + animal->getWidth(), x + width);
+		float checkY2 = min(animal->getY() + animal->getHeight(), y + height);
+		if (checkX <= checkX2 && checkY <= checkY2)
+		{
+			animal->updatePosition(speed, false);
+			continue;
+		}
+		animal->updatePosition(speed, isappearEsc);
 	}
 }
 

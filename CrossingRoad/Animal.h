@@ -32,7 +32,7 @@ public:
 	std::string getType() const;
 
 	virtual void clearAnimation() = 0;
-	virtual void updatePosition(float speed);
+	virtual void updatePosition(float speed,bool isappearEsc);
 	virtual void draw(RenderWindow& window);
 };
 

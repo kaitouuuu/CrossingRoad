@@ -16,10 +16,10 @@ void Animal4::clearAnimation()
 	animationAnimal4.gameOver();
 }
 
-void Animal4::updatePosition(float speed)
+void Animal4::updatePosition(float speed,bool isappearEsc)
 {
-	Animal::updatePosition(speed);
-	animationAnimal4.update(speed);
+	Animal::updatePosition(speed,isappearEsc);
+	animationAnimal4.update(speed,isappearEsc);
 }
 
 void Animal4::draw(RenderWindow& window)
