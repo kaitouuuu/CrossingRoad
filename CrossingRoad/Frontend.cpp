@@ -2,8 +2,8 @@
 
 void Frontend::displayMenu()
 {
-	RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road");
-	//RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road", sf::Style::Fullscreen);
+	//RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road");
+	RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road", sf::Style::Fullscreen);
 	window.setFramerateLimit(60);
 	string filename = "Content/Image/background.jpg";
 	Texture backgroundTexture;
@@ -103,10 +103,18 @@ void Frontend::displayMenu()
 	c.push_back(G);
 	c.push_back(H);
 
+	vector<Button> cc;
+	cc.push_back(F);
+	cc.push_back(H);
+
 	vector<Button> escapebut;
 	escapebut.push_back(Es1);
 	escapebut.push_back(Es2);
 	escapebut.push_back(Es3);
+
+	vector<Button> escapebut2;
+	escapebut2.push_back(Es1);
+	escapebut2.push_back(Es2);
 
 	bool isappearEscape = false;
 	bool islose = false;
@@ -338,19 +346,34 @@ void Frontend::displayMenu()
 				else if (isappearEscape && !islose) {
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-					for (auto &but : escapebut) {
-						if (but.isClicked(mousePosF)) {
-							if (but.type() == "Back") {
-								isappearEscape = false;
+					if (currentlv == Stagelv::none) {
+						for (auto& but : escapebut) {
+							if (but.isClicked(mousePosF)) {
+								if (but.type() == "Back") {
+									isappearEscape = false;
+								}
+								else if (but.type() == "New game esc") {
+									currentState = GameState::newgame;
+									isappearEscape = false;
+								}
+								else if (but.type() == "Save") {
+									outputSave();
+									currentState = GameState::mainmenu;
+									isappearEscape = false;
+								}
 							}
-							else if (but.type() == "New game esc") {
-								currentState = GameState::newgame;
-								isappearEscape = false;
-							}
-							else if (but.type() == "Save") {
-								outputSave();
-								currentState = GameState::mainmenu;
-								isappearEscape = false;
+						}
+					}
+					else {
+						for (auto& but : escapebut2) {
+							if (but.isClicked(mousePosF)) {
+								if (but.type() == "Back") {
+									isappearEscape = false;
+								}
+								else if (but.type() == "New game esc") {
+									currentState = GameState::newgame;
+									isappearEscape = false;
+								}
 							}
 						}
 					}
@@ -518,15 +541,27 @@ void Frontend::displayMenu()
 			if (isappearEscape) {
 				if (!islose) {
 					window.draw(escape_screen);
-					Es1.draw(window, mouse);
-					Es2.draw(window, mouse);
-					Es3.draw(window, mouse);
+					if (currentlv == Stagelv::none) {
+						Es1.draw(window, mouse);
+						Es2.draw(window, mouse);
+						Es3.draw(window, mouse);
+					}
+					else {
+						Es1.draw(window, mouse);
+						Es2.draw(window, mouse);
+					}
 				}
 				else {
 					window.draw(escape_screen);
-					Ct.draw(window);
-					Es2.draw(window, mouse);
-					Es3.draw(window, mouse);
+					if (currentlv == Stagelv::none) {
+						Ct.draw(window);
+						Es2.draw(window, mouse);
+						Es3.draw(window, mouse);
+					}
+					else {
+						Ct.draw(window);
+						Es2.draw(window, mouse);
+					}
 				}
 			}
 			
