@@ -112,7 +112,6 @@ void Frontend::displayMenu()
 			{"Move Up: ", sf::Keyboard::W},
 			{"Move Down: ", sf::Keyboard::S},
 			{"Change Skin: ", sf::Keyboard::F}
-		
 	};
 	TextBox popuptext("Content/Font/SuperMario256.ttf", Color::White, "PRESS ANY KEY OR BUTTON", 100, 201, 325);
 	Clock frameClock;
@@ -120,13 +119,8 @@ void Frontend::displayMenu()
 	
 
 	// base game
-	Base base;
 	base.randomGame(1);
-	Character champ;
-	int difficulty;
-	int numStage;
-	int stage ;
-	bool newStage;
+	difficulty = numStage = stage = newStage = 0;
 	champ.updatekeymap(keyMap);
 	while (window.isOpen())
 	{
@@ -216,7 +210,6 @@ void Frontend::displayMenu()
 							std::string buttontext = (*iter).second.getText();
 							int firstSpacePos = buttontext.find_first_of(":");
 							result = buttontext.substr(0, firstSpacePos);
-							//cout << result << endl;
 							if (result == "Move Left") {
 								setbut = Settingbut::left;
 							}
@@ -266,8 +259,7 @@ void Frontend::displayMenu()
 								isappearEscape = false;
 							}
 							else if (but.type() == "Save") {
-
-								// DO STH HERE WITH SAVE
+								outputSave();
 								currentState = GameState::mainmenu;
 								isappearEscape = false;
 							}
@@ -280,7 +272,6 @@ void Frontend::displayMenu()
 		}
 
 		window.clear(Color::White);
-		//character.draw(window);
 
 		switch (currentState) {
 		case GameState::setting:
@@ -318,8 +309,7 @@ void Frontend::displayMenu()
 		case GameState::newgame:
 			difficulty = 1;
 			numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
-			champ = Character("Character1.png", 1060.f, 500.f //1080.f - 48.f
-				, 48.f, 48.f, true, false);
+			champ = Character("Character1.png", 1060.f, 500.f, 48.f, 48.f, true, false);
 			champ.updatekeymap(keyMap);
 			stage = 1;
 			newStage = true;
@@ -384,11 +374,9 @@ void Frontend::displayMenu()
 
 			int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
 				max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
-			std::cout << checkCondition << std::endl;
+
 			if (checkCondition == 1)
 			{
-				//currentState = GameState::newgame;
-				//Sleep(100000);
 				isappearEscape = true;
 				islose = true;
 			}
@@ -416,16 +404,12 @@ void Frontend::displayMenu()
 				else {
 					window.draw(escape_screen);
 					Ct.draw(window);
-					
 					Es2.draw(window, mouse);
 					Es3.draw(window, mouse);
 				}
 			}
 			
 			break;
-		
-		
-		
 		}
 
 		window.display();
@@ -433,23 +417,27 @@ void Frontend::displayMenu()
 	
 }
 
+void Frontend::outputSave() {
+	std::ofstream INP;
+	INP.open("test.inp", std::ifstream::out);
+	INP << base.lanes.size() << std::endl;
+	INP.close();
+}
 
-void Frontend::createButtons() {
+
+void Frontend::createButtons()
+{
 	settingbutton.clear();
 	float offsetY = 216.f;
-	//cout << "keymap: " << keyMap.size();
-	for (const auto& pair : keyMap) {
-		//cout << "over\n";
+	for (const auto& pair : keyMap)
+	{
 		const std::string action = pair.first;
-		//cout << action << endl;
 		sf::Keyboard::Key key = pair.second;
 		
 		std::string keyString = keyToString(key);
-		//cout << keyString << endl;
 		Button but("Content/Image/button.png", 683.f, offsetY,"but");
 		
 		TextBox b("Content/Font/SuperMario256.ttf", Color::White, action+keyToString(key), 40, 683.f, offsetY + 25.f);
-		//cout << "Go\n";
 		std::pair<Button, TextBox> buttonAndTextPair(but, b);
 
 		settingbutton.push_back(buttonAndTextPair);
@@ -472,20 +460,20 @@ std::string Frontend::keyToString(sf::Keyboard::Key key) {
 }
 
 void Frontend::handleKeyPressed(sf::Keyboard::Key keyCode, const std::string& result) {
-	
-		// Update the key mapping for the selected action
+	// Update the key mapping for the selected action
 	std::string selectedAction = result + ": ";
 	keyMap[selectedAction] = keyCode;
 	std::string updatedtext = selectedAction + keyToString(keyCode);
-	for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter) {
+	for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter)
+	{
 		std::string buttontext = (*iter).second.getText();
 		int firstSpacePos = buttontext.find_first_of(":");
 		string get_result = buttontext.substr(0, firstSpacePos);
-		if (result == get_result) {
+		if (result == get_result)
+		{
 			(*iter).second.setText(updatedtext);
 			break;
 		}
 		
 	}
-	
 }

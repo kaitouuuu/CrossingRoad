@@ -4,6 +4,7 @@
 #include "Base.h"
 #include "MainMenu.h"
 #include <map>
+#include <fstream>
 #include <SFML/Graphics.hpp>
 #include <utility> // for std pair
 #include <string>
@@ -27,6 +28,7 @@ class Frontend {
 public:
 	//Frontend();
 	void displayMenu();
+	void outputSave();
 	
 private:
 	map<std::string, sf::Keyboard::Key> keyMap;
@@ -34,6 +36,12 @@ private:
 	void createButtons();
 	std::string keyToString(sf::Keyboard::Key key);
 	void handleKeyPressed(sf::Keyboard::Key keyCode, const std::string& selectedAction);
+	Base base;
+	Character champ;
+	int difficulty;
+	int numStage;
+	int stage;
+	bool newStage;
 	
 
 };
