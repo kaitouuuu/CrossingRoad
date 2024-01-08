@@ -412,6 +412,7 @@ void Frontend::displayMenu()
 							}
 							else if (but.type() == "Save") {
 								outputSave();
+							}
 							else if (but.type() == "Exit") {
 
 								// DO STH HERE WITH SAVE
