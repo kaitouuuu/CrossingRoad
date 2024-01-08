@@ -50,6 +50,7 @@ private:
 	int stage;
 	bool newStage;
 	void drawhighscore(int highscore, RenderWindow& window);
+	int highScore;
 
 };
 

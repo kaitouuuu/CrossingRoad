@@ -2,6 +2,11 @@
 
 void Frontend::displayMenu()
 {
+	ifstream INP;
+	INP.open("test.inp", std::ios::in);
+	INP >> highScore;
+	INP.close();
+
 	RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road", sf::Style::Fullscreen);
 	window.setFramerateLimit(60);
 	string filename = "Content/Image/background.jpg";
@@ -125,6 +130,10 @@ void Frontend::displayMenu()
 	escapebut2.push_back(Es1);
 	escapebut2.push_back(Es2);
 
+	vector<Button> escapebut3;
+	escapebut3.push_back(Es2);
+	escapebut3.push_back(L2);
+
 	bool isappearEscape = false;
 	bool islose = false;
 
@@ -238,7 +247,7 @@ void Frontend::displayMenu()
 								else if (button.type() == "Endless") {
 									currentState = GameState::game;
 									currenttype = Gametype::endless;
-
+									currentlv = Stagelv::none;
 								}
 								else if (button.type() == "Back") {
 									currentState = GameState::mainmenu;
@@ -248,6 +257,7 @@ void Frontend::displayMenu()
 						}
 					}
 					else if (currentState == GameState::stagemode) {
+						currentlv = Stagelv::none;
 						for (auto& button : stagelv) {
 							if (button.isClicked(mousePosF)) {
 								if (button.type() == "Lv1") {
@@ -402,15 +412,12 @@ void Frontend::displayMenu()
 				else if (isappearEscape && islose) {
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-					for (auto& but : escapebut) {
+					for (auto& but : escapebut3) {
 						if (but.isClicked(mousePosF)) {
 							if (but.type() == "New game esc") {
 								currentState = GameState::newgame;
 								isappearEscape = false;
 								islose = false;
-							}
-							else if (but.type() == "Save") {
-								outputSave();
 							}
 							else if (but.type() == "Exit") {
 								currentState = GameState::mainmenu;
@@ -473,7 +480,7 @@ void Frontend::displayMenu()
 
 			if (currenttype == Gametype::endless) {
 				Et.draw(window);
-				drawhighscore(0, window);
+				drawhighscore(highScore, window);
 			}
 			break;
 		case GameState::highscore:
@@ -622,28 +629,18 @@ void Frontend::displayMenu()
 			if (isappearEscape) {
 				if (!islose) {
 					window.draw(escape_screen);
+					Es1.draw(window, mouse);
+					Es2.draw(window, mouse);
 					if (currentlv == Stagelv::none) {
-						Es1.draw(window, mouse);
-						Es2.draw(window, mouse);
 						Es3.draw(window, mouse);
-					}
-					else {
-						Es1.draw(window, mouse);
-						Es2.draw(window, mouse);
 					}
 				}
 				else {
+					highScore = std::max(highScore, stage);
 					window.draw(escape_screen);
-					if (currentlv == Stagelv::none) {
-						Ct.draw(window);
-						Es2.draw(window, mouse);
-						Es3.draw(window, mouse);
-					}
-					else {
-						Ct.draw(window);
-						Es2.draw(window, mouse);
-						L2.draw(window, mouse);
-					}
+					Ct.draw(window);
+					Es2.draw(window, mouse);
+					L2.draw(window, mouse);
 				}
 			}
 			
@@ -658,7 +655,7 @@ void Frontend::displayMenu()
 void Frontend::outputSave() {
 	std::ofstream INP;
 	INP.open("test.inp", ios::out);
-	INP << stage << " " << difficulty << std::endl;
+	INP << highScore << std::endl << stage << " " << difficulty << std::endl;
 	for (Road& lane : base.lanes)
 	{
 		std::string s = lane.getType();
