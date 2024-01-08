@@ -21,27 +21,33 @@ void Base::randomGame(int difficulty)
 	lanes.clear();
 	Road newRoad = Road("Field", 0);
 	lanes.push_back(newRoad);
+	newRoad = Road("Field", widthLane);
+	lanes.push_back(newRoad);
 
-	for (int i = 1; i < numLane - 1; ++i)
+	for (int i = 2; i < numLane - 2; ++i)
 	{
 		std::string type = allRoadType[randomNumber(0, 2)];
 
 		// The harder the game the fewer Field type roads appear
 		if (difficulty > 3 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 2)];
+			type = allRoadType[randomNumber(0, 2)];
 		}
 		if (difficulty > 10 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 2)];
+			type = allRoadType[randomNumber(0, 2)];
 		}
 		if (difficulty > 28 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 2)];
+			type = allRoadType[randomNumber(0, 2)];
 		}
 		if (difficulty > 67 && type == "Field")
 		{
-			std::string type = allRoadType[randomNumber(0, 2)];
+			type = allRoadType[randomNumber(0, 2)];
+		}
+
+		if (i == 1) {
+			type = "Field";
 		}
 
 		newRoad = Road(type, widthLane * i);
@@ -70,7 +76,7 @@ void Base::randomGame(int difficulty)
 
 			newRoad.setSpeed(speed);
 
-			int numCar = min(1 + difficulty + randomNumber(0, difficulty), 18);
+			int numCar = min(1 + difficulty / 10 + randomNumber(0, difficulty / 3), 16);
 
 			for (int j = 1; j <= numCar; ++j)
 			{
@@ -113,7 +119,7 @@ void Base::randomGame(int difficulty)
 
 		if (type == "Land")
 		{
-			float speed = float(randomNumber(400 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
+			float speed = float(randomNumber(600 + std::min(difficulty * 200, 150000), 250000 + std::min(difficulty * 2500, 200000))) / 10000;
 
 			// Random vehicle direction
 			if (randomNumber(0, 1))
@@ -123,7 +129,7 @@ void Base::randomGame(int difficulty)
 
 			newRoad.setSpeed(speed);
 
-			int numAnimal = difficulty + std::max(0, randomNumber(0, difficulty) - 1) - 1;
+			int numAnimal = std::min(15, std::max(0, randomNumber(0, difficulty / 3) - 1));
 
 			for (int j = 1; j <= numAnimal; ++j)
 			{
@@ -155,6 +161,8 @@ void Base::randomGame(int difficulty)
 	}
 
 	// Last road
+	newRoad = Road("Field", widthLane * (numLane - 2));
+	lanes.push_back(newRoad);
 	newRoad = Road("Field", widthLane * (numLane - 1));
 	lanes.push_back(newRoad);
 }

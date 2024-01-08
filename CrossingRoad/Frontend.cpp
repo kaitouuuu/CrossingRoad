@@ -389,8 +389,7 @@ void Frontend::displayMenu()
 								islose = false;
 							}
 							else if (but.type() == "Save") {
-
-								// DO STH HERE WITH SAVE
+								outputSave();
 								currentState = GameState::mainmenu;
 								isappearEscape = false;
 								islose = false;
@@ -447,8 +446,31 @@ void Frontend::displayMenu()
 			break;
 
 		case GameState::newgame:
-			difficulty = 1;
-			numStage = 1 + std::min(std::min(difficulty, 6) + difficulty / 12, 24);
+			if (currentlv == Stagelv::none) {
+				difficulty = 1;
+			}
+			else if(currentlv == Stagelv::lv1) {
+				difficulty = 2;
+			}
+			else if (currentlv == Stagelv::lv2) {
+				difficulty = 4;
+			}
+			else if (currentlv == Stagelv::lv3) {
+				difficulty = 7;
+			}
+			else if (currentlv == Stagelv::lv4) {
+				difficulty = 11;
+			}
+			else { // currentlv == Stagelv::lv5
+				difficulty = 16;
+			}
+			if (currentlv != Stagelv::none) {
+				numStage = 2 + std::min(std::min(difficulty / 3, 6) + difficulty / 10, 21);
+			}
+			else {
+				numStage = 1 << 16;
+			}
+			std::cerr << numStage << std::endl;
 			champ = Character("Character1.png", 1060.f, 500.f, 48.f, 48.f, true, false);
 			champ.updatekeymap(keyMap);
 			stage = 1;
@@ -533,6 +555,9 @@ void Frontend::displayMenu()
 				}
 				else
 				{
+					if (currentlv == Stagelv::none) {
+						++difficulty;
+					}
 					newStage = true;
 				}
 			}
