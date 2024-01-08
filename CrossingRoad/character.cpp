@@ -454,7 +454,15 @@ int Character::checkCollision(Road &aRoad)
 			}
 		}
 	}
-	return check;
+	else if (aRoad.getType() == "Field")
+	{
+		for (int i = 0; i < aRoad.objects.size(); ++i)
+		{
+			if (condition(aRoad.objects[i]->getX(), aRoad.objects[i]->getY(), aRoad.objects[i]->getHeight(), aRoad.objects[i]->getWidth()))
+				handleNotCarCollision(aRoad.objects[i]->getX(), aRoad.objects[i]->getY(), aRoad.objects[i]->getHeight(), aRoad.objects[i]->getWidth());
+		}
+	}
+	return max(check, 0);
 }
 
 float Character::getY()

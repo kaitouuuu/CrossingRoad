@@ -19,7 +19,7 @@ private:
 
 public:
 	Object();
-	Object(float xPos, float yPos, float width, float height, std::string type);
+	Object(float xPos, float yPos, std::string type);
 
 	float getX() const;
 	float getY() const;

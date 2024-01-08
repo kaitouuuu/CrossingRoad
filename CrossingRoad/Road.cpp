@@ -41,14 +41,14 @@ void Road::setSpeed(const float s)
 	speed = s;
 }
 
-void Road::addObject(const Object &added)
+void Road::addObject(Object* added)
 {
-	for (Object &object : objects)
+	for (Object* object : objects)
 	{
-		float objX = object.getX();
-		float objX2 = objX + object.getWidth();
-		float addedObjX = added.getX();
-		float addedObjX2 = addedObjX + added.getWidth();
+		float objX = object->getX();
+		float objX2 = objX + object->getWidth();
+		float addedObjX = added->getX();
+		float addedObjX2 = addedObjX + added->getWidth();
 
 		if (objX <= addedObjX && addedObjX <= objX2 || addedObjX <= objX && objX <= addedObjX2)
 		{

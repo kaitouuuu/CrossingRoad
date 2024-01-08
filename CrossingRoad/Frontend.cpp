@@ -58,6 +58,25 @@ void Frontend::displayMenu()
 	Button G("Content/Image/Load game.png", 1406, 522, "Load game");
 	Button H("Content/Image/Back.png", 1483, 634, "Back");
 
+	//Button game mode
+	Button stage_("Content/Image/Stage.png", 1458, 410, "Stage");
+	Button endless_("Content/Image/Endless.png", 1443, 522, "Endless");
+	Button back_("Content/Image/Back.png", 1483, 634, "Back");
+
+	//BUtton lv stage
+	Button lv1("Content/Image/Stage 1.png", 1409, 424, "Lv1");
+	Button lv2("Content/Image/Stage 2.png", 1409, 517, "Lv2");
+	Button lv3("Content/Image/Stage 3.png", 1409, 610, "Lv3");
+	Button lv4("Content/Image/Stage 4.png", 1409, 703, "Lv4");
+	Button lv5("Content/Image/Stage 5.png", 1409, 796, "Lv5");
+	Button Backstage("Content/Image/Back.png", 1437, 889, "Back");
+	vector<Button>stagelv;
+	stagelv.push_back(lv1);
+	stagelv.push_back(lv2);
+	stagelv.push_back(lv3);
+	stagelv.push_back(lv4);
+	stagelv.push_back(lv5);
+	stagelv.push_back(Backstage);
 	//Button setting
 	Button H2("Content/Image/Back.png", 1681, 945, "Back");
 
@@ -65,6 +84,11 @@ void Frontend::displayMenu()
 	Button Es1("Content/Image/Back.png", 857, 369, "Back");
 	Button Es2("Content/Image/New Game.png", 790, 499, "New game esc");
 	Button Es3("Content/Image/Save.png", 804, 636, "Save");
+
+	vector<Button> gamemodee;
+	gamemodee.push_back(stage_);
+	gamemodee.push_back(endless_);
+	gamemodee.push_back(back_);
 
 	vector<Button> b;
 	b.push_back(A);
@@ -98,7 +122,8 @@ void Frontend::displayMenu()
 	//t.push_back(Ct);
 	Menu n(b, t);
 	Menu q(c, t);
-	
+	Menu gmode(gamemodee, t);
+	Menu slv(stagelv, t);
 	//Menu p(d, y);
 	//MainMenu m(b);
 
@@ -116,7 +141,8 @@ void Frontend::displayMenu()
 	TextBox popuptext("Content/Font/SuperMario256.ttf", Color::White, "PRESS ANY KEY OR BUTTON", 100, 201, 325);
 	Clock frameClock;
 
-	
+	Gametype currenttype = Gametype::none;
+	Stagelv currentlv = Stagelv::none;
 
 	// base game
 	base.randomGame(1);
@@ -159,7 +185,7 @@ void Frontend::displayMenu()
 							{
 								if (button.type() == "Game")
 								{
-									currentState = GameState::game;
+									currentState = GameState::gamemode;
 								}
 								else if (button.type() == "Setting")
 								{
@@ -173,7 +199,66 @@ void Frontend::displayMenu()
 							}
 						}
 					}
-					else if (currentState==GameState::game)
+					else if (currentState == GameState::gamemode) {
+						for (auto& button : gamemodee) {
+							if (button.isClicked(mousePosF)) {
+								if (button.type() == "Stage") {
+									currentState = GameState::stagemode;
+									currenttype = Gametype::stage;
+								}
+								else if (button.type() == "Endless") {
+									currentState = GameState::game;
+									currenttype = Gametype::endless;
+
+								}
+								else if (button.type() == "Back") {
+									currentState = GameState::mainmenu;
+									currenttype = Gametype::none;
+								}
+							}
+						}
+					}
+					else if (currentState == GameState::stagemode) {
+						for (auto& button : stagelv) {
+							if (button.isClicked(mousePosF)) {
+								if (button.type() == "Lv1") {
+									currentState = GameState::game;
+									currenttype = Gametype::stage;
+									currentlv = Stagelv::lv1;
+									cout << "Lv1 is clicked\n";
+								}
+								else if (button.type() == "Lv2") {
+									currentState = GameState::game;
+									currenttype = Gametype::stage;
+									currentlv = Stagelv::lv2;
+
+								}
+								else if (button.type() == "Lv3") {
+									currentState = GameState::game;
+									currenttype = Gametype::stage;
+									currentlv = Stagelv::lv3;
+
+								}
+								else if (button.type() == "Lv4") {
+									currentState = GameState::game;
+									currenttype = Gametype::stage;
+									currentlv = Stagelv::lv4;
+
+								}
+								else if (button.type() == "Back") {
+									currentState = GameState::gamemode;
+									currenttype = Gametype::stage;
+									currentlv = Stagelv::lv5;
+
+								}
+								else if (button.type() == "Back") {
+									currentState = GameState::gamemode;
+									currentlv = Stagelv::none;
+								}
+							}
+						}
+					}
+					else if (currentState == GameState::game)
 					{
 						for (auto& button : c)
 						{
@@ -189,7 +274,11 @@ void Frontend::displayMenu()
 								}
 								else if (button.type() == "Back")
 								{
-									currentState = GameState::mainmenu;
+									if (currenttype == Gametype::stage) {
+										currentState = GameState::stagemode;
+									}
+									else
+									currentState = GameState::gamemode;
 								}
 							}
 						}
@@ -246,7 +335,7 @@ void Frontend::displayMenu()
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 					isappearEscape = true;
 				}
-				else if (isappearEscape) {
+				else if (isappearEscape && !islose) {
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 					for (auto &but : escapebut) {
@@ -262,6 +351,26 @@ void Frontend::displayMenu()
 								outputSave();
 								currentState = GameState::mainmenu;
 								isappearEscape = false;
+							}
+						}
+					}
+				}
+				else if (isappearEscape && islose) {
+					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+					for (auto& but : escapebut) {
+						if (but.isClicked(mousePosF)) {
+							if (but.type() == "New game esc") {
+								currentState = GameState::newgame;
+								isappearEscape = false;
+								islose = false;
+							}
+							else if (but.type() == "Save") {
+
+								// DO STH HERE WITH SAVE
+								currentState = GameState::mainmenu;
+								isappearEscape = false;
+								islose = false;
 							}
 						}
 					}
@@ -294,6 +403,14 @@ void Frontend::displayMenu()
 			window.draw(background);
 
 			n.draw(window, mouse);
+			break;
+		case GameState::gamemode:
+			window.draw(background);
+			gmode.draw(window, mouse);
+			break;
+		case GameState::stagemode:
+			window.draw(background);
+			slv.draw(window, mouse);
 			break;
 		case GameState::game:
 			window.draw(background);
@@ -354,6 +471,10 @@ void Frontend::displayMenu()
 			
 			for (Road& lane : base.lanes)
 			{
+				for (Object* object : lane.objects)
+				{
+					object->draw(window);
+				}
 				for (Vehicle* vehicle : lane.vehicles)
 				{
 					vehicle->draw(window);
