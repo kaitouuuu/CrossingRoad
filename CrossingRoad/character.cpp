@@ -104,7 +104,6 @@ Character::Character(string fileName, float x, float y, float width, float heigh
 	type = 1;
 
 	noKeyWasPressed = true;
-	isLose = false;
 }
 
 void Character::update(Clock &frameClock, Road &aRoad, Event &e, bool isappearesc)
