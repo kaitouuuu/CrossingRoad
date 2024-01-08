@@ -6,7 +6,10 @@ Base::Base()
 // Get random integer in range [l, r]
 int Base::randomNumber(int l, int r)
 {
-	return std::uniform_int_distribution<int>(l, r)(rng);
+	if (l <= r) {
+		return std::uniform_int_distribution<int>(l, r)(rng);
+	}
+	return 0;
 }
 
 void Base::randomGame(int difficulty)
@@ -14,17 +17,14 @@ void Base::randomGame(int difficulty)
 	const float widthLane = 54.0;
 	const int numLane = 20;
 	std::string allRoadType[] = {"Road", "Field", "Land"};
-	std::string allObjectType[] = {"big1", "big2", "square1", "square2", "square3",
-									"square4", "square5", "square6", "vertical1"};
+	std::string allObjectType[] = {"big1", "big2", "square1", "square2", "square3", "square4", "square5", "square6", "vertical1"};
 
 	// Initial road
 	lanes.clear();
 	Road newRoad = Road("Field", 0);
 	lanes.push_back(newRoad);
-	newRoad = Road("Field", widthLane);
-	lanes.push_back(newRoad);
 
-	for (int i = 2; i < numLane - 1; ++i)
+	for (int i = 1; i < numLane - 1; ++i)
 	{
 		std::string type = allRoadType[randomNumber(0, 2)];
 
@@ -57,19 +57,15 @@ void Base::randomGame(int difficulty)
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 190000), 250000 + std::min(difficulty * 2500, 240000))) / 10000 + 60;
 			float xPosition = float(randomNumber(960 - 321, 960 + 321));
 			newRoad.initTrafficLight(xPosition, widthLane*i);
+			if (randomNumber(0, 1))
+			{
+				speed = -speed;
+			}
 			if (difficulty <= 10) {
 				if (lanes.back().getType() == "Road")
 				{
 					// Consecutive roads will have the same direction
 					if (lanes.back().getSpeed() < 0)
-					{
-						speed = -speed;
-					}
-				}
-				else
-				{
-					// Random vehicle direction
-					if (randomNumber(0, 1))
 					{
 						speed = -speed;
 					}
@@ -108,7 +104,7 @@ void Base::randomGame(int difficulty)
 
 		if (type == "Field")
 		{
-			int numObj = randomNumber(0 + min(difficulty / 10, 6), min(14, randomNumber(0, std::max(0, difficulty - 1))));
+			int numObj = randomNumber(min(min(difficulty / 10, 6), min(14, randomNumber(0, std::max(0, difficulty - 1)))), min(14, randomNumber(0, std::max(0, difficulty - 1))));
 
 			for (int j = 1; j <= numObj; ++j)
 			{

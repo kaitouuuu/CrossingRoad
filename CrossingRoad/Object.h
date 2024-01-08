@@ -16,6 +16,7 @@ private:
 	std::string type;
 	Texture texture;
 	Sprite sprite;
+	std::string filename;
 
 public:
 	Object();

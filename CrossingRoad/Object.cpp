@@ -6,8 +6,7 @@ Object::Object()
 Object::Object(float xPos, float yPos, std::string type)
 	: xPos(xPos), yPos(yPos), type(type)
 {
-
-	std::string filename;
+	filename = "";
 
 	if (type == "big1")
 	{
@@ -49,13 +48,12 @@ Object::Object(float xPos, float yPos, std::string type)
 		filename = "Content/Image/SquareObject6.png";
 		width = height = 24;
 	}
-	else if (type == "vertical1")
+	else
 	{
 		filename = "Content/Image/VerticalObject1.png";
 		width = 24;
 		height = 48;
 	}
-
 	if (!texture.loadFromFile(filename))
 	{
 		std::cout << "Failed to load stable object!" << std::endl;

@@ -483,7 +483,7 @@ void Frontend::displayMenu()
 
 		case GameState::newgame:
 			if (currentlv == Stagelv::none) {
-				difficulty = 1;
+				difficulty = 11;
 			}
 			else if(currentlv == Stagelv::lv1) {
 				difficulty = 2;
@@ -552,6 +552,7 @@ void Frontend::displayMenu()
 				//	}
 				//	std::cerr << std::endl;
 				//}
+				//std::cerr << std::endl << "----------------------" << std::endl;
 			}
 			
 			for (Road& lane : base.lanes)
@@ -616,22 +617,33 @@ void Frontend::displayMenu()
 					newStage = true;
 				}
 			}
-			
+
 			champ.draw(window);
 			if (isappearEscape) {
 				if (!islose) {
 					window.draw(escape_screen);
-					Es1.draw(window, mouse);
-					Es2.draw(window, mouse);
 					if (currentlv == Stagelv::none) {
+						Es1.draw(window, mouse);
+						Es2.draw(window, mouse);
 						Es3.draw(window, mouse);
+					}
+					else {
+						Es1.draw(window, mouse);
+						Es2.draw(window, mouse);
 					}
 				}
 				else {
 					window.draw(escape_screen);
-					Ct.draw(window);
-					Es2.draw(window, mouse);
-					L2.draw(window, mouse);
+					if (currentlv == Stagelv::none) {
+						Ct.draw(window);
+						Es2.draw(window, mouse);
+						Es3.draw(window, mouse);
+					}
+					else {
+						Ct.draw(window);
+						Es2.draw(window, mouse);
+						L2.draw(window, mouse);
+					}
 				}
 			}
 			
@@ -645,9 +657,43 @@ void Frontend::displayMenu()
 
 void Frontend::outputSave() {
 	std::ofstream INP;
-	INP.open("test.inp", std::ifstream::out);
-	INP << base.lanes.size() << std::endl;
+	INP.open("test.inp", ios::out);
+	INP << stage << " " << difficulty << std::endl;
+	for (Road& lane : base.lanes)
+	{
+		std::string s = lane.getType();
+		INP << s << " " << lane.getSpeed() << " " << lane.getY() << std::endl;
+		if (s == "Road") {
+			INP << lane.vehicles.size() << std::endl;
+			for (Vehicle* vehicle : lane.vehicles)
+			{
+				INP << vehicle->getType() << " " << vehicle->getX() << " " << vehicle->getY()
+					<< " " << vehicle->getWidth() << " " << vehicle->getHeight() << " " << std::endl;
+			}
+		}
+		if (s == "Land") {
+			INP << lane.objects.size() << std::endl;
+			for (Object* object : lane.objects)
+			{
+				INP << object->getType() << " " << object->getX() << " " << object->getY()
+					<< " " << object->getWidth() << " " << object->getHeight() << " " << std::endl;
+			}
+		}
+		if (s == "Field") {
+			INP << lane.animals.size() << std::endl;
+			for (Animal* animal : lane.animals)
+			{
+				INP << animal->getType() << " " << animal->getX() << " " << animal->getY()
+					<< " " << animal->getWidth() << " " << animal->getHeight() << " " << std::endl;
+			}
+		}
+	}
 	INP.close();
+}
+
+void Frontend::inputSave()
+{
+	std::ifstream INP;
 }
 
 

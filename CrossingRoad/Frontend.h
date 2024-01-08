@@ -35,6 +35,7 @@ public:
 	//Frontend();
 	void displayMenu();
 	void outputSave();
+	void inputSave();
 	
 private:
 	map<std::string, sf::Keyboard::Key> keyMap;
