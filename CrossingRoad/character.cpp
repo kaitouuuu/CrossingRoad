@@ -462,7 +462,7 @@ int Character::checkCollision(Road &aRoad)
 				handleNotCarCollision(aRoad.objects[i]->getX(), aRoad.objects[i]->getY(), aRoad.objects[i]->getHeight(), aRoad.objects[i]->getWidth());
 		}
 	}
-	return max(check, 0);
+	return check;
 }
 
 float Character::getY()

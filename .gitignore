@@ -366,3 +366,5 @@ MigrationBackup/
 FodyWeavers.xsd
 Debug/CrossingRoad.exe
 Debug/CrossingRoad.pdb
+Release/CrossingRoad.exe
+Release/CrossingRoad.pdb
