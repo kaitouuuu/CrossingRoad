@@ -12,47 +12,54 @@ Object::Object(float xPos, float yPos, std::string type)
 	if (type == "big1")
 	{
 		filename = "Content/Image/BigSquareObject1.png";
+		width = height = 48;
 	}
 	else if (type == "big2")
 	{
 		filename = "Content/Image/BigSquareObject2.png";
+		width = height = 48;
 	}
 	else if (type == "square1")
 	{
 		filename = "Content/Image/SquareObject1.png";
+		width = height = 24;
 	}
 	else if (type == "square2")
 	{
 		filename = "Content/Image/SquareObject2.png";
+		width = height = 24;
 	}
 	else if (type == "square3")
 	{
 		filename = "Content/Image/SquareObject3.png";
+		width = height = 24;
 	}
 	else if (type == "square4")
 	{
 		filename = "Content/Image/SquareObject4.png";
+		width = height = 24;
 	}
 	else if (type == "square5")
 	{
 		filename = "Content/Image/SquareObject5.png";
+		width = height = 24;
 	}
 	else if (type == "square6")
 	{
 		filename = "Content/Image/SquareObject6.png";
+		width = height = 24;
 	}
 	else if (type == "vertical1")
 	{
 		filename = "Content/Image/VerticalObject1.png";
+		width = 24;
+		height = 48;
 	}
 
 	if (!texture.loadFromFile(filename))
 	{
 		std::cout << "Failed to load stable object!" << std::endl;
 	}
-
-	width = getWidth();
-	height = getHeight();
 }
 
 float Object::getX() const

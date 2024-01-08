@@ -24,7 +24,7 @@ void Base::randomGame(int difficulty)
 	newRoad = Road("Field", widthLane);
 	lanes.push_back(newRoad);
 
-	for (int i = 2; i < numLane - 2; ++i)
+	for (int i = 2; i < numLane - 1; ++i)
 	{
 		std::string type = allRoadType[randomNumber(0, 2)];
 
@@ -46,7 +46,7 @@ void Base::randomGame(int difficulty)
 			type = allRoadType[randomNumber(0, 2)];
 		}
 
-		if (i == 1) {
+		if (i == 1 || i == numLane - 2) {
 			type = "Field";
 		}
 
@@ -57,20 +57,22 @@ void Base::randomGame(int difficulty)
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 190000), 250000 + std::min(difficulty * 2500, 240000))) / 10000 + 60;
 			float xPosition = float(randomNumber(960 - 250, 960 + 250));
 			newRoad.initTrafficLight(xPosition, widthLane*i);
-			if (lanes.back().getType() == "Road")
-			{
-				// Consecutive roads will have the same direction
-				if (lanes.back().getSpeed() < 0)
+			if (difficulty <= 10) {
+				if (lanes.back().getType() == "Road")
 				{
-					speed = -speed;
+					// Consecutive roads will have the same direction
+					if (lanes.back().getSpeed() < 0)
+					{
+						speed = -speed;
+					}
 				}
-			}
-			else
-			{
-				// Random vehicle direction
-				if (randomNumber(0, 1))
+				else
 				{
-					speed = -speed;
+					// Random vehicle direction
+					if (randomNumber(0, 1))
+					{
+						speed = -speed;
+					}
 				}
 			}
 
@@ -106,8 +108,7 @@ void Base::randomGame(int difficulty)
 
 		if (type == "Field")
 		{
-			//int numObj = randomNumber(0, std::max(0, difficulty - 1));
-			int numObj = 2;
+			int numObj = randomNumber(0 + min(difficulty / 10, 6), min(14, randomNumber(0, std::max(0, difficulty - 1))));
 
 			for (int j = 1; j <= numObj; ++j)
 			{
@@ -161,20 +162,6 @@ void Base::randomGame(int difficulty)
 	}
 
 	// Last road
-	newRoad = Road("Field", widthLane * (numLane - 2));
-	lanes.push_back(newRoad);
 	newRoad = Road("Field", widthLane * (numLane - 1));
 	lanes.push_back(newRoad);
 }
-
-//Base::Base(std::mt19937_64 seed)
-//	: rng(seed) {}
-//
-//void Base::printAll()
-//{
-//	for (Road &road : lanes)
-//	{
-//		road.printAll();
-//		std::cout << "-------------" << std::endl;
-//	}
-//}

@@ -2,7 +2,6 @@
 
 void Frontend::displayMenu()
 {
-	//RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road");
 	RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road", sf::Style::Fullscreen);
 	window.setFramerateLimit(60);
 	string filename = "Content/Image/background.jpg";
@@ -414,8 +413,6 @@ void Frontend::displayMenu()
 								outputSave();
 							}
 							else if (but.type() == "Exit") {
-
-								// DO STH HERE WITH SAVE
 								currentState = GameState::mainmenu;
 								isappearEscape = false;
 								islose = false;
@@ -509,7 +506,6 @@ void Frontend::displayMenu()
 			else {
 				numStage = 1 << 16;
 			}
-			std::cerr << numStage << std::endl;
 			champ = Character("Character1.png", 1060.f, 500.f, 48.f, 48.f, true, false);
 			champ.updatekeymap(keyMap);
 			stage = 1;
@@ -536,6 +532,26 @@ void Frontend::displayMenu()
 				newStage = false;
 				champ = Character("Character1.png", 1060.f, 1080.f - 48.f, 48.f, 48.f, true, false);
 				champ.updatekeymap(keyMap);
+
+				for (Road& lane : base.lanes) {
+					std::cerr << lane.getType() << std::endl;
+					std::cerr << "Object:" << std::endl;
+					for (Object* object : lane.objects)
+					{
+						std::cerr << object->getWidth() << " " << object->getHeight() << std::endl;
+					}
+					std::cerr << "Vehicle:" << std::endl;
+					for (Vehicle* vehicle : lane.vehicles)
+					{
+						std::cerr << vehicle->getWidth() << " " << vehicle->getHeight() << std::endl;
+					}
+					std::cerr << "Animal:" << std::endl;
+					for (Animal* animal : lane.animals)
+					{
+						std::cerr << animal->getWidth() << " " << animal->getHeight() << std::endl;
+					}
+					std::cerr << std::endl;
+				}
 			}
 			
 			for (Road& lane : base.lanes)
@@ -543,15 +559,15 @@ void Frontend::displayMenu()
 				lane.draw(window);
 			}
 			
-				for (Road& lane : base.lanes)
+			for (Road& lane : base.lanes)
+			{
+				if (lane.getType() == "Road")
 				{
-					if (lane.getType() == "Road")
-					{
 						lane.updateTrafficLight();
-					}
-					lane.updateVehicles(isappearEscape,champ.getX(),champ.getY(),champ.getWidth(),champ.getHeight());
-					lane.updateAnimals(isappearEscape, champ.getX(), champ.getY(), champ.getWidth(), champ.getHeight());
 				}
+				lane.updateVehicles(isappearEscape,champ.getX(),champ.getY(),champ.getWidth(),champ.getHeight());
+				lane.updateAnimals(isappearEscape, champ.getX(), champ.getY(), champ.getWidth(), champ.getHeight());
+			}
 			
 			for (Road& lane : base.lanes)
 			{
@@ -605,27 +621,17 @@ void Frontend::displayMenu()
 			if (isappearEscape) {
 				if (!islose) {
 					window.draw(escape_screen);
+					Es1.draw(window, mouse);
+					Es2.draw(window, mouse);
 					if (currentlv == Stagelv::none) {
-						Es1.draw(window, mouse);
-						Es2.draw(window, mouse);
 						Es3.draw(window, mouse);
-					}
-					else {
-						Es1.draw(window, mouse);
-						Es2.draw(window, mouse);
 					}
 				}
 				else {
 					window.draw(escape_screen);
-					if (currentlv == Stagelv::none) {
-						Ct.draw(window);
-						Es2.draw(window, mouse);
-						Es3.draw(window, mouse);
-					}
-					else {
-						Ct.draw(window);
-						Es2.draw(window, mouse);
-					}
+					Ct.draw(window);
+					Es2.draw(window, mouse);
+					L2.draw(window, mouse);
 				}
 			}
 			
