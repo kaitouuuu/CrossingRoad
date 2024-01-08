@@ -354,19 +354,19 @@ int Character::handleNotCarCollision(float objX, float objY, float hObj, float w
 	{
 		if (type == 0)
 		{
-			y = objY + hObj + 0.01f;
+			y = objY + hObj + 0.01f - 8;
 		}
 		else if (type == 1)
 		{
-			y = objY - 48.01f;
+			y = objY - 40.01f;
 		}
 		else if (type == 2)
 		{
-			x = objX + wObj + 0.01f;
+			x = objX + wObj + 0.01f - 8;
 		}
 		else if (type == 3)
 		{
-			x = objX - 48.01f;
+			x = objX - 40.01f;
 		}
 	}
 	else // border collision
@@ -378,7 +378,7 @@ int Character::handleNotCarCollision(float objX, float objY, float hObj, float w
 		}
 		else if (type == 1)
 		{
-			y = 1080 - 48.01f;
+			y = 1080 - 40.01f;
 		}
 		else if (type == 2)
 		{
@@ -386,7 +386,7 @@ int Character::handleNotCarCollision(float objX, float objY, float hObj, float w
 		}
 		else if (type == 3)
 		{
-			x = 1920 - 48.01f;
+			x = 1920 - 40.01f;
 		}
 	}
 	animatedSprite.setPosition(x, y);
@@ -395,6 +395,8 @@ int Character::handleNotCarCollision(float objX, float objY, float hObj, float w
 
 bool Character::condition(float xTL, float yTL, float objH, float objW)
 {
+	objH -= 8;
+	objW -= 8;
 	float checkX = max(xTL, x);
 	float checkY = max(yTL, y);
 	float checkX2 = min(xTL + objW, x + width);
@@ -428,7 +430,7 @@ int Character::checkCollision(Road &aRoad)
 	{
 		tmpx += 0.1f;
 	}
-	if (!(0 <= tmpx && tmpx + 48 < 1920 && 0 <= tmpy && tmpy + 48 < 1080))
+	if (!(0 <= tmpx && tmpx + 40 < 1920 && 0 <= tmpy && tmpy + 40 < 1080))
 	{
 		check = handleNotCarCollision(0, 0, 0, 0);
 	}

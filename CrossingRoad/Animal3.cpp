@@ -9,6 +9,7 @@ Animal3::Animal3(float xPos, float yPos) : Animal(xPos, yPos, "Fox")
 {
 	AnimationAnimal3 tmp("Content/Image/FoxAnimated.png", xPos, yPos, 48.f, 48.f, true, false);
 	animationAnimal3 = tmp;
+	setWidthHeight(40, 30);
 }
 
 void Animal3::clearAnimation()

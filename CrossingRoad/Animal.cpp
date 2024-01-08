@@ -29,12 +29,18 @@ float Animal::getY() const
 
 float Animal::getWidth() const
 {
-	return sprite.getLocalBounds().width;
+	return width;
 }
 
 float Animal::getHeight() const
 {
-	return sprite.getLocalBounds().height;
+	return height;
+}
+
+void Animal::setWidthHeight(float x, float y)
+{
+	width = x;
+	height = y;
 }
 
 std::string Animal::getType() const

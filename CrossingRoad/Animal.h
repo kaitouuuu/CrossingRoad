@@ -29,6 +29,8 @@ public:
 	float getWidth() const;
 	float getHeight() const;
 
+	void setWidthHeight(float x, float y);
+
 	std::string getType() const;
 
 	virtual void clearAnimation() = 0;

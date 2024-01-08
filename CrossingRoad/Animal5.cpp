@@ -9,6 +9,7 @@ Animal5::Animal5(float xPos, float yPos) : Animal(xPos, yPos, "Porcupine")
 {
 	AnimationAnimal5 tmp("Content/Image/PorcupineAnimated.png", xPos, yPos, 48.f, 48.f, true, false);
 	animationAnimal5 = tmp;
+	setWidthHeight(57, 48);
 }
 
 void Animal5::clearAnimation()

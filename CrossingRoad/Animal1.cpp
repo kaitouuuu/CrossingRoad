@@ -9,6 +9,7 @@ Animal1::Animal1(float xPos, float yPos) : Animal(xPos, yPos, "Cat")
 {
 	AnimationAnimal1 tmp("Content/Image/CatAnimated.png", xPos, yPos, 48.f, 48.f, true, false);
 	animationAnimal1 = tmp;
+	setWidthHeight(36, 36);
 }
 
 void Animal1::clearAnimation()

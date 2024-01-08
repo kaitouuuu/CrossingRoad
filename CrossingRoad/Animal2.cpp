@@ -9,6 +9,7 @@ Animal2::Animal2(float xPos, float yPos) : Animal(xPos, yPos, "Dragonfly")
 {
 	AnimationAnimal2 tmp("Content/Image/DragonflyAnimated.png", xPos, yPos, 48.f, 48.f, true, false);
 	animationAnimal2 = tmp;
+	setWidthHeight(34, 26);
 }
 
 void Animal2::clearAnimation()

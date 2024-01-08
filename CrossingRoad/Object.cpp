@@ -74,12 +74,12 @@ float Object::getY() const
 
 float Object::getWidth() const
 {
-	return sprite.getLocalBounds().width;
+	return width;
 }
 
 float Object::getHeight() const
 {
-	return sprite.getLocalBounds().height;
+	return height;
 }
 
 std::string Object::getType() const

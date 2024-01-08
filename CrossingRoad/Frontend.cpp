@@ -530,28 +530,28 @@ void Frontend::displayMenu()
 				}
 
 				newStage = false;
-				champ = Character("Character1.png", 1060.f, 1080.f - 48.f, 48.f, 48.f, true, false);
+				champ = Character("Character1.png", 1060.f, 1080.f - 48.f, 40.f, 40.f, true, false);
 				champ.updatekeymap(keyMap);
 
-				for (Road& lane : base.lanes) {
-					std::cerr << lane.getType() << std::endl;
-					std::cerr << "Object:" << std::endl;
-					for (Object* object : lane.objects)
-					{
-						std::cerr << object->getWidth() << " " << object->getHeight() << std::endl;
-					}
-					std::cerr << "Vehicle:" << std::endl;
-					for (Vehicle* vehicle : lane.vehicles)
-					{
-						std::cerr << vehicle->getWidth() << " " << vehicle->getHeight() << std::endl;
-					}
-					std::cerr << "Animal:" << std::endl;
-					for (Animal* animal : lane.animals)
-					{
-						std::cerr << animal->getWidth() << " " << animal->getHeight() << std::endl;
-					}
-					std::cerr << std::endl;
-				}
+				//for (Road& lane : base.lanes) {
+				//	std::cerr << lane.getType() << std::endl;
+				//	std::cerr << "Object:" << std::endl;
+				//	for (Object* object : lane.objects)
+				//	{
+				//		std::cerr << object->getWidth() << " " << object->getHeight() << std::endl;
+				//	}
+				//	std::cerr << "Vehicle:" << std::endl;
+				//	for (Vehicle* vehicle : lane.vehicles)
+				//	{
+				//		std::cerr << vehicle->getWidth() << " " << vehicle->getHeight() << std::endl;
+				//	}
+				//	std::cerr << "Animal:" << std::endl;
+				//	for (Animal* animal : lane.animals)
+				//	{
+				//		std::cerr << animal->getWidth() << " " << animal->getHeight() << std::endl;
+				//	}
+				//	std::cerr << std::endl;
+				//}
 			}
 			
 			for (Road& lane : base.lanes)

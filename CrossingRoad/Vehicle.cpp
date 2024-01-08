@@ -32,12 +32,12 @@ float Vehicle::getY() const
 
 float Vehicle::getWidth() const
 {
-	return sprite.getLocalBounds().width;
+	return width;
 }
 
 float Vehicle::getHeight() const
 {
-	return sprite.getLocalBounds().height;
+	return height;
 }
 
 void Vehicle::setSpriteColor(const Color& color)
