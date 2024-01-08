@@ -1,45 +1,36 @@
-#pragma once
-#include <vector>
+#ifndef OBJECT_H
+#define OBJECT_H
+
+#include <string>
+#include <iostream>
+#include <SFML/Graphics.hpp>
+
+using namespace sf;
+
 class Object {
 private:
-	float x;
-	float y;
+	float xPos;
+	float yPos;
 	float width;
 	float height;
+	std::string type;
+	Texture texture;
+	Sprite sprite;
 
 public:
-	Object(float x, float y, float width, float height);
-	float getX();
-	float getY();
-	float getWidth();
-	float getHeight();
+	Object();
+	Object(float xPos, float yPos, std::string type);
+
+	float getX() const;
+	float getY() const;
+	float getWidth() const;
+	float getHeight() const;
+	std::string getType() const;
+
+	FloatRect getglobalBounds();
+	bool doesIntersect(Object* other);
+	void draw(RenderWindow& window);
 };
 
-class Car : public Object {
-private:
-	float speed;
-public:
-	void display();
-};
 
-class Obstacle : public Object {
-
-public:
-	void display();
-};
-
-class Superlane {
-private:
-	float y;
-	float x;
-public:
-
-};
-class lane : public Superlane {
-private:
-	std::vector<Obstacle*> smallobstacle;
-};
-class road : public Superlane {
-private:
-	std::vector<Car*> vehicle;
-};
+#endif // OBJECT_H

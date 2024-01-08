@@ -70,6 +70,9 @@ ScaffoldingReadMe.txt
 StyleCopReport.xml
 
 # Files built by Visual Studio
+*.exe
+**/*.exe
+**/*.pdb
 *_i.c
 *_p.c
 *_h.h
@@ -362,8 +365,9 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-.vs
-Debug
-
+Debug/CrossingRoad.exe
+Debug/CrossingRoad.pdb
+Release/CrossingRoad.exe
+Release/CrossingRoad.pdb
 *.exe
 *.pdb

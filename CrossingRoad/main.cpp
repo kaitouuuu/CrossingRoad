@@ -1,10 +1,13 @@
-#include <SFML/Graphics.hpp>
+#include "Base.h"
 #include "Frontend.h"
-
+#include "Setting.h"
 using namespace sf;
-using namespace std;
 
 int main()
 {
-    Frontend();
+	Frontend start;
+	start.displayMenu();
+
+	
+	return 0;
 }

@@ -1,14 +1,17 @@
 #include "Button.h"
 
-Button::Button(string fileName, float x, float y)
+Button::Button(string fileName, float x, float y,string type="default")
 {
-	state = 0;
-	texture.loadFromFile(fileName);
-	sprite.setTexture(texture);
-	sprite.setPosition(x, y);
-	this->fileName = fileName;
+    state = 0;
+    texture.loadFromFile(fileName);
+    sprite.setTexture(texture);
+    sprite.setPosition(x, y);
+    this->fileName = fileName;
+    Stype = type;
 }
-
+const string Button::type() {
+    return Stype;
+}
 Button::~Button()
 {
 
@@ -16,30 +19,30 @@ Button::~Button()
 
 bool Button::isMoved(Vector2f& mouse)
 {
-	return sprite.getGlobalBounds().contains(mouse);
+    return sprite.getGlobalBounds().contains(mouse);
 }
 
 bool Button::isClicked(Vector2f& mouse)
 {
-	return (Mouse::isButtonPressed(Mouse::Left) && sprite.getGlobalBounds().contains(mouse));
+    return (Mouse::isButtonPressed(Mouse::Left) && sprite.getGlobalBounds().contains(mouse));
 }
 
-void Button::changeState(Vector2f& mouse)
-{
-	if (isClicked(mouse)) {
-		state = 2;
-	}
-	else if (isMoved(mouse)) {
-		state = 1;
-	}
-	else {
-		state = 0;
-	}
-}
+//void Button::changeState(Vector2f& mouse)
+//{
+//    if (isClicked(mouse)) {
+//        state = 2;
+//    }
+//    else if (isMoved(mouse)) {
+//        state = 1;
+//    }
+//    else {
+//        state = 0;
+//    }
+//}
 
 void Button::draw(RenderWindow& app, Vector2f& mouse)
 {
-    changeState(mouse);
+    //changeState(mouse);
 
     string newFileName = fileName;
     for (int i = 0; i < 5; ++i) {
@@ -49,14 +52,19 @@ void Button::draw(RenderWindow& app, Vector2f& mouse)
     if (state == 0) {
         newFileName += "0.png";
     }
-    else if (state == 1) {
-        newFileName += "1.png";
-    }
-    else {
-        newFileName += "2.png";
-    }
+    //else if (state == 1) {
+    //    newFileName += "1.png";
+    //}
+    //else {
+    //    newFileName += "2.png";
+    //}
 
-    texture.loadFromFile(newFileName);
+    //texture.loadFromFile(newFileName);
     sprite.setTexture(texture);
     app.draw(sprite);
+}
+
+FloatRect Button::getGlobalBound() {
+    return sprite.getGlobalBounds();
+
 }
