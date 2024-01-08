@@ -52,7 +52,7 @@ public:
 	void addAnimal(Animal* added);
 	void addObject(Object* added);
 	void updateVehicles(bool isappearEsc,float x, float y,float width, float height);
-	void updateAnimals();
+	void updateAnimals(bool isappearEsc,float x, float y, float width, float height);
 	void draw(RenderWindow& window);
 	// For debug
 	void setY(const float y);

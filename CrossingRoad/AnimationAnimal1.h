@@ -34,7 +34,7 @@ public:
 	void gameOver();
 	void changeState();
 
-	void update(float speed);
+	void update(float speed,bool isappearEsc);
 	void draw(sf::RenderWindow& window);
 
 	float getY();

@@ -14,7 +14,7 @@ public:
 
 	void clearAnimation();
 
-	void updatePosition(float speed) override;
+	void updatePosition(float speed,bool isappearEsc) override;
 	void draw(RenderWindow& window) override;
 };
 

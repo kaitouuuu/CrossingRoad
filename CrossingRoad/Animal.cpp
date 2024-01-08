@@ -42,7 +42,7 @@ std::string Animal::getType() const
 	return type;
 }
 
-void Animal::updatePosition(float speed)
+void Animal::updatePosition(float speed,bool isappearEsc)
 {
 	if (speed < 0) {
 		sprite.setScale(-1.f, 1.f);
@@ -50,6 +50,8 @@ void Animal::updatePosition(float speed)
 	}
 
 	sf::Time deltaTime = clock.restart();
+	if (isappearEsc)
+		return;
 	xPos += speed * deltaTime.asSeconds();
 
 	if (xPos >= 1920)
