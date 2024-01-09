@@ -720,6 +720,8 @@ std::string Frontend::keyToString(sf::Keyboard::Key key) {
 	//else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) return "Shift";
 	else if (key == sf::Keyboard::Up) return "Up Arrow";
 	else if (key == sf::Keyboard::Down) return "Down Arrow";
+	else if (key == sf::Keyboard::Left) return "Left Arrow";
+	else if(key==sf::Keyboard::Right) return "Right Arrow";
 	else if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z) {
 		char letter = static_cast<char>('A' + (key - sf::Keyboard::A));
 		return std::string(1, letter);
