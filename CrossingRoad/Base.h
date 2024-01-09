@@ -20,12 +20,7 @@ public:
 
 	int randomNumber(int l, int r);
 
-	void randomGame(int difficulty);
-	void playGame(int difficulty, int stage, RenderWindow& window);
-
-	//// For debug
-	//Base(std::mt19937_64 seed);
-	//void printAll();
+	void randomGame(int difficulty, bool& fromSave, std::string saveType[], float saveSpeed[], int saveNum[]);
 };
 
 #endif // BASE_H

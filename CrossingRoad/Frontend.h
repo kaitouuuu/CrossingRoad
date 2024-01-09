@@ -51,6 +51,12 @@ private:
 	bool newStage;
 	void drawhighscore(int highscore, RenderWindow& window);
 	int highScore;
+	bool fromSave;
+	std::string saveType[20];
+	float saveSpeed[20];
+	int saveNum[20];
+	float saveX;
+	float saveY;
 
 };
 

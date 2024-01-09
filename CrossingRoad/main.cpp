@@ -7,7 +7,6 @@ int main()
 {
 	Frontend start;
 	start.displayMenu();
-
 	
 	return 0;
 }

@@ -12,12 +12,89 @@ int Base::randomNumber(int l, int r)
 	return 0;
 }
 
-void Base::randomGame(int difficulty)
+void Base::randomGame(int difficulty, bool& fromSave, std::string saveType[], float saveSpeed[], int saveNum[])
 {
 	const float widthLane = 54.0;
 	const int numLane = 20;
 	std::string allRoadType[] = {"Road", "Field", "Land"};
 	std::string allObjectType[] = {"big1", "big2", "square1", "square2", "square3", "square4", "square5", "square6", "vertical1"};
+
+	if (fromSave == true) {
+		fromSave = false;
+		lanes.clear();
+		Road newRoad;
+		for (int i = 0; i < numLane; ++i) {
+			newRoad = Road(saveType[i], i * widthLane);
+			if (saveType[i] == "Road") {
+				float speed = float(randomNumber(400 + std::min(difficulty * 200, 190000), 250000 + std::min(difficulty * 2500, 240000))) / 10000 + 60;
+				float xPosition = float(randomNumber(960 - 321, 960 + 321));
+				newRoad.initTrafficLight(xPosition, widthLane * i);
+			}
+			if (saveType[i] != "Field") {
+				newRoad.setSpeed(saveSpeed[i]);
+			}
+			if (saveType[i] == "Road") {
+				while (newRoad.vehicles.size() < saveNum[i]) {
+					int random = randomNumber(0, 4);
+					if (random == 0) {
+						Car1* newVehicle = new Car1(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addVehicle(newVehicle);
+					}
+					else if (random == 1) {
+						Car2* newVehicle = new Car2(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addVehicle(newVehicle);
+					}
+					else if (random == 2) {
+						Car3* newVehicle = new Car3(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addVehicle(newVehicle);
+					}
+					else if (random == 3) {
+						Car4* newVehicle = new Car4(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addVehicle(newVehicle);
+					}
+					else if (random == 4) {
+						Car5* newVehicle = new Car5(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addVehicle(newVehicle);
+					}
+				}
+			}
+			else if (saveType[i] == "Field") {
+				while (newRoad.objects.size() < saveNum[i]) {
+					int temp = randomNumber(0, 8);
+					Object* newObj = new Object(float(randomNumber(0, 1919)), widthLane * i, allObjectType[temp]);
+					newRoad.addObject(newObj);
+				}
+			}
+			else {
+				while (newRoad.animals.size() < saveNum[i]) {
+					int random = randomNumber(0, 4);
+					if (random == 0) {
+						Animal1* newAnimal = new Animal1(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addAnimal(newAnimal);
+					}
+					else if (random == 1) {
+						Animal2* newAnimal = new Animal2(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addAnimal(newAnimal);
+					}
+					else if (random == 2) {
+						Animal3* newAnimal = new Animal3(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addAnimal(newAnimal);
+					}
+					else if (random == 3) {
+						Animal4* newAnimal = new Animal4(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addAnimal(newAnimal);
+					}
+					else if (random == 4) {
+						Animal5* newAnimal = new Animal5(float(randomNumber(0, 1919)), widthLane * i);
+						newRoad.addAnimal(newAnimal);
+					}
+				}
+			}
+
+			lanes.push_back(newRoad);
+		}
+		return;
+	}
 
 	// Initial road
 	lanes.clear();
@@ -56,7 +133,7 @@ void Base::randomGame(int difficulty)
 		{
 			float speed = float(randomNumber(400 + std::min(difficulty * 200, 190000), 250000 + std::min(difficulty * 2500, 240000))) / 10000 + 60;
 			float xPosition = float(randomNumber(960 - 321, 960 + 321));
-			newRoad.initTrafficLight(xPosition, widthLane*i);
+			newRoad.initTrafficLight(xPosition, widthLane * i);
 			if (randomNumber(0, 1))
 			{
 				speed = -speed;

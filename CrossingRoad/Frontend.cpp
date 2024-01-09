@@ -3,7 +3,7 @@
 void Frontend::displayMenu()
 {
 	ifstream INP;
-	INP.open("test.inp", std::ios::in);
+	INP.open("file", std::ios::in);
 	INP >> highScore;
 	INP.close();
 
@@ -174,8 +174,7 @@ void Frontend::displayMenu()
 	Stagelv currentlv = Stagelv::none;
 
 	// base game
-	base.randomGame(1);
-	difficulty = numStage = stage = newStage = 0;
+	fromSave = difficulty = numStage = stage = newStage = 0;
 	champ.updatekeymap(keyMap);
 	while (window.isOpen())
 	{
@@ -223,6 +222,29 @@ void Frontend::displayMenu()
 								}
 								else if (button.type() == "Exit")
 								{
+									std::ifstream INP;
+									INP.open("file", ios::in);
+									int temp, temp2, temp3;
+									INP >> temp >> temp2;
+									if (temp2) {
+										INP >> temp3;
+										for (int i = 0; i < 20; ++i) {
+											INP >> saveType[i] >> saveSpeed[i] >> saveNum[i];
+										}
+										INP >> saveX >> saveY;
+									}
+									INP.close();
+									std::ofstream INP2;
+									INP2.open("file", ios::out);
+									INP2 << std::max(temp, highScore) << std::endl << temp2;
+									if (temp2) {
+										INP2 << " " << temp3 << std::endl;
+										for (int i = 0; i < 20; ++i) {
+											INP2 << saveType[i] << " " << saveSpeed[i] << " " << saveNum[i] << std::endl;
+										}
+										INP2 << saveX << " " << saveY;
+									}
+									INP2.close();
 									return;
 								}
 								else if (button.type() == "Rule") {
@@ -312,7 +334,8 @@ void Frontend::displayMenu()
 									}
 									else if (button.type() == "Load game")
 									{
-										currentState = GameState::loadgame;
+										inputSave();
+										currentState = GameState::newgame;
 									}
 									else if (button.type() == "Back")
 									{
@@ -513,9 +536,14 @@ void Frontend::displayMenu()
 			else {
 				numStage = 1 << 16;
 			}
-			champ = Character("Character1.png", 1060.f, 500.f, 48.f, 48.f, true, false);
+			if (fromSave == true) {
+				champ = Character("Content/Image/Character1.png", saveX, saveY, 48.f, 48.f, true, false);
+			}
+			else {
+				champ = Character("Content/Image/Character1.png", 1060.f, 500.f, 48.f, 48.f, true, false);
+				stage = 1;
+			}
 			champ.updatekeymap(keyMap);
-			stage = 1;
 			newStage = true;
 			currentState = GameState::playingGame;
 			break;
@@ -523,43 +551,28 @@ void Frontend::displayMenu()
 		case GameState::playingGame:
 			
 			if (newStage == true) {
+				if (fromSave == false) {
+					champ = Character("Content/Image/Character1.png", 1060.f, 1080.f - 48.f, 40.f, 40.f, true, false);
+				}
+				else {
+					champ = Character("Content/Image/Character1.png", saveX, saveY, 48.f, 48.f, true, false);
+				}
+				champ.updatekeymap(keyMap);
+
 				if (stage < numStage / 4)
 				{
-					base.randomGame(std::max(difficulty - 1, 1));
+					base.randomGame(std::max(difficulty - 1, 1), fromSave, saveType, saveSpeed, saveNum);
 				}
 				else if (stage == numStage)
 				{
-					base.randomGame(difficulty + 1);
+					base.randomGame(difficulty + 1, fromSave, saveType, saveSpeed, saveNum);
 				}
 				else
 				{
-					base.randomGame(difficulty);
+					base.randomGame(difficulty, fromSave, saveType, saveSpeed, saveNum);
 				}
-
+				
 				newStage = false;
-				champ = Character("Character1.png", 1060.f, 1080.f - 48.f, 40.f, 40.f, true, false);
-				champ.updatekeymap(keyMap);
-
-				//for (Road& lane : base.lanes) {
-				//	std::cerr << lane.getType() << std::endl;
-				//	std::cerr << "Object:" << std::endl;
-				//	for (Object* object : lane.objects)
-				//	{
-				//		std::cerr << object->getWidth() << " " << object->getHeight() << std::endl;
-				//	}
-				//	std::cerr << "Vehicle:" << std::endl;
-				//	for (Vehicle* vehicle : lane.vehicles)
-				//	{
-				//		std::cerr << vehicle->getWidth() << " " << vehicle->getHeight() << std::endl;
-				//	}
-				//	std::cerr << "Animal:" << std::endl;
-				//	for (Animal* animal : lane.animals)
-				//	{
-				//		std::cerr << animal->getWidth() << " " << animal->getHeight() << std::endl;
-				//	}
-				//	std::cerr << std::endl;
-				//}
-				//std::cerr << std::endl << "----------------------" << std::endl;
 			}
 			
 			for (Road& lane : base.lanes)
@@ -654,43 +667,40 @@ void Frontend::displayMenu()
 
 void Frontend::outputSave() {
 	std::ofstream INP;
-	INP.open("test.inp", ios::out);
+	INP.open("file", ios::out);
 	INP << highScore << std::endl << stage << " " << difficulty << std::endl;
 	for (Road& lane : base.lanes)
 	{
 		std::string s = lane.getType();
-		INP << s << " " << lane.getSpeed() << " " << lane.getY() << std::endl;
+		INP << s << " " << lane.getSpeed() << std::endl;
 		if (s == "Road") {
 			INP << lane.vehicles.size() << std::endl;
-			for (Vehicle* vehicle : lane.vehicles)
-			{
-				INP << vehicle->getType() << " " << vehicle->getX() << " " << vehicle->getY()
-					<< " " << vehicle->getWidth() << " " << vehicle->getHeight() << " " << std::endl;
-			}
 		}
 		if (s == "Land") {
-			INP << lane.objects.size() << std::endl;
-			for (Object* object : lane.objects)
-			{
-				INP << object->getType() << " " << object->getX() << " " << object->getY()
-					<< " " << object->getWidth() << " " << object->getHeight() << " " << std::endl;
-			}
+			INP << lane.animals.size() << std::endl;
 		}
 		if (s == "Field") {
-			INP << lane.animals.size() << std::endl;
-			for (Animal* animal : lane.animals)
-			{
-				INP << animal->getType() << " " << animal->getX() << " " << animal->getY()
-					<< " " << animal->getWidth() << " " << animal->getHeight() << " " << std::endl;
-			}
+			INP << lane.objects.size() << std::endl;
 		}
 	}
+	INP << champ.getX() << " " << champ.getY();
 	INP.close();
 }
 
 void Frontend::inputSave()
 {
 	std::ifstream INP;
+	INP.open("file", ios::in);
+	INP >> highScore >> stage;
+	if (stage) {
+		fromSave = true;
+		INP >> difficulty;
+		for (int i = 0; i < 20; ++i) {
+			INP >> saveType[i] >> saveSpeed[i] >> saveNum[i];
+		}
+		INP >> saveX >> saveY;
+	}
+	INP.close();
 }
 
 
