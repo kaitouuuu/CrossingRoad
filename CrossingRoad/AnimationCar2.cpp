@@ -29,7 +29,8 @@ void AnimationCar2::gameOver()
 {
 	waitAnimation.clearFrame();
 	walkingAnimation.clearFrame();
-	for (int i = 0; i < 20; ++i) {
+	for (int i = 0; i < 20; ++i)
+	{
 		setCollision();
 	}
 	currentAnimation = &deadCar;
@@ -43,7 +44,6 @@ void AnimationCar2::changeState()
 
 AnimationCar2::AnimationCar2()
 {
-
 }
 
 AnimationCar2::AnimationCar2(std::string fileName, float x, float y, float width, float height, bool paused, bool looped)
@@ -80,37 +80,48 @@ void AnimationCar2::update(float speed, bool isappearesc)
 
 	sf::Vector2f movement(speed, 0.f);
 
-	if (gameEnd) {
-		if (!isappearesc) {
+	if (gameEnd)
+	{
+		if (!isappearesc)
+		{
 			animatedSprite.play(*currentAnimation);
 			animatedSprite.update(frameTime);
 		}
 		return;
 	}
 
-	if (!isappearesc) {
-		if (speed == 0) {
-			if (isMoved) {
+	if (!isappearesc)
+	{
+		if (speed == 0)
+		{
+			if (isMoved)
+			{
 				walkingAnimation.clearFrame();
-				for (int i = 0; i < 20; ++i) {
+				for (int i = 0; i < 20; ++i)
+				{
 					setMove();
 				}
 				isMoved = false;
 			}
-			for (int i = 0; i < 20; ++i) {
+			for (int i = 0; i < 20; ++i)
+			{
 				setStable();
 			}
 			currentAnimation = &waitAnimation;
 		}
-		else {
-			if (!isMoved) {
+		else
+		{
+			if (!isMoved)
+			{
 				walkingAnimation.clearFrame();
-				for (int i = 0; i < 20; ++i) {
+				for (int i = 0; i < 20; ++i)
+				{
 					setStable();
 				}
 				isMoved = true;
 			}
-			for (int i = 0; i < 20; ++i) {
+			for (int i = 0; i < 20; ++i)
+			{
 				setMove();
 			}
 			currentAnimation = &walkingAnimation;
@@ -121,7 +132,8 @@ void AnimationCar2::update(float speed, bool isappearesc)
 		animatedSprite.update(frameTime);
 	}
 
-	if (speed < 0) {
+	if (speed < 0)
+	{
 		animatedSprite.setScale(-1.f, 1.f);
 		animatedSprite.setOrigin(getWidth(), 0);
 	}
@@ -153,12 +165,12 @@ float AnimationCar2::getWidth()
 	return animatedSprite.getLocalBounds().width;
 }
 
-float AnimationCar2::getX()
+float AnimationCar2::getX() const
 {
 	return x;
 }
 
-float AnimationCar2::getY()
+float AnimationCar2::getY() const
 {
 	return y;
 }

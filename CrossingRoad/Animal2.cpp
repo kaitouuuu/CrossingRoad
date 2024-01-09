@@ -2,7 +2,6 @@
 
 Animal2::Animal2()
 {
-
 }
 
 Animal2::Animal2(float xPos, float yPos) : Animal(xPos, yPos, "Dragonfly")
@@ -16,6 +15,7 @@ void Animal2::clearAnimation()
 {
 	animationAnimal2.gameOver();
 }
+
 void Animal2::updatePosition(float speed,bool isappearEsc)
 {
 	Animal::updatePosition(speed,isappearEsc);

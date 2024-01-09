@@ -2,7 +2,6 @@
 
 Animal4::Animal4()
 {
-
 }
 
 Animal4::Animal4(float xPos, float yPos) : Animal(xPos, yPos, "Hedgehog")

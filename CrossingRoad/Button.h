@@ -1,35 +1,38 @@
-#pragma once
+#ifndef BUTTON_H
+#define BUTTON_H
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
 using namespace sf;
-using namespace std;
+
 enum class buttonState {
-    unclick,click,touch
+    unclick, click, touch
 };
+
 class Button
 {
 private:
     Sprite sprite;
     Texture texture;
-    string fileName;
+    std::string fileName;
 
     int state = 0;
 
     float x;
     float y;
     float speed;
-    string Stype;
+    std::string Stype;
 
 public:
-    Button(string fileName, float x, float y,string typee   );
+    Button(std::string fileName, float x, float y,std::string typee   );
     ~Button();
 
     bool isMoved(Vector2f& mouse);
     bool isClicked(Vector2f& mouse);
-    const string type();
-    //void changeState(Vector2f& mouse);
+    const std::string type();
     void draw(RenderWindow& app, Vector2f& mouse);
     FloatRect getGlobalBound();
 };
+
+#endif // BUTTON_H

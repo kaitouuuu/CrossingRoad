@@ -18,4 +18,4 @@ public:
 	void draw(RenderWindow& window) override;
 };
 
-#endif // !1
+#endif // ANIMAL5_H

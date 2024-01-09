@@ -37,8 +37,8 @@ public:
 	void update(float speed, bool isappearesc);
 	void draw(sf::RenderWindow& window);
 
-	float getY();
-	float getX();
+	float getX() const;
+	float getY() const;
 	float getWidth();
 	float getHeight();
 };

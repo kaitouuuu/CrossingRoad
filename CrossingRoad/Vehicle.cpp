@@ -1,8 +1,10 @@
 #include "Vehicle.h"
 
 Vehicle::Vehicle()
-	: xPos(0), yPos(0), width(0), height(0),check(0), type("") {
-	if (!texture.loadFromFile("Content/Image/" + type + "Car.png")) {
+	: xPos(0), yPos(0), width(0), height(0), check(0), type("")
+{
+	if (!texture.loadFromFile("Content/Image/" + type + "Car.png"))
+	{
 		std::cout << "Can not load image\n";
 		exit(0);
 	}
@@ -11,8 +13,10 @@ Vehicle::Vehicle()
 }
 
 Vehicle::Vehicle(float xPos, float yPos, std::string type)
-	: xPos(xPos), yPos(yPos), type(type),check(xPos) {
-	if (!texture.loadFromFile("Content/Image/" + type + "Car.png")) {
+	: xPos(xPos), yPos(yPos), type(type), check(xPos)
+{
+	if (!texture.loadFromFile("Content/Image/" + type + "Car.png"))
+	{
 		std::cout << "Can not load image\n";
 		exit(0);
 	}
@@ -52,16 +56,20 @@ std::string Vehicle::getType() const
 
 void Vehicle::updatePosition(float speed, bool isappearEsc)
 {
-	if (speed < 0) {
+	if (speed < 0)
+	{
 		sprite.setScale(-1.f, 1.f);
 		sprite.setOrigin(getWidth(), 0);
 	}
 	sf::Time deltaTime = clock.restart();
-	if (isappearEsc) {
+	if (isappearEsc)
+	{
 		check = xPos;
 	}
-	else {
-		if (check != xPos) exit(0);
+	else
+	{
+		if (check != xPos)
+			exit(0);
 		xPos += speed * deltaTime.asSeconds();
 		check = xPos;
 
@@ -78,7 +86,8 @@ void Vehicle::updatePosition(float speed, bool isappearEsc)
 	}
 }
 
-void Vehicle::draw(RenderWindow& window) {
+void Vehicle::draw(RenderWindow& window)
+{
 	sprite.setTexture(texture);
 	sprite.setPosition(xPos, yPos);
 

@@ -29,7 +29,8 @@ void AnimationCar4::gameOver()
 {
 	waitAnimation.clearFrame();
 	walkingAnimation.clearFrame();
-	for (int i = 0; i < 20; ++i) {
+	for (int i = 0; i < 20; ++i)
+	{
 		setCollision();
 	}
 	currentAnimation = &deadCar;
@@ -41,10 +42,8 @@ void AnimationCar4::changeState()
 	gameEnd = true;
 }
 
-
 AnimationCar4::AnimationCar4()
 {
-
 }
 
 AnimationCar4::AnimationCar4(std::string fileName, float x, float y, float width, float height, bool paused, bool looped)
@@ -81,37 +80,48 @@ void AnimationCar4::update(float speed, bool isappearesc)
 
 	sf::Vector2f movement(speed, 0.f);
 
-	if (gameEnd) {
-		if (!isappearesc) {
+	if (gameEnd)
+	{
+		if (!isappearesc)
+		{
 			animatedSprite.play(*currentAnimation);
 			animatedSprite.update(frameTime);
 		}
 		return;
 	}
 
-	if (!isappearesc) {
-		if (speed == 0) {
-			if (isMoved) {
+	if (!isappearesc)
+	{
+		if (speed == 0)
+		{
+			if (isMoved)
+			{
 				walkingAnimation.clearFrame();
-				for (int i = 0; i < 20; ++i) {
+				for (int i = 0; i < 20; ++i)
+				{
 					setMove();
 				}
 				isMoved = false;
 			}
-			for (int i = 0; i < 20; ++i) {
+			for (int i = 0; i < 20; ++i)
+			{
 				setStable();
 			}
 			currentAnimation = &waitAnimation;
 		}
-		else {
-			if (!isMoved) {
+		else
+		{
+			if (!isMoved)
+			{
 				walkingAnimation.clearFrame();
-				for (int i = 0; i < 20; ++i) {
+				for (int i = 0; i < 20; ++i)
+				{
 					setStable();
 				}
 				isMoved = true;
 			}
-			for (int i = 0; i < 20; ++i) {
+			for (int i = 0; i < 20; ++i)
+			{
 				setMove();
 			}
 			currentAnimation = &walkingAnimation;
@@ -122,7 +132,8 @@ void AnimationCar4::update(float speed, bool isappearesc)
 		animatedSprite.update(frameTime);
 	}
 
-	if (speed < 0) {
+	if (speed < 0)
+	{
 		animatedSprite.setScale(-1.f, 1.f);
 		animatedSprite.setOrigin(getWidth(), 0);
 	}
@@ -154,12 +165,12 @@ float AnimationCar4::getWidth()
 	return animatedSprite.getLocalBounds().width;
 }
 
-float AnimationCar4::getX()
+float AnimationCar4::getX() const
 {
 	return x;
 }
 
-float AnimationCar4::getY()
+float AnimationCar4::getY() const
 {
 	return y;
 }

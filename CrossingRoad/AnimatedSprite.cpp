@@ -171,8 +171,6 @@ void AnimatedSprite::update(sf::Time deltaTime)
                     m_currentFrame = 0; // reset to start
                 }
 
-
-
             }
 
             // set the current frame, not reseting the time
@@ -189,9 +187,4 @@ void AnimatedSprite::draw(sf::RenderTarget& target, sf::RenderStates states) con
         states.texture = m_texture;
         target.draw(m_vertices, 4, sf::Quads, states);
     }
-}
-
-void AnimatedSprite::getX()
-{
-
 }

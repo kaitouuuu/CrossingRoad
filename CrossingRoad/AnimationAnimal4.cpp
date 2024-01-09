@@ -43,7 +43,6 @@ void AnimationAnimal4::changeState()
 
 AnimationAnimal4::AnimationAnimal4()
 {
-
 }
 
 AnimationAnimal4::AnimationAnimal4(std::string fileName, float x, float y, float width, float height, bool paused, bool looped)
@@ -74,39 +73,48 @@ AnimationAnimal4::AnimationAnimal4(std::string fileName, float x, float y, float
 void AnimationAnimal4::update(float speed,bool isappearEsc)
 {
 	sf::Time frameTime = clock.restart();
-
 	sf::Vector2f movement(speed, 0.f);
 
-	if (gameEnd) {
+	if (gameEnd)
+	{
 		if (!isappearEsc) {
 			animatedSprite.play(*currentAnimation);
 			animatedSprite.update(frameTime);
 			return;
 		}
 	}
-	if (!isappearEsc) {
-		if (speed == 0) {
-			if (isMoved) {
+	if (!isappearEsc)
+	{
+		if (speed == 0)
+		{
+			if (isMoved)
+			{
 				walkingAnimation.clearFrame();
-				for (int i = 0; i < 20; ++i) {
+				for (int i = 0; i < 20; ++i)
+				{
 					setMove();
 				}
 				isMoved = false;
 			}
-			for (int i = 0; i < 20; ++i) {
+			for (int i = 0; i < 20; ++i)
+			{
 				setStable();
 			}
 			currentAnimation = &waitAnimation;
 		}
-		else {
-			if (!isMoved) {
+		else
+		{
+			if (!isMoved)
+			{
 				walkingAnimation.clearFrame();
-				for (int i = 0; i < 20; ++i) {
+				for (int i = 0; i < 20; ++i)
+				{
 					setStable();
 				}
 				isMoved = true;
 			}
-			for (int i = 0; i < 20; ++i) {
+			for (int i = 0; i < 20; ++i)
+			{
 				setMove();
 			}
 			currentAnimation = &walkingAnimation;
@@ -116,7 +124,9 @@ void AnimationAnimal4::update(float speed,bool isappearEsc)
 		animatedSprite.move(movement * frameTime.asSeconds());
 		animatedSprite.update(frameTime);
 	}
-	if (speed < 0) {
+
+	if (speed < 0)
+	{
 		animatedSprite.setScale(-1.f, 1.f);
 		animatedSprite.setOrigin(getWidth(), 0);
 	}
@@ -148,12 +158,12 @@ float AnimationAnimal4::getWidth()
 	return animatedSprite.getLocalBounds().width;
 }
 
-float AnimationAnimal4::getX()
+float AnimationAnimal4::getX() const
 {
 	return x;
 }
 
-float AnimationAnimal4::getY()
+float AnimationAnimal4::getY() const
 {
 	return y;
 }

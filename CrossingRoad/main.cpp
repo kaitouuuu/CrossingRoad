@@ -1,6 +1,6 @@
 #include "Base.h"
 #include "Frontend.h"
-#include "Setting.h"
+
 using namespace sf;
 
 int main()

@@ -1,15 +1,15 @@
 #include "Animal.h"
 
 Animal::Animal()
-	: xPos(0), yPos(0), width(0), height(0), type("") {
-
+	: xPos(0), yPos(0), width(0), height(0), type("")
+{
 }
 
 Animal::Animal(float xPos, float yPos, std::string type)
-	: xPos(xPos), yPos(yPos), type(type) {
+	: xPos(xPos), yPos(yPos), type(type)
+{
 	if (!texture.loadFromFile("Content/Image/" + type + ".png")) {
 		std::cout << "Can not load image\n";
-
 		exit(0);
 	}
 
@@ -50,7 +50,8 @@ std::string Animal::getType() const
 
 void Animal::updatePosition(float speed,bool isappearEsc)
 {
-	if (speed < 0) {
+	if (speed < 0)
+	{
 		sprite.setScale(-1.f, 1.f);
 		sprite.setOrigin(getWidth(), 0);
 	}
@@ -70,7 +71,8 @@ void Animal::updatePosition(float speed,bool isappearEsc)
 	}
 }
 
-void Animal::draw(RenderWindow& window) {
+void Animal::draw(RenderWindow& window)
+{
 	sprite.setTexture(texture);
 	sprite.setPosition(xPos, yPos);
 

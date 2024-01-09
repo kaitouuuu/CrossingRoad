@@ -7,8 +7,8 @@
 #include <iostream>
 #include <map>
 #include <utility>
+
 using namespace sf;
-using namespace std;
 
 class Character
 {
@@ -32,12 +32,12 @@ private:
 	bool noKeyWasPressed;
 
 	int type;
-	map<std::string, sf::Keyboard::Key> keyMap;
+	std::map<std::string, sf::Keyboard::Key> keyMap;
 public:
 	int checkCollision(Road &aRoad);
 
 	Character();
-	Character(string fileName, float x, float y, float width, float height, bool paused, bool looped);
+	Character(std::string fileName, float x, float y, float width, float height, bool paused, bool looped);
 
 	void setMoveUp();
 	void setMoveDown();
@@ -57,7 +57,7 @@ public:
 	float getHeight();
 
 	bool condition(float xTL, float yTL, float objH, float objW);
-	void updatekeymap(map<std::string, sf::Keyboard::Key> keyMap);
+	void updatekeymap(std::map<std::string, sf::Keyboard::Key> keyMap);
 	int handleNotCarCollision(float tmpx, float tmpy, float xObj, float yObj);
 };
 

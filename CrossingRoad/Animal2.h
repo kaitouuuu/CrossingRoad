@@ -17,4 +17,5 @@ public:
 	void updatePosition(float speed,bool isappearEsc) override;
 	void draw(RenderWindow& window) override;
 };
-#endif // !1
+
+#endif // ANIMAL2_H

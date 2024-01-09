@@ -2,7 +2,6 @@
 
 Car1::Car1()
 {
-
 }
 
 Car1::Car1(float xPos, float yPos) : Vehicle(xPos + 8, yPos + 16, "Red")
@@ -19,7 +18,6 @@ void Car1::clearAnimation()
 void Car1::updatePosition(float speed, bool isappearEsc)
 {
 	Vehicle::updatePosition(speed,isappearEsc);
-
 	animationCar1.update(speed,isappearEsc);
 }
 

@@ -90,12 +90,12 @@ FloatRect Object::getglobalBounds()
 	return sprite.getGlobalBounds();
 }
 
-bool Object::doesIntersect(Object *other)
+bool Object::doesIntersect(Object* other)
 {
 	return this->sprite.getGlobalBounds().intersects(other->sprite.getGlobalBounds());
 }
 
-void Object::draw(RenderWindow &window)
+void Object::draw(RenderWindow& window)
 {
 	sprite.setTexture(texture);
 	sprite.setPosition(Vector2f(xPos, yPos));

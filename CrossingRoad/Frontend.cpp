@@ -2,14 +2,14 @@
 
 void Frontend::displayMenu()
 {
-	ifstream INP;
+	std::ifstream INP;
 	INP.open("file", std::ios::in);
 	INP >> highScore;
 	INP.close();
 
 	RenderWindow window(sf::VideoMode(1920, 1080), "Crossing Road", sf::Style::Fullscreen);
 	window.setFramerateLimit(60);
-	string filename = "Content/Image/background.jpg";
+	std::string filename = "Content/Image/background.jpg";
 	Texture backgroundTexture;
 
 	if (!backgroundTexture.loadFromFile(filename))
@@ -38,7 +38,6 @@ void Frontend::displayMenu()
 	}
 	Sprite pop_up_screen(pop_up_background);
 
-
 	filename = "Content/Image/Escape screen.png";
 	Texture escapescreen;
 	if (!escapescreen.loadFromFile(filename))
@@ -54,83 +53,80 @@ void Frontend::displayMenu()
 	Button A("Content/Image/Game.png", 1452, 353, "Game");
 	Button B("Content/Image/Rule.png", 1462, 466, "Rule");
 	Button C("Content/Image/Setting.png", 1410, 579, "Setting");
-	//Button D("Content/Image/High score.png", 1403, 692, "High score");
 	Button E("Content/Image/Exit.png", 1462, 692, "Exit");
 
-	//Button game
+	// Button game
 	Button F("Content/Image/New Game.png", 1415, 410, "New game");
 	Button G("Content/Image/Load game.png", 1406, 522, "Load game");
 	Button H("Content/Image/Back.png", 1483, 634, "Back");
 
-	//Button game mode
+	// Button game mode
 	Button stage_("Content/Image/Stage.png", 1458, 410, "Stage");
 	Button endless_("Content/Image/Endless.png", 1443, 522, "Endless");
 	Button back_("Content/Image/Back.png", 1483, 634, "Back");
 
-	//BUtton lv stage
+	// BUtton lv stage
 	Button lv1("Content/Image/Stage 1.png", 1409, 424, "Lv1");
 	Button lv2("Content/Image/Stage 2.png", 1409, 517, "Lv2");
 	Button lv3("Content/Image/Stage 3.png", 1409, 610, "Lv3");
 	Button lv4("Content/Image/Stage 4.png", 1409, 703, "Lv4");
 	Button lv5("Content/Image/Stage 5.png", 1409, 796, "Lv5");
 	Button Backstage("Content/Image/Back.png", 1437, 889, "Back");
-	vector<Button>stagelv;
+	std::vector<Button> stagelv;
 	stagelv.push_back(lv1);
 	stagelv.push_back(lv2);
 	stagelv.push_back(lv3);
 	stagelv.push_back(lv4);
 	stagelv.push_back(lv5);
 	stagelv.push_back(Backstage);
-	//Button setting
+	// Button setting
 	Button H2("Content/Image/Back.png", 1681, 945, "Back");
 
-	//Button escape menu
+	// Button escape menu
 	Button Es1("Content/Image/Back.png", 857, 369, "Back");
 	Button Es2("Content/Image/New Game.png", 790, 499, "New game esc");
 	Button Es3("Content/Image/Save.png", 804, 636, "Save");
 	Button L2("Content/Image/Exit.png", 854, 636, "Exit");
 
-	//Rule menu
+	// Rule menu
 	Button Rule1("Content/Image/Rule01.png", 379, 242, "Rule01");
 	Button Rule2("Content/Image/Rule02.png", 379, 630, "Rule02");
 	Button Ruleback("Content/Image/Back.png", 1628, 933, "Back");
-	vector<Button> rulemenu;
+	std::vector<Button> rulemenu;
 	rulemenu.push_back(Rule1);
 	rulemenu.push_back(Rule2);
 	rulemenu.push_back(Ruleback);
 
-	vector<Button> gamemodee;
+	std::vector<Button> gamemodee;
 	gamemodee.push_back(stage_);
 	gamemodee.push_back(endless_);
 	gamemodee.push_back(back_);
 
-	vector<Button> b;
+	std::vector<Button> b;
 	b.push_back(A);
 	b.push_back(B);
 	b.push_back(C);
-	//b.push_back(D);
 	b.push_back(E);
 
-
-	vector<Button> c;
+	std::vector<Button> c;
 	c.push_back(F);
 	c.push_back(G);
 	c.push_back(H);
 
-	vector<Button> cc;
+	std::vector<Button> cc;
 	cc.push_back(F);
 	cc.push_back(H);
 
-	vector<Button> escapebut;
+	std::vector<Button> escapebut;
 	escapebut.push_back(Es1);
 	escapebut.push_back(Es2);
 	escapebut.push_back(Es3);
 
-	vector<Button> escapebut2;
+	std::vector<Button> escapebut2;
 	escapebut2.push_back(Es1);
 	escapebut2.push_back(Es2);
 
-	vector<Button> escapebut3;
+	std::vector<Button> escapebut3;
 	escapebut3.push_back(Es2);
 	escapebut3.push_back(L2);
 
@@ -142,43 +138,37 @@ void Frontend::displayMenu()
 	TextBox Ct("Content/Font/SuperMario256.ttf", Color::Black, "YOU LOSE!!!", 40, 827, 369);
 	TextBox Dt("Content/Font/SuperMario256.ttf", Color::White, "RULE", 100, 412, 38);
 	TextBox Et("Content/Font/SuperMario256.ttf", Color::White, "Highscore: ", 60, 1018, 820);
-	vector<TextBox> t;
-	vector<TextBox> tt;
+	std::vector<TextBox> t;
+	std::vector<TextBox> tt;
 	t.push_back(At);
 	tt.push_back(Dt);
-	//t.push_back(Bt);
-	//t.push_back(Ct);
 	Menu n(b, t);
 	Menu q(c, t);
 	Menu gmode(gamemodee, t);
 	Menu slv(stagelv, t);
 	Menu menurule(rulemenu, tt);
-	//Menu p(d, y);
-	//MainMenu m(b);
 
 	Settingbut setbut;
 	settingState setstate = settingState::Normal;
-	string result;
-	
+	std::string result;
+
 	keyMap = {
-			{"Move Left: ", sf::Keyboard::A},
-			{"Move Right: ", sf::Keyboard::D},
-			{"Move Up: ", sf::Keyboard::W},
-			{"Move Down: ", sf::Keyboard::S},
-			{"Change Skin: ", sf::Keyboard::F}
-	};
+		{"Move Left: ", sf::Keyboard::A},
+		{"Move Right: ", sf::Keyboard::D},
+		{"Move Up: ", sf::Keyboard::W},
+		{"Move Down: ", sf::Keyboard::S},
+		{"Change Skin: ", sf::Keyboard::F} };
 	TextBox popuptext("Content/Font/SuperMario256.ttf", Color::White, "PRESS ANY KEY OR BUTTON", 100, 201, 325);
 	Clock frameClock;
 
 	Gametype currenttype = Gametype::none;
 	Stagelv currentlv = Stagelv::none;
 
-	// base game
 	fromSave = difficulty = numStage = stage = newStage = 0;
 	champ.updatekeymap(keyMap);
 	while (window.isOpen())
 	{
-		
+
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
 		Event e;
 
@@ -206,7 +196,8 @@ void Frontend::displayMenu()
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 
-					if (currentState == GameState::mainmenu) {
+					if (currentState == GameState::mainmenu)
+					{
 						for (auto& button : b)
 						{
 							if (button.isClicked(mousePosF))
@@ -218,28 +209,32 @@ void Frontend::displayMenu()
 								else if (button.type() == "Setting")
 								{
 									currentState = GameState::setting;
-
 								}
 								else if (button.type() == "Exit")
 								{
 									std::ifstream INP;
-									INP.open("file", ios::in);
+									INP.open("file", std::ios::in);
 									int temp, temp2, temp3;
 									INP >> temp >> temp2;
-									if (temp2) {
+									if (temp2)
+									{
 										INP >> temp3;
-										for (int i = 0; i < 20; ++i) {
+										for (int i = 0; i < 20; ++i)
+										{
 											INP >> saveType[i] >> saveSpeed[i] >> saveNum[i];
 										}
 										INP >> saveX >> saveY;
 									}
 									INP.close();
 									std::ofstream INP2;
-									INP2.open("file", ios::out);
-									INP2 << std::max(temp, highScore) << std::endl << temp2;
-									if (temp2) {
+									INP2.open("file", std::ios::out);
+									INP2 << std::max(temp, highScore) << std::endl
+										<< temp2;
+									if (temp2)
+									{
 										INP2 << " " << temp3 << std::endl;
-										for (int i = 0; i < 20; ++i) {
+										for (int i = 0; i < 20; ++i)
+										{
 											INP2 << saveType[i] << " " << saveSpeed[i] << " " << saveNum[i] << std::endl;
 										}
 										INP2 << saveX << " " << saveY;
@@ -247,71 +242,85 @@ void Frontend::displayMenu()
 									INP2.close();
 									return;
 								}
-								else if (button.type() == "Rule") {
+								else if (button.type() == "Rule")
+								{
 									currentState = GameState::rule;
 								}
 							}
 						}
 					}
-					else if (currentState == GameState::rule) {
-						if (Ruleback.isClicked(mousePosF)) {
+					else if (currentState == GameState::rule)
+					{
+						if (Ruleback.isClicked(mousePosF))
+						{
 							currentState = GameState::mainmenu;
 						}
 					}
-					
-					else if (currentState == GameState::gamemode) {
-						for (auto& button : gamemodee) {
-							if (button.isClicked(mousePosF)) {
-								if (button.type() == "Stage") {
+
+					else if (currentState == GameState::gamemode)
+					{
+						for (auto& button : gamemodee)
+						{
+							if (button.isClicked(mousePosF))
+							{
+								if (button.type() == "Stage")
+								{
 									currentState = GameState::stagemode;
 									currenttype = Gametype::stage;
 								}
-								else if (button.type() == "Endless") {
+								else if (button.type() == "Endless")
+								{
 									currentState = GameState::game;
 									currenttype = Gametype::endless;
 									currentlv = Stagelv::none;
 								}
-								else if (button.type() == "Back") {
+								else if (button.type() == "Back")
+								{
 									currentState = GameState::mainmenu;
 									currenttype = Gametype::none;
 								}
 							}
 						}
 					}
-					else if (currentState == GameState::stagemode) {
+					else if (currentState == GameState::stagemode)
+					{
 						currentlv = Stagelv::none;
-						for (auto& button : stagelv) {
-							if (button.isClicked(mousePosF)) {
-								if (button.type() == "Lv1") {
+						for (auto& button : stagelv)
+						{
+							if (button.isClicked(mousePosF))
+							{
+								if (button.type() == "Lv1")
+								{
 									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv1;
 								}
-								else if (button.type() == "Lv2") {
+								else if (button.type() == "Lv2")
+								{
 									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv2;
-
 								}
-								else if (button.type() == "Lv3") {
+								else if (button.type() == "Lv3")
+								{
 									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv3;
-
 								}
-								else if (button.type() == "Lv4") {
+								else if (button.type() == "Lv4")
+								{
 									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv4;
-
 								}
-								else if (button.type() == "Lv5") {
+								else if (button.type() == "Lv5")
+								{
 									currentState = GameState::newgame;
 									currenttype = Gametype::stage;
 									currentlv = Stagelv::lv5;
-
 								}
-								else if (button.type() == "Back") {
+								else if (button.type() == "Back")
+								{
 									currentState = GameState::gamemode;
 									currentlv = Stagelv::none;
 								}
@@ -320,10 +329,12 @@ void Frontend::displayMenu()
 					}
 					else if (currentState == GameState::game)
 					{
-						if (currenttype != Gametype::endless) {
+						if (currenttype != Gametype::endless)
+						{
 							currentState = GameState::newgame;
 						}
-						else {
+						else
+						{
 							for (auto& button : c)
 							{
 								if (button.isClicked(mousePosF))
@@ -345,72 +356,88 @@ void Frontend::displayMenu()
 							}
 						}
 					}
-					else if (currentState == GameState::setting) {
-						if(H2.isClicked(mousePosF))
-						currentState = GameState::mainmenu;
+					else if (currentState == GameState::setting)
+					{
+						if (H2.isClicked(mousePosF))
+							currentState = GameState::mainmenu;
 					}
-					
 				}
 			}
-			if (currentState == GameState::setting) {
-				if (setstate == settingState::Normal) {
+			if (currentState == GameState::setting)
+			{
+				if (setstate == settingState::Normal)
+				{
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-					for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter) {
-						if ((*iter).first.isClicked(mousePosF)) {
+					for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter)
+					{
+						if ((*iter).first.isClicked(mousePosF))
+						{
 							std::string buttontext = (*iter).second.getText();
 							int firstSpacePos = buttontext.find_first_of(":");
 							result = buttontext.substr(0, firstSpacePos);
-							if (result == "Move Left") {
+							if (result == "Move Left")
+							{
 								setbut = Settingbut::left;
 							}
-							else if (result == "Move Right") {
+							else if (result == "Move Right")
+							{
 								setbut = Settingbut::right;
 							}
-							else if (result == "Move Up") {
+							else if (result == "Move Up")
+							{
 								setbut = Settingbut::up;
 							}
-							else if (result == "Move Down") {
+							else if (result == "Move Down")
+							{
 								setbut = Settingbut::down;
 							}
-							else if (result == "Change Skin") {
+							else if (result == "Change Skin")
+							{
 								setbut = Settingbut::changeskin;
 							}
 							setstate = settingState::Popup;
 						}
-
 					}
-					
 				}
-				else if (setstate == settingState::Popup) {
-					
-					if (e.type == sf::Event::KeyPressed) {
+				else if (setstate == settingState::Popup)
+				{
+
+					if (e.type == sf::Event::KeyPressed)
+					{
 						Keyboard::Key pressedKey = e.key.code;
 						handleKeyPressed(e.key.code, result);
 						setstate = settingState::Normal;
 					}
-
-
 				}
 			}
-			if (currentState == GameState::playingGame) {
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			if (currentState == GameState::playingGame)
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+				{
 					isappearEscape = true;
 				}
-				else if (isappearEscape && !islose) {
+				else if (isappearEscape && !islose)
+				{
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-					if (currentlv == Stagelv::none) {
-						for (auto& but : escapebut) {
-							if (but.isClicked(mousePosF)) {
-								if (but.type() == "Back") {
+					if (currentlv == Stagelv::none)
+					{
+						for (auto& but : escapebut)
+						{
+							if (but.isClicked(mousePosF))
+							{
+								if (but.type() == "Back")
+								{
 									isappearEscape = false;
 								}
-								else if (but.type() == "New game esc") {
+								else if (but.type() == "New game esc")
+								{
 									currentState = GameState::newgame;
 									isappearEscape = false;
 								}
-								else if (but.type() == "Save") {
+								else if (but.type() == "Save")
+								{
 									outputSave();
 									currentState = GameState::mainmenu;
 									isappearEscape = false;
@@ -418,13 +445,18 @@ void Frontend::displayMenu()
 							}
 						}
 					}
-					else {
-						for (auto& but : escapebut2) {
-							if (but.isClicked(mousePosF)) {
-								if (but.type() == "Back") {
+					else
+					{
+						for (auto& but : escapebut2)
+						{
+							if (but.isClicked(mousePosF))
+							{
+								if (but.type() == "Back")
+								{
 									isappearEscape = false;
 								}
-								else if (but.type() == "New game esc") {
+								else if (but.type() == "New game esc")
+								{
 									currentState = GameState::newgame;
 									isappearEscape = false;
 								}
@@ -432,49 +464,59 @@ void Frontend::displayMenu()
 						}
 					}
 				}
-				else if (isappearEscape && islose) {
+				else if (isappearEscape && islose)
+				{
 					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 					sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-					for (auto& but : escapebut3) {
-						if (but.isClicked(mousePosF)) {
-							if (but.type() == "New game esc") {
+					for (auto& but : escapebut3)
+					{
+						if (but.isClicked(mousePosF))
+						{
+							if (but.type() == "New game esc")
+							{
 								currentState = GameState::newgame;
 								isappearEscape = false;
 								islose = false;
 							}
-							else if (but.type() == "Exit") {
+							else if (but.type() == "Exit")
+							{
 								currentState = GameState::mainmenu;
 								isappearEscape = false;
 								islose = false;
 							}
 						}
 					}
-					if (L2.isClicked(mousePosF)) {
+					if (L2.isClicked(mousePosF))
+					{
 						currentState = GameState::mainmenu;
 						isappearEscape = false;
 						islose = false;
 					}
 				}
 			}
-			
+
 			champ.changeSkin();
 		}
 
 		window.clear(Color::White);
 
-		switch (currentState) {
+		switch (currentState)
+		{
 		case GameState::setting:
-			if (setstate == settingState::Normal) {
+			if (setstate == settingState::Normal)
+			{
 				createButtons();
 				window.draw(setting_background);
 				Bt.draw(window);
 				H2.draw(window, mouse);
-				for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter) {
+				for (auto iter = settingbutton.begin(); iter != settingbutton.end(); ++iter)
+				{
 					(*iter).first.draw(window, mouse);
 					(*iter).second.draw(window);
 				}
 			}
-			else if (setstate == settingState::Popup) {
+			else if (setstate == settingState::Popup)
+			{
 				window.draw(pop_up_screen);
 				popuptext.draw(window);
 			}
@@ -501,7 +543,8 @@ void Frontend::displayMenu()
 
 			q.draw(window, mouse);
 
-			if (currenttype == Gametype::endless) {
+			if (currenttype == Gametype::endless)
+			{
 				Et.draw(window);
 				drawhighscore(highScore, window);
 			}
@@ -512,34 +555,44 @@ void Frontend::displayMenu()
 			break;
 
 		case GameState::newgame:
-			if (currentlv == Stagelv::none) {
-				difficulty = 11;
+			if (currentlv == Stagelv::none)
+			{
+				difficulty = 1;
 			}
-			else if(currentlv == Stagelv::lv1) {
+			else if (currentlv == Stagelv::lv1)
+			{
 				difficulty = 2;
 			}
-			else if (currentlv == Stagelv::lv2) {
+			else if (currentlv == Stagelv::lv2)
+			{
 				difficulty = 4;
 			}
-			else if (currentlv == Stagelv::lv3) {
+			else if (currentlv == Stagelv::lv3)
+			{
 				difficulty = 7;
 			}
-			else if (currentlv == Stagelv::lv4) {
+			else if (currentlv == Stagelv::lv4)
+			{
 				difficulty = 11;
 			}
-			else { // currentlv == Stagelv::lv5
+			else
+			{ // currentlv == Stagelv::lv5
 				difficulty = 16;
 			}
-			if (currentlv != Stagelv::none) {
+			if (currentlv != Stagelv::none)
+			{
 				numStage = 2 + std::min(std::min(difficulty / 3, 6) + difficulty / 10, 21);
 			}
-			else {
+			else
+			{
 				numStage = 1 << 16;
 			}
-			if (fromSave == true) {
+			if (fromSave == true)
+			{
 				champ = Character("Content/Image/Character1.png", saveX, saveY, 48.f, 48.f, true, false);
 			}
-			else {
+			else
+			{
 				champ = Character("Content/Image/Character1.png", 1060.f, 500.f, 48.f, 48.f, true, false);
 				stage = 1;
 			}
@@ -549,12 +602,15 @@ void Frontend::displayMenu()
 			break;
 
 		case GameState::playingGame:
-			
-			if (newStage == true) {
-				if (fromSave == false) {
+
+			if (newStage == true)
+			{
+				if (fromSave == false)
+				{
 					champ = Character("Content/Image/Character1.png", 1060.f, 1080.f - 48.f, 40.f, 40.f, true, false);
 				}
-				else {
+				else
+				{
 					champ = Character("Content/Image/Character1.png", saveX, saveY, 48.f, 48.f, true, false);
 				}
 				champ.updatekeymap(keyMap);
@@ -571,25 +627,25 @@ void Frontend::displayMenu()
 				{
 					base.randomGame(difficulty, fromSave, saveType, saveSpeed, saveNum);
 				}
-				
+
 				newStage = false;
 			}
-			
+
 			for (Road& lane : base.lanes)
 			{
 				lane.draw(window);
 			}
-			
+
 			for (Road& lane : base.lanes)
 			{
 				if (lane.getType() == "Road")
 				{
-						lane.updateTrafficLight();
+					lane.updateTrafficLight();
 				}
-				lane.updateVehicles(isappearEscape,champ.getX(),champ.getY(),champ.getWidth(),champ.getHeight());
+				lane.updateVehicles(isappearEscape, champ.getX(), champ.getY(), champ.getWidth(), champ.getHeight());
 				lane.updateAnimals(isappearEscape, champ.getX(), champ.getY(), champ.getWidth(), champ.getHeight());
 			}
-			
+
 			for (Road& lane : base.lanes)
 			{
 				for (Object* object : lane.objects)
@@ -606,16 +662,16 @@ void Frontend::displayMenu()
 				}
 			}
 
-			int pos1 = max(int(champ.getY() / 54) - 1, 0);
+			int pos1 = std::max(int(champ.getY() / 54) - 1, 0);
 			int pos2 = int(champ.getY() / 54);
-			int pos3 = min(int(champ.getY() / 54) + 1, int(base.lanes.size() - 1));
-			
+			int pos3 = std::min(int(champ.getY() / 54) + 1, int(base.lanes.size() - 1));
+
 			champ.update(frameClock, base.lanes[pos1], e, isappearEscape);
 			champ.update(frameClock, base.lanes[pos2], e, isappearEscape);
 			champ.update(frameClock, base.lanes[pos3], e, isappearEscape);
 
-			int checkCondition = max(champ.checkCollision(base.lanes[pos1]),
-				max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
+			int checkCondition = std::max(champ.checkCollision(base.lanes[pos1]),
+				std::max(champ.checkCollision(base.lanes[pos2]), champ.checkCollision(base.lanes[pos3])));
 
 			if (checkCondition == 1)
 			{
@@ -631,7 +687,8 @@ void Frontend::displayMenu()
 				}
 				else
 				{
-					if (currentlv == Stagelv::none) {
+					if (currentlv == Stagelv::none)
+					{
 						++difficulty;
 					}
 					newStage = true;
@@ -639,16 +696,20 @@ void Frontend::displayMenu()
 			}
 
 			champ.draw(window);
-			if (isappearEscape) {
-				if (!islose) {
+			if (isappearEscape)
+			{
+				if (!islose)
+				{
 					window.draw(escape_screen);
 					Es1.draw(window, mouse);
 					Es2.draw(window, mouse);
-					if (currentlv == Stagelv::none) {
+					if (currentlv == Stagelv::none)
+					{
 						Es3.draw(window, mouse);
 					}
 				}
-				else {
+				else
+				{
 					highScore = std::max(highScore, stage);
 					window.draw(escape_screen);
 					Ct.draw(window);
@@ -656,30 +717,34 @@ void Frontend::displayMenu()
 					L2.draw(window, mouse);
 				}
 			}
-			
+
 			break;
 		}
 
 		window.display();
 	}
-	
 }
 
-void Frontend::outputSave() {
+void Frontend::outputSave()
+{
 	std::ofstream INP;
-	INP.open("file", ios::out);
-	INP << highScore << std::endl << stage << " " << difficulty << std::endl;
+	INP.open("file", std::ios::out);
+	INP << highScore << std::endl
+		<< stage << " " << difficulty << std::endl;
 	for (Road& lane : base.lanes)
 	{
 		std::string s = lane.getType();
 		INP << s << " " << lane.getSpeed() << std::endl;
-		if (s == "Road") {
+		if (s == "Road")
+		{
 			INP << lane.vehicles.size() << std::endl;
 		}
-		if (s == "Land") {
+		if (s == "Land")
+		{
 			INP << lane.animals.size() << std::endl;
 		}
-		if (s == "Field") {
+		if (s == "Field")
+		{
 			INP << lane.objects.size() << std::endl;
 		}
 	}
@@ -690,19 +755,20 @@ void Frontend::outputSave() {
 void Frontend::inputSave()
 {
 	std::ifstream INP;
-	INP.open("file", ios::in);
+	INP.open("file", std::ios::in);
 	INP >> highScore >> stage;
-	if (stage) {
+	if (stage)
+	{
 		fromSave = true;
 		INP >> difficulty;
-		for (int i = 0; i < 20; ++i) {
+		for (int i = 0; i < 20; ++i)
+		{
 			INP >> saveType[i] >> saveSpeed[i] >> saveNum[i];
 		}
 		INP >> saveX >> saveY;
 	}
 	INP.close();
 }
-
 
 void Frontend::createButtons()
 {
@@ -712,35 +778,44 @@ void Frontend::createButtons()
 	{
 		const std::string action = pair.first;
 		sf::Keyboard::Key key = pair.second;
-		
+
 		std::string keyString = keyToString(key);
-		Button but("Content/Image/button.png", 683.f, offsetY,"but");
-		
-		TextBox b("Content/Font/SuperMario256.ttf", Color::White, action+keyToString(key), 40, 683.f, offsetY + 25.f);
+		Button but("Content/Image/button.png", 683.f, offsetY, "but");
+
+		TextBox b("Content/Font/SuperMario256.ttf", Color::White, action + keyToString(key), 40, 683.f, offsetY + 25.f);
 		std::pair<Button, TextBox> buttonAndTextPair(but, b);
 
 		settingbutton.push_back(buttonAndTextPair);
 
 		offsetY += 135.0f;
 	}
-	
 }
-std::string Frontend::keyToString(sf::Keyboard::Key key) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) return "Space";
-	//else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) return "Shift";
-	else if (key == sf::Keyboard::Up) return "Up Arrow";
-	else if (key == sf::Keyboard::Down) return "Down Arrow";
-	else if (key == sf::Keyboard::Left) return "Left Arrow";
-	else if(key==sf::Keyboard::Right) return "Right Arrow";
-	else if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z) {
+
+std::string Frontend::keyToString(sf::Keyboard::Key key)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		return "Space";
+	else if (key == sf::Keyboard::Up)
+		return "Up Arrow";
+	else if (key == sf::Keyboard::Down)
+		return "Down Arrow";
+	else if (key == sf::Keyboard::Left)
+		return "Left Arrow";
+	else if (key == sf::Keyboard::Right)
+		return "Right Arrow";
+	else if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z)
+	{
 		char letter = static_cast<char>('A' + (key - sf::Keyboard::A));
 		return std::string(1, letter);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) return "Tab";
-	else return "None";
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+		return "Tab";
+	else
+		return "None";
 }
 
-void Frontend::handleKeyPressed(sf::Keyboard::Key keyCode, const std::string& result) {
+void Frontend::handleKeyPressed(sf::Keyboard::Key keyCode, const std::string& result)
+{
 	// Update the key mapping for the selected action
 	std::string selectedAction = result + ": ";
 	keyMap[selectedAction] = keyCode;
@@ -749,17 +824,18 @@ void Frontend::handleKeyPressed(sf::Keyboard::Key keyCode, const std::string& re
 	{
 		std::string buttontext = (*iter).second.getText();
 		int firstSpacePos = buttontext.find_first_of(":");
-		string get_result = buttontext.substr(0, firstSpacePos);
+		std::string get_result = buttontext.substr(0, firstSpacePos);
 		if (result == get_result)
 		{
 			(*iter).second.setText(updatedtext);
 			break;
 		}
-		
 	}
 }
-void Frontend::drawhighscore(int highscore, RenderWindow& window) {
-	string scorestr = to_string(highscore);
+
+void Frontend::drawhighscore(int highscore, RenderWindow& window)
+{
+	std::string scorestr = std::to_string(highscore);
 	TextBox score("Content/Font/SuperMario256.ttf", Color::White, scorestr, 60, 1428.f, 820.f);
 	score.draw(window);
 }

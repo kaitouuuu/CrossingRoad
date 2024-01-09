@@ -19,9 +19,6 @@
     <ClCompile Include="TextBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Frontend.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,9 +38,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Car1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Setting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Car2.cpp">
@@ -106,6 +100,9 @@
     <ClCompile Include="AnimationAnimal5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Road.h">
@@ -121,9 +118,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Frontend.h">
@@ -145,9 +139,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Car1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Setting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Car2.h">
@@ -208,6 +199,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AnimationAnimal5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -32,7 +32,8 @@ void AnimationAnimal2::gameOver()
 {
 	waitAnimation.clearFrame();
 	walkingAnimation.clearFrame();
-	for (int i = 0; i < 20; ++i) {
+	for (int i = 0; i < 20; ++i)
+	{
 		setCollision();
 	}
 	currentAnimation = &deadAnimal;
@@ -46,7 +47,6 @@ void AnimationAnimal2::changeState()
 
 AnimationAnimal2::AnimationAnimal2()
 {
-
 }
 
 AnimationAnimal2::AnimationAnimal2(std::string fileName, float x, float y, float width, float height, bool paused, bool looped)
@@ -77,39 +77,49 @@ AnimationAnimal2::AnimationAnimal2(std::string fileName, float x, float y, float
 void AnimationAnimal2::update(float speed,bool isappearEsc)
 {
 	sf::Time frameTime = clock.restart();
-
 	sf::Vector2f movement(speed, 0.f);
 
-	if (gameEnd) {
-		if (!isappearEsc) {
+	if (gameEnd)
+	{
+		if (!isappearEsc)
+		{
 			animatedSprite.play(*currentAnimation);
 			animatedSprite.update(frameTime);
 			return;
 		}
 	}
-	if (!isappearEsc) {
-		if (speed == 0) {
-			if (isMoved) {
+
+	if (!isappearEsc)
+	{
+		if (speed == 0)
+		{
+			if (isMoved)
+			{
 				walkingAnimation.clearFrame();
-				for (int i = 0; i < 20; ++i) {
+				for (int i = 0; i < 20; ++i)
+				{
 					setMove();
 				}
 				isMoved = false;
 			}
-			for (int i = 0; i < 20; ++i) {
+			for (int i = 0; i < 20; ++i)
+			{
 				setStable();
 			}
 			currentAnimation = &waitAnimation;
 		}
 		else {
-			if (!isMoved) {
+			if (!isMoved)
+			{
 				walkingAnimation.clearFrame();
-				for (int i = 0; i < 20; ++i) {
+				for (int i = 0; i < 20; ++i)
+				{
 					setStable();
 				}
 				isMoved = true;
 			}
-			for (int i = 0; i < 20; ++i) {
+			for (int i = 0; i < 20; ++i)
+			{
 				setMove();
 			}
 			currentAnimation = &walkingAnimation;
@@ -119,11 +129,13 @@ void AnimationAnimal2::update(float speed,bool isappearEsc)
 			animatedSprite.move(movement * frameTime.asSeconds());
 			animatedSprite.update(frameTime);
 		}
-		if (speed < 0) {
+		if (speed < 0)
+		{
 			animatedSprite.setScale(-1.f, 1.f);
 			animatedSprite.setOrigin(getWidth(), 0);
 		}
 	}
+
 	if (x >= 1920)
 	{
 		animatedSprite.setPosition(x - 1920, y);
@@ -151,12 +163,12 @@ float AnimationAnimal2::getWidth()
 	return animatedSprite.getLocalBounds().width;
 }
 
-float AnimationAnimal2::getX()
+float AnimationAnimal2::getX() const
 {
 	return x;
 }
 
-float AnimationAnimal2::getY()
+float AnimationAnimal2::getY() const
 {
 	return y;
 }

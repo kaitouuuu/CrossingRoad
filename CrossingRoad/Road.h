@@ -23,7 +23,7 @@
 #include "Animal5.h"
 
 #include "TrafficLight.h"
-using namespace std;
+
 class Road {
 private:
 	std::string type;
@@ -54,10 +54,6 @@ public:
 	void updateVehicles(bool isappearEsc,float x, float y,float width, float height);
 	void updateAnimals(bool isappearEsc,float x, float y, float width, float height);
 	void draw(RenderWindow& window);
-	// For debug
-	void setY(const float y);
-	void setType(const std::string t);
-	void printAll();
 };
 
 #endif // ROAD_H

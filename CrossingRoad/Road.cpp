@@ -95,35 +95,35 @@ void Road::addAnimal(Animal* added)
 	animals.push_back(added);
 }
 
-void Road::updateVehicles(bool isappearEsc, float x, float y,float width, float height)
+void Road::updateVehicles(bool isappearEsc, float x, float y, float width, float height)
 {
 	if (trafficLight.getColor() != 2)
 		for (Vehicle* vehicle : vehicles)
 		{
-			float checkX = max(vehicle->getX(), x);
-			float checkY = max(vehicle->getY(), y);
-			float checkX2 = min(vehicle->getX() + vehicle->getWidth(), x + width);
-			float checkY2 = min(vehicle->getY() + vehicle->getHeight(), y + height);
+			float checkX = std::max(vehicle->getX(), x);
+			float checkY = std::max(vehicle->getY(), y);
+			float checkX2 = std::min(vehicle->getX() + vehicle->getWidth(), x + width);
+			float checkY2 = std::min(vehicle->getY() + vehicle->getHeight(), y + height);
 			if (checkX <= checkX2 && checkY <= checkY2)
 			{
 				vehicle->updatePosition(speed, false);
 				continue;
 			}
-			vehicle->updatePosition(speed,isappearEsc);
+			vehicle->updatePosition(speed, isappearEsc);
 		}
 	else
 		for (Vehicle* vehicle : vehicles)
 		{
-			float checkX = max(vehicle->getX(), x);
-			float checkY = max(vehicle->getY(), y);
-			float checkX2 = min(vehicle->getX() + vehicle->getWidth(), x + width);
-			float checkY2 = min(vehicle->getY() + vehicle->getHeight(), y + height);
+			float checkX = std::max(vehicle->getX(), x);
+			float checkY = std::max(vehicle->getY(), y);
+			float checkX2 = std::min(vehicle->getX() + vehicle->getWidth(), x + width);
+			float checkY2 = std::min(vehicle->getY() + vehicle->getHeight(), y + height);
 			if (checkX <= checkX2 && checkY <= checkY2)
 			{
 				vehicle->updatePosition(0, false);
 				continue;
 			}
-			vehicle->updatePosition(0,isappearEsc);
+			vehicle->updatePosition(0, isappearEsc);
 		}
 }
 
@@ -131,10 +131,10 @@ void Road::updateAnimals(bool isappearEsc, float x, float y, float width, float 
 {
 	for (Animal* animal : animals)
 	{
-		float checkX = max(animal->getX(), x);
-		float checkY = max(animal->getY(), y);
-		float checkX2 = min(animal->getX() + animal->getWidth(), x + width);
-		float checkY2 = min(animal->getY() + animal->getHeight(), y + height);
+		float checkX = std::max(animal->getX(), x);
+		float checkY = std::max(animal->getY(), y);
+		float checkX2 = std::min(animal->getX() + animal->getWidth(), x + width);
+		float checkY2 = std::min(animal->getY() + animal->getHeight(), y + height);
 		if (checkX <= checkX2 && checkY <= checkY2)
 		{
 			animal->updatePosition(speed, false);
@@ -144,9 +144,8 @@ void Road::updateAnimals(bool isappearEsc, float x, float y, float width, float 
 	}
 }
 
-void Road::draw(RenderWindow &window)
+void Road::draw(RenderWindow& window)
 {
-
 	std::string filename;
 	if (type == "Road")
 	{
@@ -171,18 +170,4 @@ void Road::draw(RenderWindow &window)
 	sprite.setPosition(0.f, yPos);
 	window.draw(sprite);
 	trafficLight.draw(window);
-}
-
-void Road::setY(const float y)
-{
-	yPos = y;
-}
-
-void Road::setType(const std::string t)
-{
-	type = t;
-}
-
-void Road::printAll()
-{
 }

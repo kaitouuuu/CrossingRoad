@@ -76,11 +76,11 @@ Character::Character()
 {
 }
 
-Character::Character(string fileName, float x, float y, float width, float height, bool paused, bool looped)
+Character::Character(std::string fileName, float x, float y, float width, float height, bool paused, bool looped)
 {
 	if (!texture.loadFromFile(fileName))
 	{
-		cout << "Failed to load player spritesheet!" << endl;
+		std::cout << "Failed to load player spritesheet!" << std::endl;
 	}
 
 	setUp();
@@ -106,7 +106,7 @@ Character::Character(string fileName, float x, float y, float width, float heigh
 	noKeyWasPressed = true;
 }
 
-void Character::update(Clock &frameClock, Road &aRoad, Event &e, bool isappearesc)
+void Character::update(Clock& frameClock, Road& aRoad, Event& e, bool isappearesc)
 {
 	Time frameTime = frameClock.restart();
 
@@ -115,7 +115,7 @@ void Character::update(Clock &frameClock, Road &aRoad, Event &e, bool isappeares
 	if (!isappearesc)
 	{
 		std::string action;
-		for (const auto &pair : keyMap)
+		for (const auto& pair : keyMap)
 		{
 			if (sf::Keyboard::isKeyPressed(pair.second))
 			{
@@ -333,7 +333,7 @@ void Character::update(Clock &frameClock, Road &aRoad, Event &e, bool isappeares
 	//}
 }
 
-void Character::draw(RenderWindow &window)
+void Character::draw(RenderWindow& window)
 {
 	window.draw(animatedSprite);
 }
@@ -397,10 +397,10 @@ bool Character::condition(float xTL, float yTL, float objH, float objW)
 {
 	objH -= 8;
 	objW -= 8;
-	float checkX = max(xTL, x);
-	float checkY = max(yTL, y);
-	float checkX2 = min(xTL + objW, x + width);
-	float checkY2 = min(yTL + objH, y + height);
+	float checkX = std::max(xTL, x);
+	float checkY = std::max(yTL, y);
+	float checkX2 = std::min(xTL + objW, x + width);
+	float checkY2 = std::min(yTL + objH, y + height);
 	if (checkX <= checkX2 && checkY <= checkY2)
 	{
 		return true;
@@ -408,7 +408,7 @@ bool Character::condition(float xTL, float yTL, float objH, float objW)
 	return false;
 }
 
-int Character::checkCollision(Road &aRoad)
+int Character::checkCollision(Road& aRoad)
 {
 	float tmpx = x;
 	float tmpy = y;
@@ -439,7 +439,8 @@ int Character::checkCollision(Road &aRoad)
 	{
 		for (int i = 0; i < aRoad.vehicles.size(); ++i)
 		{
-			if (condition(aRoad.vehicles[i]->getX(), aRoad.vehicles[i]->getY(), aRoad.vehicles[i]->getHeight(), aRoad.vehicles[i]->getWidth())) {
+			if (condition(aRoad.vehicles[i]->getX(), aRoad.vehicles[i]->getY(), aRoad.vehicles[i]->getHeight(), aRoad.vehicles[i]->getWidth()))
+			{
 				aRoad.vehicles[i]->clearAnimation();
 				return 1;
 			}
@@ -449,7 +450,8 @@ int Character::checkCollision(Road &aRoad)
 	{
 		for (int i = 0; i < aRoad.animals.size(); ++i)
 		{
-			if (condition(aRoad.animals[i]->getX(), aRoad.animals[i]->getY(), aRoad.animals[i]->getHeight(), aRoad.animals[i]->getWidth())) {
+			if (condition(aRoad.animals[i]->getX(), aRoad.animals[i]->getY(), aRoad.animals[i]->getHeight(), aRoad.animals[i]->getWidth()))
+			{
 				aRoad.animals[i]->clearAnimation();
 				return 1;
 			}
@@ -479,14 +481,18 @@ float Character::getX()
 void Character::changeSkin()
 {
 	std::string action;
-	for (const auto& pair : keyMap) {
-		if (sf::Keyboard::isKeyPressed(pair.second)) {
+	for (const auto& pair : keyMap)
+	{
+		if (sf::Keyboard::isKeyPressed(pair.second))
+		{
 			action = pair.first;
 		}
 	}
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-	if(action=="Change Skin: "){
-		if (skin < 4) {
+	// if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
+	if (action == "Change Skin: ")
+	{
+		if (skin < 4)
+		{
 			++skin;
 		}
 		else
@@ -517,10 +523,10 @@ void Character::changeSkin()
 	}
 }
 
-void Character::updatekeymap(map<std::string, sf::Keyboard::Key> keyMap)
+void Character::updatekeymap(std::map<std::string, sf::Keyboard::Key> keyMap)
 {
 	this->keyMap.clear();
-	for (const auto &pair : keyMap)
+	for (const auto& pair : keyMap)
 	{
 		this->keyMap.emplace(pair);
 	}
